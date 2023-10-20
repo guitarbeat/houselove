@@ -1,2 +1,0 @@
-# codecamp
-Created with CodeSandbox
