@@ -1,0 +1,29 @@
+@use "sass:math"; // Add this at the top of your SCSS file
+
+
+.text-animate {
+  display: inline-block;
+  opacity: 0;
+  animation: bounceIn;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+  min-width: 10px;
+}
+
+.text-animate-hover {
+  min-width: 10px;
+  display: inline-block;
+  animation-fill-mode: both;
+
+  &:hover {
+    animation: rubberBand 1s;
+    color: pink;
+  }
+}
+
+@for $i from 1 through 100 {
+  .text-animate._#{$i} {
+    animation-delay: math.div($i, 20) + s; // Updated division operation
+  }
+}

@@ -1,0 +1,54 @@
+.home-page {
+  .text-zone {
+    position: absolute;
+    left: 50%;  /* Centering horizontally */
+    top: 50%;   /* Centering vertically */
+    transform: translateX(-50%) translateY(-50%);  /* Adjusting both horizontal and vertical translations */
+    width: 55%;
+    max-height: 90%;
+    padding-right: 15%;
+  }
+
+  h1 {
+    color: #fff; 
+    font-size: 3vw; 
+    line-height: 4.2vw;
+    margin: 0;
+    font-family: 'Coolvetica';
+    font-weight: 400;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  h2 {
+    color: #8d8d8d;
+    margin-top: 1vw;
+    font-weight: 400;
+    font-size: 1.5vw;
+    font-family: sans-serif;
+    letter-spacing: 2px;
+    animation: fadeIn 1s 1.8s backwards;
+  }
+
+  .flat-button {
+    color: #fff;
+    font-size: 1.2vw;
+    font-weight: 400;
+    letter-spacing: 2px;
+    font-family: sans-serif;
+    text-decoration: none;
+    padding: 0.5vw 1vw;
+    border: 1px solid #E7A29B;
+    margin-top: 1.5vw;
+    display: inline-block;
+    animation: fadeInAnimation 1s 1.8s backwards;
+    border-radius: 20px;
+    white-space: nowrap;
+    transition: all 0.3s;
+
+    &:hover {
+      background: #E7A29B;
+      color: #fff;
+      transform: scale(1.05);
+    }
+  }
+}
