@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './index.scss'
 import { faHandshake, faHome, faUsers, faHeart, faLeaf, faBalanceScale } from '@fortawesome/free-solid-svg-icons'
 
+
 const About = () => {
   const [letterClass, setLetterClass] = useState('text-animate')
 
