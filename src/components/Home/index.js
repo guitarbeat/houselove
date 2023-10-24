@@ -9,8 +9,7 @@ import backgroundImage from '../../assets/images/background.png';
 const Home = () => {
     const [letterClass, setLetterClass] = useState('text-animate');
 
-    const introductionArray = "House Love".split("");
-    const descriptionArray = "Sharing resources for housing co-ops.".split("");
+    const introductionArray = "Sharing resources for housing co-ops.".split("");
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -25,7 +24,7 @@ const Home = () => {
         <>
             <div className="container home-page">
             <div className="background-image-container">
-            <img src={backgroundImage} alt="Background" />
+                <img src={backgroundImage} alt="Background" />
             </div>
                 <div className="text-zone">
                     <h1>
@@ -33,12 +32,6 @@ const Home = () => {
                             letterClass={letterClass} 
                             strArray={introductionArray} 
                             idx={0} 
-                        />
-                        <br />
-                        <AnimatedLetters 
-                            letterClass={letterClass} 
-                            strArray={descriptionArray} 
-                            idx={introductionArray.length} 
                         />
                     </h1>
                     <h2>Find conflict mediators and share resources.</h2>
