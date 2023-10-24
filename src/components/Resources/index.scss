@@ -24,7 +24,8 @@
 
 .resource-card {
   position: relative;
-  margin: 0.7rem;
+  margin-right: 0.9rem;
+  margin-bottom: 0.9rem;
   flex: 0 1 calc(33.333% - 1.4rem);
   min-width: 20rem;
   color: inherit;
@@ -35,6 +36,7 @@
   transition: all 0.3s ease-in-out;
   border-radius: 8px;
   overflow: hidden;
+  height: 100%; /* Make sure the card stretches to the full height */
 
   h3, &__header h3 {
     font-size: 2rem;
@@ -86,12 +88,13 @@
   &__footer {
     font-size: 0.9rem;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-end;
     .resource-card__submitted-by,
     .resource-card__date-added {
       color: #000000;
     }
-  }
+}
 }
 
 // Styles for the resource filter buttons
