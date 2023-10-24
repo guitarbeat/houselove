@@ -5,8 +5,9 @@ import Layout from './components/Layout';
 import Home from './components/Home';
 import About from './components/About';
 import Resources from './components/Resources';
-// import Mediators from './components/Mediators';
+import Mediators from './components/Mediators';
 import Contact from './components/Contact';
+
 import './App.scss';
 
 function App() {
@@ -18,12 +19,12 @@ function App() {
 
   return (
     <GoogleSheetsProvider config={config}>
-      <Routes>
+      <Routes> 
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="resources" element={<Resources />} />
-          {/* <Route path="mediators" element={<Mediators />} /> */}
+          <Route path="mediators" element={<Mediators />} />
           <Route path="contact" element={<Contact />} />
         </Route>
       </Routes>

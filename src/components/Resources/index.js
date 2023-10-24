@@ -53,7 +53,25 @@ const Resources = ({ db }) => {
       Explore documentation, guides, tools, and more to assist you in managing and participating in your cooperative living experience.
     </p>
     <p>
-  You can also contribute to our list of resources by accessing our <a href="https://docs.google.com/spreadsheets/d/1zG32wvIIPsXn0J6i88GF6CisVvlePeZGah53FbTBpzw/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="resource-link">public Google Sheet</a>!
+  Contribute to our list of resources by adding to our{' '}
+  <a
+    href="https://docs.google.com/spreadsheets/d/1zG32wvIIPsXn0J6i88GF6CisVvlePeZGah53FbTBpzw/edit?usp=sharing"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="resource-link"
+  >
+    public Google Sheet
+  </a>
+  {' or '}
+  <a
+    href="https://forms.gle/nYYfwdMbC4rL3hMY6"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="resource-link"
+  >
+    Google Form
+  </a>
+  .
 </p>
 
   

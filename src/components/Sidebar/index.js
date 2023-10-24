@@ -10,12 +10,14 @@ import {
   faBook,
   faBars,
   faClose,
+  faHandshake,
 } from '@fortawesome/free-solid-svg-icons';
 
 const navItems = [
   { to: '/', icon: faHome, label: 'Home' },
   { to: '/about', icon: faUser, label: 'About', className: 'about-link' },
   { to: '/resources', icon: faBook, label: 'Resources', className: 'resources-link' },
+  { to: '/mediators', icon: faHandshake, label: 'Mediators', className: 'mediators-link' }, 
   { to: '/contact', icon: faEnvelope, label: 'Contact', className: 'contact-link' },
   // Add more items as needed
 ];
