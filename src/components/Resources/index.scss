@@ -13,6 +13,14 @@
     width: 0;
   }
 }
+.resource-link {
+  color: #007bff; // Bootstrap's default blue for example
+  text-decoration: underline;
+  &:hover {
+    color: #0056b3; // A slightly darker blue for the hover state
+    text-decoration: none; // Optional: removes the underline on hover
+  }
+}
 
 .resource-card {
   position: relative;
