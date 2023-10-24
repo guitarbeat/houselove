@@ -119,11 +119,12 @@ $breakpoint-md: 768px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px auto;
+  margin: 50px auto;
   padding: 10px;
   border: 2px dashed $card-bg-color;
   border-radius: 8px;
   width: fit-content;
+  max-width: 100%;
 
   .filters-label {
     position: absolute; // Position the label absolutely
@@ -141,6 +142,7 @@ $breakpoint-md: 768px;
   display: flex;
   justify-content: center;
   gap: 20px; // Space between buttons
+  flex-wrap: wrap; 
 
   button {
     display: flex;
@@ -155,6 +157,7 @@ $breakpoint-md: 768px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: calc(33.333% - 20px);
+
 
     &:hover {
       background-color: darken($hover-bg-color, 10%); // Darken on hover
