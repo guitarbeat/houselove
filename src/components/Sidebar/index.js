@@ -1,20 +1,40 @@
-import './index.scss'
-import Logo from '../../assets/images/logo.png'
-import { Link, NavLink } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useState } from 'react'
+import './index.scss';
+import Logo from '../../assets/images/logo.png';
+import { Link, NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 import {
   faHome,
   faUser,
   faEnvelope,
-  faBook, // Icon for resources
-  // faHandshake,  Icon for mediators
+  faBook,
   faBars,
   faClose,
-} from '@fortawesome/free-solid-svg-icons'
+} from '@fortawesome/free-solid-svg-icons';
+
+const navItems = [
+  { to: '/', icon: faHome, label: 'Home' },
+  { to: '/about', icon: faUser, label: 'About', className: 'about-link' },
+  { to: '/resources', icon: faBook, label: 'Resources', className: 'resources-link' },
+  { to: '/contact', icon: faEnvelope, label: 'Contact', className: 'contact-link' },
+  // Add more items as needed
+];
+
+const SidebarItem = ({ to, icon, label, className, onClick }) => (
+  <NavLink
+    exact={to === '/'}
+    activeClassName="active"
+    to={to}
+    className={className}
+    onClick={onClick}
+    aria-label={label}>
+    <FontAwesomeIcon icon={icon} />
+  </NavLink>
+);
 
 const Sidebar = () => {
   const [showNav, setShowNav] = useState(false);
+  const closeNav = () => setShowNav(false);
 
   return (
     <div className="nav-bar">
@@ -25,46 +45,11 @@ const Sidebar = () => {
           onClick={() => setShowNav(false)}>
           <img src={Logo} alt="Logo" />
         </Link>
-        <div className="subtitle">House Love</div>
       </div>
       <nav className={showNav ? 'mobile-show' : ''}>
-        <NavLink
-          exact="true"
-          activeclassname="active"
-          to="/"
-          onClick={() => setShowNav(false)}>
-          <FontAwesomeIcon icon={faHome} color="#4d4d4e" />
-        </NavLink>
-        <NavLink
-          activeclassname="active"
-          className="about-link"
-          to="/about"
-          onClick={() => setShowNav(false)}>
-          <FontAwesomeIcon icon={faUser} color="#4d4d4e" />
-        </NavLink>
-        <NavLink
-          activeclassname="active"
-          className="resources-link"
-          to="/resources"
-          onClick={() => setShowNav(false)}>
-          <FontAwesomeIcon icon={faBook} color="#4d4d4e" />
-        </NavLink>
-        {/* 
-        <NavLink 
-          activeclassname="active"
-          className="mediators-link"
-          to="/mediators"
-          onClick={() => setShowNav(false)}>
-          <FontAwesomeIcon icon={faHandshake} color="#4d4d4e" />
-        </NavLink>
-        */}
-        <NavLink
-          activeclassname="active"
-          className="contact-link"
-          to="/contact"
-          onClick={() => setShowNav(false)}>
-          <FontAwesomeIcon icon={faEnvelope} color="#4d4d4e" />
-        </NavLink>
+        {navItems.map((item) => (
+          <SidebarItem key={item.to} {...item} onClick={closeNav} />
+        ))}
         <FontAwesomeIcon
           onClick={() => setShowNav(false)}
           icon={faClose}
@@ -75,7 +60,7 @@ const Sidebar = () => {
       <FontAwesomeIcon
         onClick={() => setShowNav(true)}
         icon={faBars}
-        color="#ffd700"
+        color="#E7A29B"
         size="3x"
         className='hamburger-icon' />
     </div>

@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Loader from 'react-loaders';
 import './index.scss';
 import AnimatedLetters from '../AnimatedLetters';
 import backgroundImage from '../../assets/images/background.png';
-
+import Loader from 'react-loaders';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     const [letterClass, setLetterClass] = useState('text-animate');
 
-    const introductionArray = "Sharing resources for housing co-ops.".split("");
+    const introductionArray = "Empowering Co-ops with Shared Resources and Support".split("");
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -23,9 +22,9 @@ const Home = () => {
     return (
         <>
             <div className="container home-page">
-            <div className="background-image-container">
-                <img src={backgroundImage} alt="Background" />
-            </div>
+                <div className="background-image-container">
+                    <img src={backgroundImage} alt="Cozy community housing" />
+                </div>
                 <div className="text-zone">
                     <h1>
                         <AnimatedLetters 
@@ -34,10 +33,9 @@ const Home = () => {
                             idx={0} 
                         />
                     </h1>
-                    <h2>Find conflict mediators and share resources.</h2>
-                    <Link to="/contact" className="flat-button">
-                        CONTACT US
-                    </Link>
+                    <h2>Connect. Share. Thrive.</h2>
+                    <p>Discover a hub of resources tailored for housing co-operatives. From conflict resolution to effective management, find everything you need to foster a vibrant and harmonious community.</p>
+                    <Link to="/resources" className="cta-button">Explore Resources</Link>
                 </div>
             </div>
             <Loader type="pacman" />
