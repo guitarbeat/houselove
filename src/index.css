@@ -20,4 +20,11 @@ body {
 
   overflow: hidden;
   display: block;
+
 }
+
+
+@media screen and (max-width: 1200px) {
+  body {
+    overflow: visible;
+  }}

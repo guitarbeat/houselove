@@ -54,3 +54,14 @@ input, textarea {
   animation: fadeOut 1s 1s;     // Apply fadeOut animation, starts after 1s
   animation-fill-mode: forwards; // The animation will apply the property values for the time the animation is not playing
 }
+
+
+@media screen and (max-width: 1200px) {
+  .loader-active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    bottom: 50%;
+  }
+}

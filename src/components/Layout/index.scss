@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
 
 .page {
-  width: calc(100% - 80px); /* Adjusted width to account for sidebar */
-  padding-left: 80px; /* Added padding to push content to the right */
+  width: 100%;
   height: 100%;
   position: absolute;
 }
-
 
 
 .container {
@@ -16,7 +14,6 @@
   min-height: 566px;
   position: absolute;
   opacity: 0;
-  top: 5%;
   margin: 0 auto;
   z-index: 1;
   transform-style: preserve-3d;
@@ -75,8 +72,7 @@
     }
   }
 }
-
-@media screen and (max-width: 1200px) {
+@media (max-width: 1200px) {
   .page {
     position: initial;
   }
@@ -97,6 +93,13 @@
         display: block;
         padding: 20px;
         box-sizing: border-box;
+        text-align: center; /* Center-align text on smaller screens */
+      }
+      h1 {
+        font-size: 36px; /* Reduce font size for smaller screens */
+      }
+      p {
+        font-size: 16px; /* Reduce font size for smaller screens */
       }
     }
   }
