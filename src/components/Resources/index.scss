@@ -1,25 +1,18 @@
-
-
 .resources-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end; /* Align cards to the right */
-  max-width: 50%; /* Set a maximum width (adjust as needed) */
-  margin-left: auto; /* Push the container to the right edge */
-  overflow-y: scroll; /* Enable vertical scrolling */
-  scrollbar-width: none; /* Hide the scroll bar in Firefox */
-  -ms-overflow-style: none; /* Hide the scroll bar in IE and Edge */
-  max-height: 100vh; 
-  padding-right: 20px; 
-  padding-top: 10px;
+  justify-content: flex-end;
+  max-width: 50%;
+  margin-left: auto;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  max-height: 100vh;
+  padding: 10px 20px 0;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
-
-.resources-container::-webkit-scrollbar {
-  width: 0; /* Hide the scroll bar in Webkit (Chrome, Safari) */
-}
-
-
-
 
 .resource-card {
   position: relative;
@@ -27,21 +20,23 @@
   flex: 0 1 calc(33.333% - 1.4rem);
   min-width: 20rem;
   color: inherit;
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.08);
   background-color: #D8A7B1;
-  padding: 2rem;
+  padding: 1rem;
   text-decoration: none;
-  backdrop-filter: blur(3px);
-
   transition: all 0.3s ease-in-out;
   border-radius: 8px;
   overflow: hidden;
-  height: auto;
 
-  h3 {
+  h3, &__header h3 {
     font-size: 2rem;
     line-height: 1.3em;
     text-transform: uppercase;
+    margin-top: 0;
+  }
+
+  .resource-card__keywords, &__label, p, &__footer {
+    transition: max-height 0.5s ease-in-out;
   }
 
   .resource-card__keywords {
@@ -51,7 +46,6 @@
     float: right;
     height: 3rem;
     width: 10rem;
-    shape-outside: margin-box;
   }
 
   .resource-card__label {
@@ -62,60 +56,86 @@
     margin-left: 0.5rem;
   }
 
-  .resource-image {
-    width: 100%;
-    max-height: 50vh;
-    transition: transform 0.5s;
-    object-fit: cover;
-  }
-
   p {
     margin-top: 10px;
     font-size: 1rem;
     line-height: 1.5;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
     color: #FAE8E0;
   }
 
-  .learn-more {
-    display: inline-block;
-    margin-top: 15px;
-    text-decoration: underline;
-    font-weight: bold;
-  }
-
   &:hover {
-    box-shadow: rgba(0, 0, 0, 0.23) -6px 6px;
+    box-shadow: -6px 6px rgba(0, 0, 0, 0.23);
     background-color: #EF7C8E;
     cursor: pointer;
-
-    .resource-image {
-      transform: scale(1.1);
-    }
 
     p {
       max-height: 100vh;
     }
   }
+
+  &__footer {
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    .resource-card__submitted-by,
+    .resource-card__date-added {
+      color: #000000;
+    }
+  }
 }
 
-/* For screens smaller than 768px (typical mobile screens) */
+// Styles for the resource filter buttons
+.resource-filter-buttons {
+  display: flex;
+  justify-content: center;
+
+  button {
+    background-color: #EF7C8E;
+    color: #FAE8E0;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #D8A7B1;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #FAE8E0;
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .resources-container {
-    max-width: 100%; /* Allow the container to occupy the full width */
-    justify-content: center; /* Center-align the cards */
-    padding: 10px; /* Adjust padding */
+    max-width: 100%;
+    justify-content: center;
+    padding: 10px;
   }
 
   .resource-card {
-    flex: 0 1 calc(50% - 1.4rem); /* Make cards occupy 50% of the width */
-    min-width: auto; /* Remove minimum width */
-    margin: 0.7rem 0; /* Adjust margin for better spacing */
+    flex: 0 1 calc(50% - 1.4rem);
+    min-width: auto;
+    margin: 0.7rem 0;
   }
 
   .resource-card h3 {
-    font-size: 1.5rem; /* Reduce heading font size */
+    font-size: 1.5rem;
+  }
+
+  .resource-filter-buttons {
+    flex-wrap: wrap;
+
+    button {
+      margin: 5px;
+      padding: 8px 16px;
+    }
   }
 }

@@ -11,7 +11,9 @@ const ResourceCard = ({
   'Resource Name': name, 
   'Description': description, 
   'URL': url, 
-  'Resource Type': resourceType
+  'Resource Type': resourceType,
+  'Submitted By': submittedBy,
+  'Date Added': dateAdded
 }) => {
   const [isClicked, setIsClicked] = useState(false);
 
@@ -24,17 +26,22 @@ const ResourceCard = ({
 
   return (
     <a href={url} target="_blank" rel="noopener noreferrer" className="resource-card" onClick={handleClick}>
-      <div className="resource-card__keywords">
-        <div
-          className="resource-card__label"
-          style={{ backgroundColor: tagColor[resourceType] || "#67a286" }}
-        >
-          {resourceType}
+      <div className="resource-card__header">
+        <div className="resource-card__keywords">
+          <div
+            className="resource-card__label"
+            style={{ backgroundColor: tagColor[resourceType] || "#67a286" }}
+          >
+            {resourceType}
+          </div>
         </div>
+        <h3>{name}</h3>
       </div>
-      <h3>{name}</h3>
       <p className={isClicked ? "show-text" : ""}>{description}</p>
-      <div className="learn-more">Learn More</div>
+      <div className="resource-card__footer">
+        <div className="resource-card__submitted-by">Submitted by: {submittedBy}</div>
+        <div className="resource-card__date-added">Date Added: {dateAdded}</div>
+      </div>
     </a>
   );
 };
