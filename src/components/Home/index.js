@@ -2,45 +2,34 @@ import { useEffect, useState } from 'react';
 import './index.scss';
 import AnimatedLetters from '../AnimatedLetters';
 import backgroundImage from '../../assets/images/background.png';
-import Loader from 'react-loaders';
-import { Link } from 'react-router-dom';
 
 const Home = () => {
-    const [letterClass, setLetterClass] = useState('text-animate');
+  const [letterClass, setLetterClass] = useState('text-animate');
+  const introductionArray = "Empowering Co-op Communities".split("");
 
-    const introductionArray = "Empowering Co-ops with Shared Resources and Support".split("");
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setLetterClass('text-animate-hover');
+    }, 4000);
 
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            setLetterClass('text-animate-hover');
-        }, 4000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
-        // This will clear the timeout if the component is unmounted
-        return () => clearTimeout(timeoutId);
-    }, []);
-
-    return (
-        <>
-            <div className="container home-page">
-                <div className="background-image-container">
-                    <img src={backgroundImage} alt="Cozy community housing" />
-                </div>
-                <div className="text-zone">
-                    <h1>
-                        <AnimatedLetters 
-                            letterClass={letterClass} 
-                            strArray={introductionArray} 
-                            idx={0} 
-                        />
-                    </h1>
-                    <h2>Connect. Share. Thrive.</h2>
-                    <p>Discover a hub of resources tailored for housing co-operatives. From conflict resolution to effective management, find everything you need to foster a vibrant and harmonious community.</p>
-                    <Link to="/resources" className="cta-button">Explore Resources</Link>
-                </div>
-            </div>
-            <Loader type="pacman" />
-        </>
-    );
+  return (
+    <main className="container home-page">
+      <section className="text-zone" aria-labelledby="main-heading" aria-describedby="main-description">
+        <h1 id="main-heading">
+          <AnimatedLetters letterClass={letterClass} strArray={introductionArray} idx={0} />
+        </h1>
+        <h2 id="main-description">Find conflict mediators, share resources, and build a sustainable community.</h2>
+      </section>
+      <div className="background-image-container" aria-hidden="true">
+        <img src={backgroundImage} alt="" role="presentation" />
+      </div>
+    </main>
+  );
 }
 
 export default Home;

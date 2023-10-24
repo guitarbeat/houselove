@@ -4,14 +4,7 @@ import Loader from 'react-loaders';
 import AnimatedLetters from '../AnimatedLetters';
 import './index.scss';
 
-const MediatorCard = ({ name, contact, expertise, availability }) => (
-  <div className="mediator-card">
-    <h3>{name}</h3>
-    <p>Contact: {contact}</p>
-    <p>Expertise: {expertise}</p>
-    <p>Availability: {availability}</p>
-  </div>
-);
+
 
 const Mediators = ({ db }) => {
   const [letterClass, setLetterClass] = useState('text-animate');
@@ -41,11 +34,7 @@ const Mediators = ({ db }) => {
           <p>
             Explore the list below to find a mediator who fits your needs, and feel free to reach out to them directly for assistance.
           </p>
-        </div>
-        <div className="mediators-container">
-          {db.mediators.map((mediator, index) => (
-            <MediatorCard key={index} {...mediator} />
-          ))}
+                    <h1>Under Construction</h1>
         </div>
       </div>
       <Loader type="pacman" />
