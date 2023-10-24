@@ -58,6 +58,8 @@ const Resources = ({ db }) => {
 
   
   {/* Resource Filter Buttons */}
+  <div class="resource-filter-buttons-container">
+     <span class="filters-label">Filters</span>
   <div className="resource-filter-buttons">
     <button onClick={handleFilterClick('All')} className={activeFilter === 'All' ? 'active' : ''}>
       All
@@ -69,6 +71,7 @@ const Resources = ({ db }) => {
       Videos
     </button>
     {/* Add more filter buttons as needed */}
+  </div>
   </div>
     </div>
   {/* Resource Cards */}

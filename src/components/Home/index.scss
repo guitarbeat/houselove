@@ -69,9 +69,17 @@
   }
 }
 
-// Add media queries for responsive font-sizing
-@media (max-width: 600px) {
-  h1 {
-    font-size: 2rem; // Slightly smaller text on very small screens
+@media (max-width: 844px) {
+  .home-page {
+    .background-image-container {
+      position: relative; // Adjust position
+      height: 50vh; // Adjust height
+      opacity: 0.9; // Adjust opacity if needed
+    }
+
+    .text-zone {
+      position: relative; // Adjust position
+      transform: none; // Remove transformations
+    }
   }
 }

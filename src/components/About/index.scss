@@ -80,3 +80,15 @@
     transform: rotateX(90deg);
   }
 }
+@media (max-width: 960px) {
+  .stage-cube-cont {
+    width: 100%;
+    padding-top: 10%;
+    position: relative;
+  }
+  .stage-cube-cont {
+    width: 100%;
+    height: auto;
+    padding-bottom: 10%;  /* Adjust padding to suit your design */
+    box-sizing: border-box;
+  }}

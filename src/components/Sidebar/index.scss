@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
 
+$primary-color: #E7A29B;
+$secondary-color: #C7FAC7;
+$background-color: #0D2A1A;
+
 .nav-bar {
-  background: #181818;
+  background: $background-color;
   width: 70px;
   height: 100%;
   position: absolute;
@@ -10,28 +14,18 @@
   min-height: 500px;
 
   .logo-container {
-    display: block;
     padding: auto;
   
     img {
-      display: block;
       margin: auto;
       width: 100%;
       height: auto;
     }
   
-    .subtitle {
-      text-align: center;
-      font-size: 12px;
-      color: #E7A29B;
-      text-decoration: none;
-      font-family: 'Tilt Neon', cursive;
-    }
   }
 }
 
 nav {
-  display: block;
   text-align: center;
   position: absolute;
   height: 210px;
@@ -40,28 +34,19 @@ nav {
   width: 100%;
 
   a {
-    font-size: 2rem; // Adjusted from 22px
-    color: #4d4d4e;
+    font-size: 2rem;
+    color: $secondary-color;
     display: block;
     line-height: 51px;
     height: 51px;
     position: relative;
     text-decoration: none;
-
-    i {
-      transition: all 0.3s ease-out;
-    }
+    transition: all 0.3s ease-out;
 
     &:hover {
-      color: #E7A29B;
-
-      svg {
-        opacity: 0;
-      }
-
-      &:after {
-        opacity: 1;
-      }
+      color: $primary-color;
+      svg { opacity: 0; }
+      &:after { opacity: 1; }
     }
 
     &:after {
@@ -74,107 +59,75 @@ nav {
       width: 100%;
       text-align: center;
       opacity: 0;
-      -webkit-transition: all 0.3s ease-out;
       transition: all 0.3s ease-out;
     }
 
-    &:first-child {
-      &:after {
-        content: 'HOME';
-      }
-    }
+    &.active svg { color: $primary-color; }
   }
 
-  a.about-link {
-    &:after {
-      content: 'ABOUT';
-    }
-  }
+  // Use map for better maintainability
+  $nav-items: (
+    "": 'HOME',
+    ".about-link": 'ABOUT',
+    ".resources-link": 'SHARE',
+    ".mediators-link": 'MEDIATORS',
+    ".contact-link": 'CONTACT'
+  );
 
-  a.resources-link {
-    &:after {
-      content: 'SHARE';
-    }
-  }
-
-  a.mediators-link {
-    &:after {
-      content: 'MEDIATORS';
-    }
-  }
-
-  a.contact-link {
-    &:after {
-      content: 'CONTACT';
-    }
-  }
-
-  a.active {
-    svg {
-      color: #E7A29B;
+  @each $selector, $label in $nav-items {
+    a#{$selector}:after {
+      content: $label;
     }
   }
 }
 
-/* Hide hamburger and close icons by default */
-.hamburger-icon,
-.close-icon {
-  display: none;
-}
+.hamburger-icon, .close-icon { display: none; }
 
-/* Apply styles for screens with a maximum width of typical mobile devices */
+
+
+
 @media screen and (max-width: 844px) {
   .nav-bar {
-    background: transparent;
-    position: initial;
-    height: auto;
-    min-height: auto;
-
-    /* Hide nav elements */
-    nav {
-      display: none;
-    }
+    background: none;  // Changed from transparent
+    position: static;  // Changed from initial
+    height: auto;      // Unchanged
+    min-height: 0;     // Changed from auto
 
     nav {
-      width: 100%;
-      top: 0;
-      left: 0;
-      background: #181818;
-      height: 100%;
-      margin: 0;
-      z-index: 2;
-      position: fixed;
+      display: none;     
+      width: 100%;       
+      top: 0;          
+      left: 0;         
+      background: $background-color; 
+      height: 100%;      
+      margin: 0;         
+      z-index: 2;       
+      position: fixed;  
 
-      &.mobile-show {
-        display: block;
-      }
+      &.mobile-show { display: block; } 
 
-      /* Style links inside the navigation */
       a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+        height: 60px;  
+        display: flex; 
+        justify-content: center; 
+        align-items: center;    
 
-      a:after {
-        opacity: 1;
-        position: initial;
-        width: auto;
-        margin-left: 10px; 
-      }
+        &:after {
+          opacity: 1;        
+          margin-left: 10px; 
+          width: auto;       
+          position: static;   
+        }
 
-      a svg {
-        opacity: 1 !important;
+        svg { opacity: 1; } 
       }
     }
 
-    /* Position hamburger and close icons */
-    .hamburger-icon,
-    .close-icon {
+    .hamburger-icon, .close-icon {
+      display: block;   
       position: absolute;
-      top: 15px;
-      right: 15px;
-      display: block;
+      top: 15px;       
+      right: 15px;       
     }
   }
 }
