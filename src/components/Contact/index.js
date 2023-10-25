@@ -95,7 +95,7 @@ const ContactInfo = () => (
     <br />
     Pink Palace Co-op,
     <br />
-    702 W 32nd St, Austin TX 78705
+    Austin TX 78705
     <br />
     <br />
     <span>aaronlorenzowoods@gmail.com</span>
