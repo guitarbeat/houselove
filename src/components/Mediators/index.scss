@@ -1,0 +1,85 @@
+$mediator-card-bg-color: #d8a7b1;
+$mediator-card-hover-bg-color: #ef7c8e;
+$mediator-text-color-light: #4a4a4a;
+$mediator-shadow-color-light: rgba(0, 0, 0, 0.1);
+$mediator-shadow-color-dark: rgba(0, 0, 0, 0.2);
+$mediator-breakpoint-md: 768px;
+
+.mediators-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 1rem;
+  overflow-y: auto;
+  max-height: 90%;
+}
+
+.mediator-card {
+  position: relative;
+  margin: 0.5rem;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: calc(33.333% - 1rem);
+  color: $mediator-text-color-light;
+  box-shadow: 0 4px 8px $mediator-shadow-color-light;
+  background-color: $mediator-card-bg-color;
+  padding: 1rem;
+  transition: all 0.3s ease-in-out;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #3d3d3d;
+  }
+
+  p {
+    font-size: 2rem;
+    line-height: 1.4;
+    color: $mediator-text-color-light;
+    max-height: 0;
+    overflow: hidden;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    transition: max-height 0.5s ease-in-out;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px $mediator-shadow-color-dark;
+    background-color: $mediator-card-hover-bg-color;
+    p {
+      max-height: 100vh;
+    }
+  }
+
+  &__footer {
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &__contact,
+    &__location {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      svg { // this targets the FontAwesomeIcon
+        margin-right: 0.5rem; // provides a fallback and adds space to the right of the icon
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $mediator-breakpoint-md) {
+  .mediator-card {
+    flex-basis: calc(50% - 1rem);
+  }
+}
