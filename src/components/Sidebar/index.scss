@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
 
-$primary-color: #E7A29B;
-$secondary-color: #C7FAC7;
-$background-color: #0D2A1A;
+$primary-color: #e7a29b;
+$secondary-color: #c7fac7;
+$background-color: #0d2a1a;
+$gradient-start: #0f0c29; // Dark purple
+$gradient-end: #302b63; // Light purple
+$gradient-angle: 135deg;
 
 .nav-bar {
+  // background: linear-gradient($gradient-angle, $gradient-start, $gradient-end);
   background: $background-color;
   width: 70px;
   height: 100%;
@@ -15,13 +19,12 @@ $background-color: #0D2A1A;
 
   .logo-container {
     padding: auto;
-  
+
     img {
       margin: auto;
       width: 100%;
       height: auto;
     }
-  
   }
 }
 
@@ -44,9 +47,15 @@ nav {
     transition: all 0.3s ease-out;
 
     &:hover {
+      transform: scale(1.05); // Slightly scale up the icon and label
+
       color: $primary-color;
-      svg { opacity: 0; }
-      &:after { opacity: 1; }
+      svg {
+        opacity: 0;
+      }
+      &:after {
+        opacity: 1;
+      }
     }
 
     &:after {
@@ -62,16 +71,18 @@ nav {
       transition: all 0.3s ease-out;
     }
 
-    &.active svg { color: $primary-color; }
+    &.active svg {
+      color: $primary-color;
+    }
   }
 
   // Use map for better maintainability
   $nav-items: (
-    "": 'HOME',
-    ".about-link": 'ABOUT',
-    ".resources-link": 'SHARE',
-    ".mediators-link": 'MEDIATE',
-    ".contact-link": 'CONTACT'
+    '': 'HOME',
+    '.about-link': 'ABOUT',
+    '.resources-link': 'SHARE',
+    '.mediators-link': 'MEDIATE',
+    '.contact-link': 'CONTACT',
   );
 
   @each $selector, $label in $nav-items {
@@ -81,53 +92,62 @@ nav {
   }
 }
 
-.hamburger-icon, .close-icon { display: none; }
-
-
-
+.hamburger-icon,
+.close-icon {
+  display: none;
+}
 
 @media screen and (max-width: 844px) {
   .nav-bar {
-    background: none;  // Changed from transparent
-    position: static;  // Changed from initial
-    height: auto;      // Unchanged
-    min-height: 0;     // Changed from auto
+    background: none; // Changed from transparent
+    position: static; // Changed from initial
+    height: auto; // Unchanged
+    min-height: 0; // Changed from auto
 
     nav {
-      display: none;     
-      width: 100%;       
-      top: 0;          
-      left: 0;         
-      background: $background-color; 
-      height: 100%;      
-      margin: 0;         
-      z-index: 2;       
-      position: fixed;  
+      display: none;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: $background-color;
+      height: 100%;
+      margin: 0;
+      z-index: 2;
+      position: fixed;
 
-      &.mobile-show { display: block; } 
+      &.mobile-show {
+        display: block;
+        // Cover the full viewport
+        width: 100vw;
+        height: 100vh;
+        padding-top: 3rem; // Add some space at the top
+      }
 
       a {
-        height: 60px;  
-        display: flex; 
-        justify-content: center; 
-        align-items: center;    
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         &:after {
-          opacity: 1;        
-          margin-left: 10px; 
-          width: auto;       
-          position: static;   
+          opacity: 1;
+          margin-left: 10px;
+          width: auto;
+          position: static;
         }
 
-        svg { opacity: 1; } 
+        svg {
+          opacity: 1;
+        }
       }
     }
 
-    .hamburger-icon, .close-icon {
-      display: block;   
+    .hamburger-icon,
+    .close-icon {
+      display: block;
       position: absolute;
-      top: 15px;       
-      right: 15px;       
+      top: 15px;
+      right: 15px;
     }
   }
 }
