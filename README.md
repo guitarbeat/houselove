@@ -1,70 +1,162 @@
-# Getting Started with Create React App
+# House Love - Cooperative Community Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based web application designed to empower cooperative communities by providing tools for conflict mediation, resource sharing, and community building.
 
-## Available Scripts
+## 🏠 About
 
-In the project directory, you can run:
+House Love is a platform that connects cooperative housing communities with:
+- **Conflict Mediators**: Find qualified mediators for community disputes
+- **Resource Sharing**: Share and discover community resources
+- **Community Building**: Tools and resources for sustainable cooperative living
 
-### `npm start`
+## 🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Interactive Homepage**: Animated text and engaging user experience
+- **Mediator Directory**: Browse and contact community mediators
+- **Resource Library**: Access community resources and tools
+- **Contact System**: Integrated EmailJS for seamless communication
+- **Interactive Map**: Location-based services using Leaflet
+- **Responsive Design**: Mobile-friendly interface
+- **Google Sheets Integration**: Dynamic data management
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Tech Stack
 
-### `npm test`
+- **Frontend**: React 18.2.0
+- **Routing**: React Router DOM 6.17.0
+- **Styling**: SCSS with animations
+- **Maps**: Leaflet with React Leaflet
+- **Email**: EmailJS for contact forms
+- **Data**: Google Sheets API integration
+- **Icons**: FontAwesome
+- **Animations**: GSAP, Animate.css
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📋 Prerequisites
 
-### `npm run build`
+- Node.js (v16 or higher)
+- npm or yarn package manager
+- Google Sheets API access
+- EmailJS account
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🔧 Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd house-love
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   
+   Edit `.env.local` and add your API keys:
+   ```env
+   REACT_APP_GOOGLE_SHEETS_API_KEY=your_google_sheets_api_key_here
+   REACT_APP_GOOGLE_SHEETS_DOC_ID=your_google_sheets_document_id_here
+   REACT_APP_EMAILJS_PUBLIC_KEY=your_emailjs_public_key_here
+   REACT_APP_EMAILJS_SERVICE_ID=your_emailjs_service_id_here
+   REACT_APP_EMAILJS_TEMPLATE_ID=your_emailjs_template_id_here
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. **Start the development server**
+   ```bash
+   npm start
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🔑 Environment Variables
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `REACT_APP_GOOGLE_SHEETS_API_KEY` | Google Sheets API key for data integration | Yes |
+| `REACT_APP_GOOGLE_SHEETS_DOC_ID` | Google Sheets document ID | Yes |
+| `REACT_APP_EMAILJS_PUBLIC_KEY` | EmailJS public key for contact forms | Yes |
+| `REACT_APP_EMAILJS_SERVICE_ID` | EmailJS service ID | Yes |
+| `REACT_APP_EMAILJS_TEMPLATE_ID` | EmailJS template ID | Yes |
 
-## Learn More
+## 📁 Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+src/
+├── components/
+│   ├── About/           # About page component
+│   ├── AnimatedLetters/ # Text animation component
+│   ├── Contact/         # Contact page with form
+│   ├── Home/           # Homepage component
+│   ├── Layout/         # Main layout wrapper
+│   ├── Mediators/      # Mediator directory
+│   ├── Resources/      # Resource library
+│   └── Sidebar/        # Navigation sidebar
+├── assets/             # Images and static assets
+├── App.js             # Main app component
+├── App.scss           # Global styles
+└── index.js           # App entry point
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🧪 Available Scripts
 
-### Code Splitting
+- `npm start` - Runs the app in development mode
+- `npm test` - Launches the test runner
+- `npm run build` - Builds the app for production
+- `npm run eject` - Ejects from Create React App (one-way operation)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🚀 Deployment
 
-### Analyzing the Bundle Size
+### Build for Production
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Deploy to Netlify
+1. Connect your repository to Netlify
+2. Set build command: `npm run build`
+3. Set publish directory: `build`
+4. Add environment variables in Netlify dashboard
 
-### Making a Progressive Web App
+### Deploy to Vercel
+1. Install Vercel CLI: `npm i -g vercel`
+2. Run: `vercel`
+3. Follow the prompts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🔒 Security
 
-### Advanced Configuration
+- API keys are stored in environment variables
+- Form validation and sanitization implemented
+- HTTPS enforced in production
+- Regular dependency updates for security patches
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🤝 Contributing
 
-### Deployment
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Commit your changes: `git commit -am 'Add feature'`
+4. Push to the branch: `git push origin feature-name`
+5. Submit a pull request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📝 License
 
-### `npm run build` fails to minify
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🆘 Support
+
+For support, email aaronlorenzowoods@gmail.com or create an issue in the repository.
+
+## 🔄 Recent Updates
+
+- Updated to React 18.2.0
+- Improved error handling for contact forms
+- Enhanced security with environment variables
+- Added comprehensive documentation
+- Fixed dependency vulnerabilities
+
+---
+
+**Built with ❤️ for cooperative communities**
