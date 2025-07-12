@@ -30,16 +30,33 @@ const Contact = () => {
     }, 3000);
     return () => clearTimeout(timeoutId);
   }, []);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
+
   const sendEmail = (e) => {
     e.preventDefault();
-    emailjs.sendForm('service_k9dywif', 'template_nmia5ai', form.current, 'W1uc09q7N6dm3tDJH')
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    
+    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'service_k9dywif';
+    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'template_nmia5ai';
+    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'W1uc09q7N6dm3tDJH';
+    
+    emailjs.sendForm(serviceId, templateId, form.current, publicKey)
       .then(
         () => {
-          alert('Message successfully sent!');
-          window.location.reload(false);
+          setSubmitStatus('success');
+          setIsSubmitting(false);
+          form.current.reset();
+          // Auto-hide success message after 5 seconds
+          setTimeout(() => setSubmitStatus(null), 5000);
         },
-        () => {
-          alert('Failed to send the message, please try again');
+        (error) => {
+          console.error('EmailJS error:', error);
+          setSubmitStatus('error');
+          setIsSubmitting(false);
+          // Auto-hide error message after 5 seconds
+          setTimeout(() => setSubmitStatus(null), 5000);
         }
       );
   };
@@ -47,7 +64,13 @@ const Contact = () => {
   return (
     <>
       <div className="container contact-page">
-        <ContactText letterClass={letterClass} form={form} sendEmail={sendEmail} />
+        <ContactText 
+          letterClass={letterClass} 
+          form={form} 
+          sendEmail={sendEmail} 
+          isSubmitting={isSubmitting}
+          submitStatus={submitStatus}
+        />
         <ContactInfo />
         <ContactMap />
       </div>
@@ -57,7 +80,7 @@ const Contact = () => {
 };
 
 // Sub-component for contact text and form
-const ContactText = ({ letterClass, form, sendEmail }) => (
+const ContactText = ({ letterClass, form, sendEmail, isSubmitting, submitStatus }) => (
   <div className="text-zone">
     <h1>
       <AnimatedLetters
@@ -69,22 +92,41 @@ const ContactText = ({ letterClass, form, sendEmail }) => (
     <p>
       If you have any questions, suggestions, or want to contribute to "House Love", please get in touch. We value your feedback and collaboration to make this platform even better for our community.
     </p>
-    <ContactForm form={form} sendEmail={sendEmail} />
+    <ContactForm form={form} sendEmail={sendEmail} isSubmitting={isSubmitting} submitStatus={submitStatus} />
   </div>
 );
 
 // Sub-component for contact form
-const ContactForm = ({ form, sendEmail }) => (
+const ContactForm = ({ form, sendEmail, isSubmitting, submitStatus }) => (
   <div className="contact-form">
     <form ref={form} onSubmit={sendEmail}>
       <ul>
-        <li className="half"><input placeholder="Name" type="text" name="name" required /></li>
-        <li className="half"><input placeholder="Email" type="email" name="email" required /></li>
-        <li><input placeholder="Subject" type="text" name="subject" required /></li>
-        <li><textarea placeholder="Message" name="message" required /></li>
-        <li><input type="submit" className="flat-button" value="SEND" /></li>
+        <li className="half"><input placeholder="Name" type="text" name="name" required disabled={isSubmitting} /></li>
+        <li className="half"><input placeholder="Email" type="email" name="email" required disabled={isSubmitting} /></li>
+        <li><input placeholder="Subject" type="text" name="subject" required disabled={isSubmitting} /></li>
+        <li><textarea placeholder="Message" name="message" required disabled={isSubmitting} /></li>
+        <li>
+          <input 
+            type="submit" 
+            className="flat-button" 
+            value={isSubmitting ? "SENDING..." : "SEND"} 
+            disabled={isSubmitting}
+          />
+        </li>
       </ul>
     </form>
+    
+    {/* Status Messages */}
+    {submitStatus === 'success' && (
+      <div className="status-message success">
+        <p>✅ Message successfully sent! We'll get back to you soon.</p>
+      </div>
+    )}
+    {submitStatus === 'error' && (
+      <div className="status-message error">
+        <p>❌ Failed to send the message. Please try again or contact us directly.</p>
+      </div>
+    )}
   </div>
 );
 
