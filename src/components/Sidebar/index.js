@@ -14,22 +14,21 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const navItems = [
-  { to: '/', icon: faHome, label: 'Home' },
+  { to: '/', icon: faHome, label: 'Home', end: true },
   { to: '/about', icon: faUser, label: 'About', className: 'about-link' },
   { to: '/resources', icon: faBook, label: 'Resources', className: 'resources-link' },
   { to: '/mediators', icon: faHandshake, label: 'Mediators', className: 'mediators-link' }, 
   { to: '/contact', icon: faEnvelope, label: 'Contact', className: 'contact-link' },
-  // Add more items as needed
 ];
 
-const SidebarItem = ({ to, icon, label, className, onClick }) => (
+const SidebarItem = ({ to, icon, label, className, onClick, end }) => (
   <NavLink
-    exact={to === '/'}
-    activeClassName="active"
     to={to}
-    className={className}
+    end={end}
+    className={({ isActive }) => [className, isActive ? 'active' : ''].filter(Boolean).join(' ')}
     onClick={onClick}
-    aria-label={label}>
+    aria-label={label}
+  >
     <FontAwesomeIcon icon={icon} />
   </NavLink>
 );
@@ -44,7 +43,8 @@ const Sidebar = () => {
         <Link
           className="logo"
           to="/"
-          onClick={() => setShowNav(false)}>
+          onClick={() => setShowNav(false)}
+        >
           <img src={Logo} alt="Logo" />
         </Link>
       </div>
