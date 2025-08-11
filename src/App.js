@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import GoogleSheetsProvider from 'react-db-google-sheets';
 import Layout from './components/Layout';
 import Home from './components/Home';
 import About from './components/About';
 import Resources from './components/Resources';
-import Mediators from './components/Mediators';
-import Contact from './components/Contact';
+// import Contact from './components/Contact';
 
 import './App.scss';
+
+const Mediators = lazy(() => import('./components/Mediators'));
+const Contact = lazy(() => import('./components/Contact'));
 
 function App() {
   const config = {
@@ -19,15 +21,17 @@ function App() {
 
   return (
     <GoogleSheetsProvider config={config}>
-      <Routes> 
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="resources" element={<Resources />} />
-          <Route path="mediators" element={<Mediators />} />
-          <Route path="contact" element={<Contact />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes> 
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="resources" element={<Resources />} />
+            <Route path="mediators" element={<Mediators />} />
+            <Route path="contact" element={<Contact />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </GoogleSheetsProvider>
   );
 }
