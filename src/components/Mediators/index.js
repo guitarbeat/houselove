@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import { withGoogleSheets } from 'react-db-google-sheets'
+=======
+import React, { useState, useEffect } from 'react'
+>>>>>>> origin/main
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import Loader from 'react-loaders'
@@ -176,4 +180,4 @@ const MediatorMap = ({ center, zoom, mediators }) => (
   </div>
 )
 
-export default withGoogleSheets('mediators')(Mediators)
+export default Mediators
