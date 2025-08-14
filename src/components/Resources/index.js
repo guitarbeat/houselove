@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Loader from 'react-loaders';
 import AnimatedLetters from '../AnimatedLetters';
 import ResourceCard from './ResourceCard'; 
@@ -6,9 +6,10 @@ import './index.scss';
 
 const Resources = ({ db }) => {
   const [letterClass, setLetterClass] = useState('text-animate');
-  const [filteredResources, setFilteredResources] = useState([]);
   const [activeFilter, setActiveFilter] = useState('All');
   const [uniqueResourceTypes, setUniqueResourceTypes] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('newest'); // newest | oldest | az | za
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -20,23 +21,56 @@ const Resources = ({ db }) => {
 
   useEffect(() => {
     if (db && db.resources) {
-      const resourceTypes = new Set(db.resources.map(resource => resource['Resource Type']));
+      const resourceTypes = new Set(db.resources.map(resource => resource['Resource Type']).filter(Boolean));
       setUniqueResourceTypes(['All', ...Array.from(resourceTypes)]);
     }
   }, [db]);
 
-  useEffect(() => {
-    if (db && db.resources) {
-      if (activeFilter === 'All') {
-        setFilteredResources(db.resources);
-      } else {
-        const filtered = db.resources.filter(
-          (resource) => resource['Resource Type'] === activeFilter
-        );
-        setFilteredResources(filtered);
-      }
+  const filteredAndSortedResources = useMemo(() => {
+    if (!db || !db.resources) return [];
+
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+
+    let results = db.resources.filter((resource) => {
+      const matchesType = activeFilter === 'All' || resource['Resource Type'] === activeFilter;
+
+      if (!normalizedQuery) return matchesType;
+
+      const name = String(resource['Resource Name'] || '').toLowerCase();
+      const description = String(resource['Description'] || '').toLowerCase();
+      const type = String(resource['Resource Type'] || '').toLowerCase();
+
+      const matchesQuery = name.includes(normalizedQuery)
+        || description.includes(normalizedQuery)
+        || type.includes(normalizedQuery);
+
+      return matchesType && matchesQuery;
+    });
+
+    const toDate = (value) => {
+      // Try to parse common date formats; fallback to epoch 0
+      const d = new Date(value);
+      return isNaN(d.getTime()) ? 0 : d.getTime();
+    };
+
+    switch (sortBy) {
+      case 'oldest':
+        results = results.slice().sort((a, b) => toDate(a['Date Added']) - toDate(b['Date Added']));
+        break;
+      case 'az':
+        results = results.slice().sort((a, b) => String(a['Resource Name']).localeCompare(String(b['Resource Name'])));
+        break;
+      case 'za':
+        results = results.slice().sort((a, b) => String(b['Resource Name']).localeCompare(String(a['Resource Name'])));
+        break;
+      case 'newest':
+      default:
+        results = results.slice().sort((a, b) => toDate(b['Date Added']) - toDate(a['Date Added']));
+        break;
     }
-  }, [db, activeFilter]);
+
+    return results;
+  }, [db, activeFilter, searchQuery, sortBy]);
 
   const handleFilterClick = (filter) => () => {
     setActiveFilter(filter);
@@ -80,27 +114,52 @@ const Resources = ({ db }) => {
             </a>
             .
           </p>
-          
-          {/* Resource Filter Buttons */}
-          <div className="resource-filter-buttons-container">
-            <span className="filters-label">Filters</span>
-            <div className="resource-filter-buttons">
-              {uniqueResourceTypes.map(type => (
-                <button
-                  key={type}
-                  onClick={handleFilterClick(type)}
-                  className={activeFilter === type ? 'active' : ''}
-                >
-                  {type}
-                </button>
-              ))}
+
+          {/* Controls */}
+          <div className="resource-controls">
+            <div className="resource-filter-buttons-container">
+              <span className="filters-label">Filters</span>
+              <div className="resource-filter-buttons">
+                {uniqueResourceTypes.map(type => (
+                  <button
+                    key={type}
+                    onClick={handleFilterClick(type)}
+                    className={activeFilter === type ? 'active' : ''}
+                    aria-pressed={activeFilter === type}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="resource-search-sort">
+              <input
+                type="search"
+                className="resource-search-input"
+                placeholder="Search resources..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                aria-label="Search resources"
+              />
+              <select
+                className="resource-sort-select"
+                aria-label="Sort resources"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="az">A–Z</option>
+                <option value="za">Z–A</option>
+              </select>
             </div>
           </div>
         </div>
         {/* Resource Cards */}
-        {db && filteredResources.length > 0 ? (
+        {db && filteredAndSortedResources.length > 0 ? (
           <div className="resources-container">
-            {filteredResources.map((resource, index) => (
+            {filteredAndSortedResources.map((resource, index) => (
               <ResourceCard key={index} {...resource} />
             ))}
           </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './index.scss'
 import AnimatedLetters from '../AnimatedLetters'
 import backgroundImage from '../../assets/images/background.png'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   const [letterClass, setLetterClass] = useState('text-animate')
@@ -44,6 +45,10 @@ const Home = () => {
           Find conflict mediators, share resources, and build a sustainable
           community.
         </h2>
+        <div className="home-cta">
+          <Link to="/resources" className="cta-button">Explore Resources</Link>
+          <Link to="/mediators" className="cta-button secondary">Find Mediators</Link>
+        </div>
       </section>
       <div className="background-image-container" aria-hidden="true">
         <img src={backgroundImage} alt="" role="presentation" />

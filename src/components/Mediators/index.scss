@@ -14,6 +14,28 @@ $mediator-breakpoint-md: 768px;
   max-height: 90%;
 }
 
+.mediators-controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1rem 0 2rem;
+
+  .mediators-search-input,
+  .mediators-spec-select,
+  .mediators-locate-btn {
+    background: $mediator-card-hover-bg-color;
+    color: #fff;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+  }
+
+  .mediators-search-input::placeholder {
+    color: rgba(255,255,255,0.85);
+  }
+}
+
 .mediator-card {
   position: relative;
   margin: 0.5rem;
@@ -40,7 +62,7 @@ $mediator-breakpoint-md: 768px;
   }
 
   p {
-    font-size: 2rem;
+    font-size: 1.2rem;
     line-height: 1.4;
     color: $mediator-text-color-light;
     max-height: 0;
@@ -48,6 +70,10 @@ $mediator-breakpoint-md: 768px;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     transition: max-height 0.5s ease-in-out;
+  }
+
+  p.show-text {
+    max-height: 100vh;
   }
 
   &:hover {
@@ -62,17 +88,30 @@ $mediator-breakpoint-md: 768px;
   &__footer {
     font-size: 1.2rem;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
 
-    &__contact,
-    &__location {
+    .mediator-card__contact {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      svg { // this targets the FontAwesomeIcon
-        margin-right: 0.5rem; // provides a fallback and adds space to the right of the icon
+
+      a {
+        color: inherit;
+        text-decoration: underline;
+      }
+
+      .copy-contact-btn {
+        background: rgba(0,0,0,0.15);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 4px 8px;
+        font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        cursor: pointer;
       }
     }
   }
