@@ -17,7 +17,6 @@ House Love connects cooperative housing communities with:
 - **Contact System** via EmailJS
 - **Interactive Map** using Leaflet + React Leaflet
 - **Responsive Design** with SCSS
-- **Google Sheets Integration** via `react-db-google-sheets`
 
 ## 🛠️ Tech Stack
 
@@ -26,7 +25,6 @@ House Love connects cooperative housing communities with:
 - **Styling**: SCSS (`sass` 1.69.4)
 - **Maps**: Leaflet 1.9.4 with React Leaflet 4.2.1
 - **Email**: EmailJS `@emailjs/browser` 3.11.0
-- **Data**: Google Sheets via `react-db-google-sheets` 3.0.0
 - **Icons**: FontAwesome 6.4.x
 - **Animations**: GSAP 3.12.x, Animate.css 4.1.1
 - **Build**: Create React App (`react-scripts` 5.0.1)
@@ -56,29 +54,11 @@ Create `.env.local` with the following variables:
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `REACT_APP_GOOGLE_SHEETS_API_KEY` | Google API key for Sheets access | Yes |
-| `REACT_APP_GOOGLE_SHEETS_DOC_ID` | Google Sheets document ID | Yes |
 | `REACT_APP_EMAILJS_PUBLIC_KEY` | EmailJS public key | Yes |
 | `REACT_APP_EMAILJS_SERVICE_ID` | EmailJS service ID | Yes |
 | `REACT_APP_EMAILJS_TEMPLATE_ID` | EmailJS template ID | Yes |
 
 See `.env.example` for a template. CRA automatically loads `.env.local`.
-
-## 📊 Google Sheets Setup
-
-This app reads from a Google Sheet and exposes each worksheet as a collection:
-- Worksheet `resources` → available as `db.resources`
-- Worksheet `mediators` → available as `db.mediators`
-
-Expected columns:
-- **resources**: `Resource Name`, `Description`, `URL`, `Resource Type`, `Submitted By`, `Date Added`
-- **mediators**: `Name`, `Description`, `Latitude`, `Longitude`, `Specialization`, `Email`, `Phone`
-
-You can populate data using the linked public Sheet and Forms:
-- Resources: `public Google Sheet` and `Google Form` linked in the UI
-- Mediators: `Google Sheet` and `Google Form` linked in the UI
-
-Note: Make the Google Sheet readable by anyone with the link or configure API access appropriately.
 
 ## 📁 Project Structure
 

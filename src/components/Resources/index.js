@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { withGoogleSheets } from 'react-db-google-sheets';
 import Loader from 'react-loaders';
 import AnimatedLetters from '../AnimatedLetters';
 import ResourceCard from './ResourceCard'; 
@@ -115,4 +114,4 @@ const Resources = ({ db }) => {
   );
 };
 
-export default withGoogleSheets('resources')(Resources);
+export default Resources;
