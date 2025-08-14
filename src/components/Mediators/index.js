@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import { withGoogleSheets } from 'react-db-google-sheets'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -12,6 +12,9 @@ const Mediators = ({ db }) => {
   const [mapCenter, setMapCenter] = useState([51.505, -0.09]) // Default center
   const [mapZoom, setMapZoom] = useState(13) // Default zoom level
   const [mediators, setMediators] = useState([])
+  const [searchQuery, setSearchQuery] = useState('')
+  const [specializations, setSpecializations] = useState([])
+  const [activeSpec, setActiveSpec] = useState('All')
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1200)
@@ -22,6 +25,8 @@ const Mediators = ({ db }) => {
   useEffect(() => {
     if (db && db.mediators) {
       setMediators(db.mediators)
+      const specs = new Set(db.mediators.map(m => m.Specialization).filter(Boolean))
+      setSpecializations(['All', ...Array.from(specs)])
     }
   }, [db])
 
@@ -30,6 +35,26 @@ const Mediators = ({ db }) => {
     setMapZoom(zoom)
   }
 
+  const handleLocateMe = useCallback(() => {
+    if (!navigator.geolocation) return
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const { latitude, longitude } = pos.coords
+      updateMap(latitude, longitude, 12)
+    })
+  }, [])
+
+  const filteredMediators = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase()
+    return mediators.filter((m) => {
+      const specOk = activeSpec === 'All' || String(m.Specialization || '') === activeSpec
+      if (!q) return specOk
+      const name = String(m.Name || '').toLowerCase()
+      const desc = String(m.Description || '').toLowerCase()
+      const spec = String(m.Specialization || '').toLowerCase()
+      return specOk && (name.includes(q) || desc.includes(q) || spec.includes(q))
+    })
+  }, [mediators, searchQuery, activeSpec])
+
   return (
     <>
       <div
@@ -37,15 +62,24 @@ const Mediators = ({ db }) => {
           isMobile ? 'mobile' : 'desktop'
         }`}
       >
-        <MediatorText mediators={mediators} updateMap={updateMap} />
-        <MediatorMap center={mapCenter} zoom={mapZoom} mediators={mediators} />
+        <MediatorText 
+          mediators={filteredMediators} 
+          updateMap={updateMap}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          specializations={specializations}
+          activeSpec={activeSpec}
+          setActiveSpec={setActiveSpec}
+          handleLocateMe={handleLocateMe}
+        />
+        <MediatorMap center={mapCenter} zoom={mapZoom} mediators={filteredMediators} />
       </div>
       <Loader type="pacman" />
     </>
   )
 }
 
-const MediatorText = ({ mediators, updateMap }) => (
+const MediatorText = ({ mediators, updateMap, searchQuery, setSearchQuery, specializations, activeSpec, setActiveSpec, handleLocateMe }) => (
   <div className="text-zone">
     <h1>Mediators</h1>
     <p>
@@ -74,6 +108,28 @@ const MediatorText = ({ mediators, updateMap }) => (
       </a>
       . Your input makes our community stronger. Thanks for chipping in!
     </p>
+
+    <div className="mediators-controls">
+      <input
+        type="search"
+        className="mediators-search-input"
+        placeholder="Search mediators..."
+        aria-label="Search mediators"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <select
+        className="mediators-spec-select"
+        aria-label="Filter by specialization"
+        value={activeSpec}
+        onChange={(e) => setActiveSpec(e.target.value)}
+      >
+        {specializations.map((s) => (
+          <option key={s} value={s}>{s}</option>
+        ))}
+      </select>
+      <button className="mediators-locate-btn" onClick={handleLocateMe}>Locate me</button>
+    </div>
 
     <div className="mediators-container">
       {mediators.map((mediator, index) => (
