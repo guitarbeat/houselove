@@ -83,3 +83,24 @@ $mediator-breakpoint-md: 768px;
     flex-basis: calc(50% - 1rem);
   }
 }
+
+// Loading and error message styles
+.loading-message,
+.error-message {
+  text-align: center;
+  padding: 2rem;
+  margin: 2rem 0;
+  
+  p {
+    font-size: 1.1rem;
+    color: #ffd700;
+    margin: 0.5rem 0;
+  }
+}
+
+.error-message {
+  p {
+    color: #ff6b6b;
+  }
+}
+
