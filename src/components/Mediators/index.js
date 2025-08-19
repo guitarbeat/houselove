@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { withGoogleSheets } from 'react-db-google-sheets'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import Loader from 'react-loaders'
 import './index.scss'
 import MediatorCard from './MediatorCard'
 import { useMap } from 'react-leaflet'
+import googleSheetsApi from '../../utils/googleSheetsApi'
 
-const Mediators = ({ db }) => {
+const Mediators = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1200)
   const [mapCenter, setMapCenter] = useState([51.505, -0.09]) // Default center
   const [mapZoom, setMapZoom] = useState(13) // Default zoom level
   const [mediators, setMediators] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1200)
@@ -20,10 +22,25 @@ const Mediators = ({ db }) => {
   }, [])
 
   useEffect(() => {
-    if (db && db.mediators) {
-      setMediators(db.mediators)
+    const fetchMediators = async () => {
+      try {
+        setLoading(true)
+        const data = await googleSheetsApi.fetchMediators()
+        setMediators(data)
+        
+        // Set map center to first mediator if available
+        if (data.length > 0 && data[0].Latitude && data[0].Longitude) {
+          setMapCenter([parseFloat(data[0].Latitude), parseFloat(data[0].Longitude)])
+        }
+      } catch (err) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
     }
-  }, [db])
+
+    fetchMediators()
+  }, [])
 
   const updateMap = (lat, lng, zoom) => {
     setMapCenter([lat, lng])
@@ -37,15 +54,22 @@ const Mediators = ({ db }) => {
           isMobile ? 'mobile' : 'desktop'
         }`}
       >
-        <MediatorText mediators={mediators} updateMap={updateMap} />
-        <MediatorMap center={mapCenter} zoom={mapZoom} mediators={mediators} />
+        <MediatorText 
+          mediators={mediators} 
+          updateMap={updateMap} 
+          loading={loading}
+          error={error}
+        />
+        {!loading && !error && (
+          <MediatorMap center={mapCenter} zoom={mapZoom} mediators={mediators} />
+        )}
       </div>
       <Loader type="pacman" />
     </>
   )
 }
 
-const MediatorText = ({ mediators, updateMap }) => (
+const MediatorText = ({ mediators, updateMap, loading, error }) => (
   <div className="text-zone">
     <h1>Mediators</h1>
     <p>
@@ -75,22 +99,44 @@ const MediatorText = ({ mediators, updateMap }) => (
       . Your input makes our community stronger. Thanks for chipping in!
     </p>
 
-    <div className="mediators-container">
-      {mediators.map((mediator, index) => (
-        <MediatorCard
-          key={index}
-          name={mediator.Name}
-          description={mediator.Description}
-          location={{
-            lat: parseFloat(mediator.Latitude),
-            lng: parseFloat(mediator.Longitude),
-          }}
-          specialization={mediator.Specialization}
-          contact={{ email: mediator.Email, phone: mediator.Phone }}
-          updateMap={updateMap}
-        />
-      ))}
-    </div>
+    {/* Loading State */}
+    {loading && (
+      <div className="loading-message">
+        <p>Loading mediators...</p>
+      </div>
+    )}
+    
+    {/* Error State */}
+    {error && (
+      <div className="error-message">
+        <p>Error loading mediators: {error}</p>
+        <p>Please check your internet connection and try again.</p>
+      </div>
+    )}
+
+    {/* Mediators List */}
+    {!loading && !error && (
+      <div className="mediators-container">
+        {mediators.length > 0 ? (
+          mediators.map((mediator, index) => (
+            <MediatorCard
+              key={index}
+              name={mediator.Name}
+              description={mediator.Description}
+              location={{
+                lat: parseFloat(mediator.Latitude),
+                lng: parseFloat(mediator.Longitude),
+              }}
+              specialization={mediator.Specialization}
+              contact={{ email: mediator.Email, phone: mediator.Phone }}
+              updateMap={updateMap}
+            />
+          ))
+        ) : (
+          <p>No mediators found.</p>
+        )}
+      </div>
+    )}
   </div>
 )
 
@@ -120,4 +166,4 @@ const MediatorMap = ({ center, zoom, mediators }) => (
   </div>
 )
 
-export default withGoogleSheets('mediators')(Mediators)
+export default Mediators

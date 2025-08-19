@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { withGoogleSheets } from 'react-db-google-sheets';
 import Loader from 'react-loaders';
 import AnimatedLetters from '../AnimatedLetters';
 import ResourceCard from './ResourceCard'; 
+import googleSheetsApi from '../../utils/googleSheetsApi';
 import './index.scss';
 
-const Resources = ({ db }) => {
+const Resources = () => {
   const [letterClass, setLetterClass] = useState('text-animate');
+  const [resources, setResources] = useState([]);
   const [filteredResources, setFilteredResources] = useState([]);
   const [activeFilter, setActiveFilter] = useState('All');
   const [uniqueResourceTypes, setUniqueResourceTypes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -20,24 +23,34 @@ const Resources = ({ db }) => {
   }, []);
 
   useEffect(() => {
-    if (db && db.resources) {
-      const resourceTypes = new Set(db.resources.map(resource => resource['Resource Type']));
-      setUniqueResourceTypes(['All', ...Array.from(resourceTypes)]);
-    }
-  }, [db]);
+    const fetchResources = async () => {
+      try {
+        setLoading(true);
+        const data = await googleSheetsApi.fetchResources();
+        setResources(data);
+        
+        const resourceTypes = new Set(data.map(resource => resource['Resource Type']));
+        setUniqueResourceTypes(['All', ...Array.from(resourceTypes)]);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchResources();
+  }, []);
 
   useEffect(() => {
-    if (db && db.resources) {
-      if (activeFilter === 'All') {
-        setFilteredResources(db.resources);
-      } else {
-        const filtered = db.resources.filter(
-          (resource) => resource['Resource Type'] === activeFilter
-        );
-        setFilteredResources(filtered);
-      }
+    if (activeFilter === 'All') {
+      setFilteredResources(resources);
+    } else {
+      const filtered = resources.filter(
+        (resource) => resource['Resource Type'] === activeFilter
+      );
+      setFilteredResources(filtered);
     }
-  }, [db, activeFilter]);
+  }, [resources, activeFilter]);
 
   const handleFilterClick = (filter) => () => {
     setActiveFilter(filter);
@@ -83,30 +96,52 @@ const Resources = ({ db }) => {
           </p>
           
           {/* Resource Filter Buttons */}
-          <div className="resource-filter-buttons-container">
-            <span className="filters-label">Filters</span>
-            <div className="resource-filter-buttons">
-              {uniqueResourceTypes.map(type => (
-                <button
-                  key={type}
-                  onClick={handleFilterClick(type)}
-                  className={activeFilter === type ? 'active' : ''}
-                >
-                  {type}
-                </button>
-              ))}
+          {!loading && !error && (
+            <div className="resource-filter-buttons-container">
+              <span className="filters-label">Filters</span>
+              <div className="resource-filter-buttons">
+                {uniqueResourceTypes.map(type => (
+                  <button
+                    key={type}
+                    onClick={handleFilterClick(type)}
+                    className={activeFilter === type ? 'active' : ''}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
-        {/* Resource Cards */}
-        {db && filteredResources.length > 0 ? (
-          <div className="resources-container">
-            {filteredResources.map((resource, index) => (
-              <ResourceCard key={index} {...resource} />
-            ))}
+        
+        {/* Loading State */}
+        {loading && (
+          <div className="loading-message">
+            <p>Loading resources...</p>
           </div>
-        ) : (
-          <p>No resources found.</p>
+        )}
+        
+        {/* Error State */}
+        {error && (
+          <div className="error-message">
+            <p>Error loading resources: {error}</p>
+            <p>Please check your internet connection and try again.</p>
+          </div>
+        )}
+        
+        {/* Resource Cards */}
+        {!loading && !error && (
+          <>
+            {filteredResources.length > 0 ? (
+              <div className="resources-container">
+                {filteredResources.map((resource, index) => (
+                  <ResourceCard key={index} {...resource} />
+                ))}
+              </div>
+            ) : (
+              <p>No resources found.</p>
+            )}
+          </>
         )}
       </div>
       
@@ -115,4 +150,4 @@ const Resources = ({ db }) => {
   );
 };
 
-export default withGoogleSheets('resources')(Resources);
+export default Resources;
