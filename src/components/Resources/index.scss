@@ -32,6 +32,92 @@ $breakpoint-md: 768px;
   }
 }
 
+.resource-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.resource-search-sort {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  .resource-search-input,
+  .resource-sort-select {
+    background: $hover-bg-color;
+    color: $text-color-light;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+  }
+
+  .resource-search-input::placeholder {
+    color: rgba(255,255,255,0.8);
+  }
+}
+
+.resource-filter-buttons-container {
+  position: relative; // Add this to ensure the absolute positioning is relative to this container
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+  padding: 10px;
+  border: 2px dashed $card-bg-color;
+  border-radius: 8px;
+  width: fit-content;
+  max-width: 100%;
+
+  .filters-label {
+    position: absolute; // Position the label absolutely
+    top: -10px; // Adjust as necessary to position the label on the dashed line
+    left: 50%;
+    transform: translateX(-50%); // Center the label
+    background-color: #0D4A1D; // Or the background color of the parent container, if it's not white
+    color: $card-bg-color;
+    font-size: 1.2rem;
+    padding: 0 5px; // Add padding to ensure the text doesn't touch the border
+  }
+}
+
+.resource-filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px; // Space between buttons
+  flex-wrap: wrap; 
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $hover-bg-color;
+    color: $text-color-light;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: calc(33.333% - 20px);
+
+
+    &:hover {
+      background-color: darken($hover-bg-color, 10%); // Darken on hover
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px $text-color-light; // Focus outline
+    }
+
+    &.active {
+      background-color: darken($hover-bg-color, 15%);
+    }
+  }
+}
+
 .resource-card {
   position: relative;
   margin-right: 0.9rem;
@@ -91,6 +177,10 @@ $breakpoint-md: 768px;
     color: $text-color-light;
   }
 
+  p.show-text {
+    max-height: 100vh;
+  }
+
   &:hover {
     box-shadow: -6px 6px $shadow-color-dark;
     background-color: $hover-bg-color;
@@ -112,61 +202,32 @@ $breakpoint-md: 768px;
       color: #000;
     }
   }
-}
 
-.resource-filter-buttons-container {
-  position: relative; // Add this to ensure the absolute positioning is relative to this container
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 50px auto;
-  padding: 10px;
-  border: 2px dashed $card-bg-color;
-  border-radius: 8px;
-  width: fit-content;
-  max-width: 100%;
-
-  .filters-label {
-    position: absolute; // Position the label absolutely
-    top: -10px; // Adjust as necessary to position the label on the dashed line
-    left: 50%;
-    transform: translateX(-50%); // Center the label
-    background-color: #0D4A1D; // Or the background color of the parent container, if it's not white
-    color: $card-bg-color;
-    font-size: 1.2rem;
-    padding: 0 5px; // Add padding to ensure the text doesn't touch the border
-  }
-}
-
-.resource-filter-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px; // Space between buttons
-  flex-wrap: wrap; 
-
-  button {
+  &__actions {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    background-color: $hover-bg-color;
-    color: $text-color-light;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: calc(33.333% - 20px);
+    margin-top: 0.6rem;
 
-
-    &:hover {
-      background-color: darken($hover-bg-color, 10%); // Darken on hover
+    .copy-btn {
+      background: rgba(0, 0, 0, 0.15);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
     }
 
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px $text-color-light; // Focus outline
+    .hint {
+      font-size: 1rem;
+      color: rgba(0,0,0,0.8);
     }
+  }
+
+  // Reset inner button default styles in anchor context for consistency
+  button {
+    font-family: inherit;
   }
 }
 

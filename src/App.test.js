@@ -3,14 +3,6 @@ import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 import App from './App';
 
-jest.mock('react-db-google-sheets', () => ({
-  __esModule: true,
-  default: ({ children }) => <>{children}</>,
-  withGoogleSheets: () => (Component) => (props) => (
-    <Component {...props} db={{ resources: [], mediators: [] }} />
-  ),
-}));
-
 it('renders Home description text', () => {
   render(
     <BrowserRouter>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import Loader from 'react-loaders'
@@ -14,6 +14,9 @@ const Mediators = () => {
   const [mediators, setMediators] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [specializations, setSpecializations] = useState([])
+  const [activeSpec, setActiveSpec] = useState('All')
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1200)
@@ -32,6 +35,9 @@ const Mediators = () => {
         if (data.length > 0 && data[0].Latitude && data[0].Longitude) {
           setMapCenter([parseFloat(data[0].Latitude), parseFloat(data[0].Longitude)])
         }
+        const specs = new Set(data.map(m => m.Specialization).filter(Boolean))
+        setSpecializations(['All', ...Array.from(specs)])
+
       } catch (err) {
         setError(err.message)
       } finally {
@@ -47,6 +53,26 @@ const Mediators = () => {
     setMapZoom(zoom)
   }
 
+  const handleLocateMe = useCallback(() => {
+    if (!navigator.geolocation) return
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const { latitude, longitude } = pos.coords
+      updateMap(latitude, longitude, 12)
+    })
+  }, [])
+
+  const filteredMediators = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase()
+    return mediators.filter((m) => {
+      const specOk = activeSpec === 'All' || String(m.Specialization || '') === activeSpec
+      if (!q) return specOk
+      const name = String(m.Name || '').toLowerCase()
+      const desc = String(m.Description || '').toLowerCase()
+      const spec = String(m.Specialization || '').toLowerCase()
+      return specOk && (name.includes(q) || desc.includes(q) || spec.includes(q))
+    })
+  }, [mediators, searchQuery, activeSpec])
+
   return (
     <>
       <div
@@ -55,13 +81,19 @@ const Mediators = () => {
         }`}
       >
         <MediatorText 
-          mediators={mediators} 
-          updateMap={updateMap} 
+          mediators={filteredMediators} 
+          updateMap={updateMap}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          specializations={specializations}
+          activeSpec={activeSpec}
+          setActiveSpec={setActiveSpec}
+          handleLocateMe={handleLocateMe}
           loading={loading}
           error={error}
         />
         {!loading && !error && (
-          <MediatorMap center={mapCenter} zoom={mapZoom} mediators={mediators} />
+          <MediatorMap center={mapCenter} zoom={mapZoom} mediators={filteredMediators} />
         )}
       </div>
       <Loader type="pacman" />
@@ -69,7 +101,7 @@ const Mediators = () => {
   )
 }
 
-const MediatorText = ({ mediators, updateMap, loading, error }) => (
+const MediatorText = ({ mediators, updateMap, searchQuery, setSearchQuery, specializations, activeSpec, setActiveSpec, handleLocateMe, loading, error }) => (
   <div className="text-zone">
     <h1>Mediators</h1>
     <p>
@@ -114,7 +146,30 @@ const MediatorText = ({ mediators, updateMap, loading, error }) => (
       </div>
     )}
 
-    {/* Mediators List */}
+    {!loading && !error && (
+      <div className="mediators-controls">
+        <input
+          type="search"
+          className="mediators-search-input"
+          placeholder="Search mediators..."
+          aria-label="Search mediators"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <select
+          className="mediators-spec-select"
+          aria-label="Filter by specialization"
+          value={activeSpec}
+          onChange={(e) => setActiveSpec(e.target.value)}
+        >
+          {specializations.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
+        <button className="mediators-locate-btn" onClick={handleLocateMe}>Locate me</button>
+      </div>
+    )}
+
     {!loading && !error && (
       <div className="mediators-container">
         {mediators.length > 0 ? (
@@ -167,3 +222,4 @@ const MediatorMap = ({ center, zoom, mediators }) => (
 )
 
 export default Mediators
+
