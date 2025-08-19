@@ -9,6 +9,7 @@ import './App.scss';
 
 const Mediators = lazy(() => import('./components/Mediators'));
 const Contact = lazy(() => import('./components/Contact'));
+const NotFound = lazy(() => import('./components/NotFound'));
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="resources" element={<Resources />} />
           <Route path="mediators" element={<Mediators />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </Suspense>

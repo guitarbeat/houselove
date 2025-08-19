@@ -16,16 +16,29 @@ const ResourceCard = ({
   'Date Added': dateAdded
 }) => {
   const [isClicked, setIsClicked] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const handleClick = (e) => {
+  const handleCardClick = (e) => {
     if (!isClicked) {
       e.preventDefault();
       setIsClicked(true);
     }
   };
 
+  const handleCopy = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      await navigator.clipboard.writeText(String(url || ''));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (_) {
+      // no-op
+    }
+  };
+
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer" className="resource-card" onClick={handleClick}>
+    <a href={url} target="_blank" rel="noopener noreferrer" className="resource-card" onClick={handleCardClick}>
       <div className="resource-card__header">
         <div className="resource-card__keywords">
           <div
@@ -41,6 +54,14 @@ const ResourceCard = ({
       <div className="resource-card__footer">
         <div className="resource-card__submitted-by">Submitted by: {submittedBy}</div>
         <div className="resource-card__date-added">Date Added: {dateAdded}</div>
+      </div>
+      <div className="resource-card__actions">
+        <button className="copy-btn" onClick={handleCopy} aria-label="Copy link to clipboard">
+          {copied ? 'Copied!' : 'Copy link'}
+        </button>
+        {isClicked && (
+          <span className="hint">Click again to open</span>
+        )}
       </div>
     </a>
   );
