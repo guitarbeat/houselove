@@ -3,10 +3,9 @@ import Loader from 'react-loaders';
 import AnimatedLetters from '../AnimatedLetters';
 import ResourceCard from './ResourceCard'; 
 import googleSheetsApi from '../../utils/googleSheetsApi';
-import { withGoogleSheets } from 'react-db-google-sheets'; // Keep this for now, will remove after full merge
 import './index.scss';
 
-const Resources = ({ db }) => {
+const Resources = () => {
   const [letterClass, setLetterClass] = useState('text-animate');
   const [resources, setResources] = useState([]);
   const [activeFilter, setActiveFilter] = useState('All');

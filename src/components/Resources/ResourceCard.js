@@ -8,7 +8,7 @@ const tagColor = {
 };
 
 const ResourceCard = ({ 
-  'Resource Name': name, 
+  'Title': name, 
   'Description': description, 
   'URL': url, 
   'Resource Type': resourceType,
