@@ -1,0 +1,854 @@
+// ============================================================================
+// ENTERPRISE-GRADE POLISH - HOUSE LOVE PREMIUM PROFESSIONAL
+// ============================================================================
+// This file contains enterprise-grade features including permissions, print
+// styles, audit trails, onboarding, and admin interfaces.
+
+@import './design-system.scss';
+@import './advanced-effects.scss';
+
+// ============================================================================
+// PERMISSIONS AND ROLE-BASED UI
+// ============================================================================
+
+// Permission-based visibility
+.permission-based {
+  &.permission-hidden {
+    display: none !important;
+  }
+  
+  &.permission-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  &.permission-readonly {
+    pointer-events: none;
+    
+    input, textarea, select {
+      background: rgba($neutral-100, 0.5);
+      color: $text-muted;
+    }
+  }
+}
+
+// Role-based UI variations
+.role-admin {
+  .admin-only {
+    display: block;
+  }
+  
+  .user-only {
+    display: none;
+  }
+}
+
+.role-user {
+  .admin-only {
+    display: none;
+  }
+  
+  .user-only {
+    display: block;
+  }
+}
+
+// Permission indicators
+.permission-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-1;
+  @include body-small;
+  
+  .permission-icon {
+    font-size: $icon-size-sm;
+    
+    &.permission-granted {
+      color: $success-500;
+    }
+    
+    &.permission-denied {
+      color: $error-500;
+    }
+    
+    &.permission-pending {
+      color: $warning-500;
+    }
+  }
+  
+  .permission-text {
+    font-weight: $font-weight-medium;
+    
+    &.permission-granted {
+      color: $success-600;
+    }
+    
+    &.permission-denied {
+      color: $error-600;
+    }
+    
+    &.permission-pending {
+      color: $warning-600;
+    }
+  }
+}
+
+// ============================================================================
+// PROFESSIONAL PRINT STYLESHEETS
+// ============================================================================
+
+@media print {
+  // Hide non-printable elements
+  .no-print {
+    display: none !important;
+  }
+  
+  // Print-specific layouts
+  .print-layout {
+    display: block !important;
+    
+    .print-header {
+      text-align: center;
+      margin-bottom: $spacing-6;
+      border-bottom: 2px solid $neutral-300;
+      padding-bottom: $spacing-4;
+      
+      .print-logo {
+        max-width: 200px;
+        margin: 0 auto $spacing-3;
+      }
+      
+      .print-title {
+        @include heading-2;
+        color: $text-inverse;
+        margin: 0;
+      }
+      
+      .print-subtitle {
+        @include body-large;
+        color: $text-secondary;
+        margin: $spacing-2 0 0 0;
+      }
+    }
+    
+    .print-content {
+      margin: $spacing-6 0;
+      
+      .print-section {
+        margin-bottom: $spacing-6;
+        page-break-inside: avoid;
+        
+        .section-title {
+          @include heading-4;
+          color: $text-inverse;
+          margin-bottom: $spacing-3;
+          border-bottom: 1px solid $neutral-300;
+          padding-bottom: $spacing-2;
+        }
+      }
+    }
+    
+    .print-footer {
+      margin-top: $spacing-8;
+      padding-top: $spacing-4;
+      border-top: 1px solid $neutral-300;
+      text-align: center;
+      
+      .footer-text {
+        @include body-small;
+        color: $text-muted;
+      }
+      
+      .page-number {
+        @include body-small;
+        color: $text-muted;
+        margin-top: $spacing-2;
+        
+        &::before {
+          content: 'Page ';
+        }
+      }
+    }
+  }
+  
+  // Print break controls
+  .print-break {
+    page-break-before: always;
+  }
+  
+  .print-avoid-break {
+    page-break-inside: avoid;
+  }
+  
+  // Print color adjustments
+  * {
+    color: black !important;
+    background: white !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  // Print table optimizations
+  table {
+    border-collapse: collapse;
+    
+    th, td {
+      border: 1px solid #ccc !important;
+      padding: $spacing-2 !important;
+    }
+  }
+  
+  // Print button and form styling
+  .btn, .form-input, .form-textarea, .form-select {
+    border: 1px solid #ccc !important;
+    background: white !important;
+    color: black !important;
+  }
+}
+
+// ============================================================================
+// AUDIT TRAILS AND ACTIVITY LOGGING
+// ============================================================================
+
+// Audit trail display
+.audit-trail {
+  background: $bg-surface;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  @include shadow('md');
+  
+  .audit-header {
+    background: rgba($neutral-50, 0.5);
+    padding: $spacing-4 $spacing-6;
+    border-bottom: 1px solid rgba($neutral-200, 0.5);
+    
+    .audit-title {
+      @include heading-4;
+      color: $text-inverse;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+      
+      .audit-icon {
+        font-size: $icon-size-lg;
+        color: $primary-500;
+      }
+    }
+    
+    .audit-filters {
+      display: flex;
+      gap: $spacing-2;
+      margin-top: $spacing-3;
+      
+      .audit-filter {
+        @extend .btn;
+        @extend .btn-sm;
+        @extend .btn-outline;
+        padding: $spacing-1 $spacing-3;
+        min-width: auto;
+      }
+    }
+  }
+  
+  .audit-content {
+    max-height: 500px;
+    overflow-y: auto;
+    
+    .audit-entry {
+      display: flex;
+      align-items: flex-start;
+      gap: $spacing-4;
+      padding: $spacing-4 $spacing-6;
+      border-bottom: 1px solid rgba($neutral-200, 0.2);
+      transition: background 0.2s ease;
+      
+      &:hover {
+        background: rgba($primary-500, 0.02);
+      }
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      .entry-icon {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: $icon-size-sm;
+        flex-shrink: 0;
+        
+        &.icon-create {
+          background: rgba($success-500, 0.1);
+          color: $success-600;
+        }
+        
+        &.icon-update {
+          background: rgba($info-500, 0.1);
+          color: $info-600;
+        }
+        
+        &.icon-delete {
+          background: rgba($error-500, 0.1);
+          color: $error-600;
+        }
+        
+        &.icon-login {
+          background: rgba($primary-500, 0.1);
+          color: $primary-600;
+        }
+      }
+      
+      .entry-content {
+        flex: 1;
+        
+        .entry-action {
+          @include body-medium;
+          font-weight: $font-weight-semibold;
+          color: $text-inverse;
+          margin-bottom: $spacing-1;
+        }
+        
+        .entry-details {
+          @include body-small;
+          color: $text-secondary;
+          margin-bottom: $spacing-2;
+          line-height: $line-height-relaxed;
+        }
+        
+        .entry-meta {
+          display: flex;
+          gap: $spacing-4;
+          @include body-small;
+          color: $text-muted;
+          
+          .meta-item {
+            display: flex;
+            align-items: center;
+            gap: $spacing-1;
+            
+            .meta-icon {
+              font-size: $icon-size-xs;
+            }
+          }
+        }
+      }
+      
+      .entry-time {
+        @include body-small;
+        color: $text-muted;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// PROFESSIONAL ONBOARDING FLOWS
+// ============================================================================
+
+// Onboarding container
+.onboarding-flow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: $z-modal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-4;
+  
+  .onboarding-content {
+    background: $bg-surface;
+    border-radius: $radius-xl;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    @include shadow('xl');
+    animation: fadeInUp 0.4s ease;
+    
+    .onboarding-header {
+      padding: $spacing-6 $spacing-6 $spacing-4;
+      border-bottom: 1px solid rgba($neutral-200, 0.5);
+      text-align: center;
+      
+      .onboarding-logo {
+        margin-bottom: $spacing-4;
+        
+        .brand-illustration {
+          margin: 0 auto;
+        }
+      }
+      
+      .onboarding-title {
+        @include heading-3;
+        color: $text-inverse;
+        margin: 0 0 $spacing-2 0;
+      }
+      
+      .onboarding-subtitle {
+        @include body-large;
+        color: $text-secondary;
+        margin: 0;
+        line-height: $line-height-relaxed;
+      }
+    }
+    
+    .onboarding-body {
+      padding: $spacing-4 $spacing-6;
+      
+      .onboarding-step {
+        display: none;
+        
+        &.step-active {
+          display: block;
+          animation: fadeInUp 0.3s ease;
+        }
+        
+        .step-content {
+          text-align: center;
+          margin-bottom: $spacing-6;
+          
+          .step-illustration {
+            margin-bottom: $spacing-4;
+            
+            .brand-illustration {
+              margin: 0 auto;
+            }
+          }
+          
+          .step-title {
+            @include heading-4;
+            color: $text-inverse;
+            margin-bottom: $spacing-3;
+          }
+          
+          .step-description {
+            @include body-medium;
+            color: $text-secondary;
+            line-height: $line-height-relaxed;
+            max-width: 400px;
+            margin: 0 auto;
+          }
+        }
+        
+        .step-form {
+          max-width: 400px;
+          margin: 0 auto;
+          
+          .form-group {
+            margin-bottom: $spacing-4;
+            text-align: left;
+          }
+        }
+      }
+    }
+    
+    .onboarding-footer {
+      padding: $spacing-4 $spacing-6 $spacing-6;
+      border-top: 1px solid rgba($neutral-200, 0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      .onboarding-progress {
+        @include body-small;
+        color: $text-muted;
+      }
+      
+      .onboarding-actions {
+        display: flex;
+        gap: $spacing-3;
+        
+        .onboarding-button {
+          @extend .btn;
+          @extend .btn-md;
+          min-width: 100px;
+          
+          &.button-prev {
+            @extend .btn-outline;
+          }
+          
+          &.button-next {
+            @extend .btn-primary;
+          }
+          
+          &.button-skip {
+            @extend .btn-ghost;
+          }
+          
+          &.button-finish {
+            @extend .btn-success;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================================================
+// COMPREHENSIVE HELP DOCUMENTATION
+// ============================================================================
+
+// Help documentation system
+.help-system {
+  .help-sidebar {
+    background: $bg-surface;
+    border-radius: $radius-lg;
+    padding: $spacing-4;
+    @include shadow('md');
+    
+    .help-search {
+      margin-bottom: $spacing-4;
+      
+      .help-search-input {
+        width: 100%;
+        padding: $spacing-2 $spacing-3;
+        border: 1px solid $neutral-300;
+        border-radius: $radius-md;
+        @include body-small;
+        
+        &:focus {
+          border-color: $primary-500;
+          outline: none;
+          box-shadow: 0 0 0 3px rgba($primary-500, 0.1);
+        }
+      }
+    }
+    
+    .help-navigation {
+      .help-category {
+        margin-bottom: $spacing-3;
+        
+        .category-title {
+          @include body-medium;
+          font-weight: $font-weight-semibold;
+          color: $text-inverse;
+          margin-bottom: $spacing-2;
+          padding: $spacing-2;
+          background: rgba($neutral-100, 0.5);
+          border-radius: $radius-sm;
+          cursor: pointer;
+          transition: background 0.2s ease;
+          
+          &:hover {
+            background: rgba($neutral-200, 0.5);
+          }
+          
+          .category-icon {
+            margin-right: $spacing-2;
+            color: $primary-500;
+          }
+        }
+        
+        .category-items {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          
+          .help-item {
+            padding: $spacing-2 $spacing-4;
+            @include body-small;
+            color: $text-secondary;
+            cursor: pointer;
+            border-radius: $radius-sm;
+            transition: all 0.2s ease;
+            
+            &:hover {
+              background: rgba($primary-500, 0.1);
+              color: $primary-600;
+            }
+            
+            &.item-active {
+              background: rgba($primary-500, 0.1);
+              color: $primary-600;
+              font-weight: $font-weight-medium;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .help-content {
+    background: $bg-surface;
+    border-radius: $radius-lg;
+    padding: $spacing-6;
+    @include shadow('md');
+    
+    .help-article {
+      .article-header {
+        margin-bottom: $spacing-6;
+        padding-bottom: $spacing-4;
+        border-bottom: 1px solid rgba($neutral-200, 0.5);
+        
+        .article-title {
+          @include heading-3;
+          color: $text-inverse;
+          margin: 0 0 $spacing-2 0;
+        }
+        
+        .article-meta {
+          display: flex;
+          gap: $spacing-4;
+          @include body-small;
+          color: $text-muted;
+          
+          .meta-item {
+            display: flex;
+            align-items: center;
+            gap: $spacing-1;
+          }
+        }
+      }
+      
+      .article-body {
+        @include body-medium;
+        color: $text-inverse;
+        line-height: $line-height-relaxed;
+        
+        h2, h3, h4 {
+          color: $text-inverse;
+          margin: $spacing-4 0 $spacing-2 0;
+        }
+        
+        p {
+          margin-bottom: $spacing-3;
+        }
+        
+        ul, ol {
+          margin: $spacing-3 0;
+          padding-left: $spacing-6;
+        }
+        
+        code {
+          background: rgba($neutral-500, 0.1);
+          padding: $spacing-1 $spacing-2;
+          border-radius: $radius-sm;
+          font-family: 'Monaco', 'Menlo', monospace;
+          font-size: 0.9em;
+        }
+        
+        pre {
+          background: rgba($neutral-500, 0.1);
+          padding: $spacing-3;
+          border-radius: $radius-md;
+          overflow-x: auto;
+          margin: $spacing-3 0;
+        }
+      }
+      
+      .article-footer {
+        margin-top: $spacing-6;
+        padding-top: $spacing-4;
+        border-top: 1px solid rgba($neutral-200, 0.5);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .article-feedback {
+          display: flex;
+          gap: $spacing-2;
+          
+          .feedback-button {
+            @extend .btn;
+            @extend .btn-sm;
+            @extend .btn-outline;
+            padding: $spacing-1 $spacing-3;
+            min-width: auto;
+            
+            .feedback-icon {
+              margin-right: $spacing-1;
+            }
+          }
+        }
+        
+        .article-navigation {
+          display: flex;
+          gap: $spacing-2;
+          
+          .nav-button {
+            @extend .btn;
+            @extend .btn-sm;
+            @extend .btn-outline;
+            padding: $spacing-1 $spacing-3;
+            min-width: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================================================
+// ADVANCED SEARCH AND FILTERING
+// ============================================================================
+
+// Advanced search system
+.advanced-search {
+  background: $bg-surface;
+  border-radius: $radius-lg;
+  padding: $spacing-6;
+  @include shadow('md');
+  
+  .search-header {
+    margin-bottom: $spacing-6;
+    
+    .search-title {
+      @include heading-4;
+      color: $text-inverse;
+      margin: 0 0 $spacing-3 0;
+    }
+    
+    .search-description {
+      @include body-medium;
+      color: $text-secondary;
+      line-height: $line-height-relaxed;
+    }
+  }
+  
+  .search-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $spacing-4;
+    margin-bottom: $spacing-6;
+    
+    .filter-group {
+      .filter-label {
+        @include body-medium;
+        font-weight: $font-weight-semibold;
+        color: $text-inverse;
+        margin-bottom: $spacing-2;
+        display: block;
+      }
+      
+      .filter-input {
+        width: 100%;
+        padding: $spacing-2 $spacing-3;
+        border: 1px solid $neutral-300;
+        border-radius: $radius-md;
+        @include body-small;
+        
+        &:focus {
+          border-color: $primary-500;
+          outline: none;
+          box-shadow: 0 0 0 3px rgba($primary-500, 0.1);
+        }
+      }
+      
+      .filter-select {
+        width: 100%;
+        padding: $spacing-2 $spacing-3;
+        border: 1px solid $neutral-300;
+        border-radius: $radius-md;
+        @include body-small;
+        background: $bg-surface;
+        color: $text-inverse;
+        
+        &:focus {
+          border-color: $primary-500;
+          outline: none;
+          box-shadow: 0 0 0 3px rgba($primary-500, 0.1);
+        }
+      }
+    }
+  }
+  
+  .search-actions {
+    display: flex;
+    gap: $spacing-3;
+    justify-content: flex-end;
+    
+    .search-button {
+      @extend .btn;
+      @extend .btn-md;
+      min-width: 120px;
+      
+      &.button-search {
+        @extend .btn-primary;
+      }
+      
+      &.button-reset {
+        @extend .btn-outline;
+      }
+      
+      &.button-advanced {
+        @extend .btn-ghost;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// RESPONSIVE ENTERPRISE FEATURES
+// ============================================================================
+
+// Mobile optimizations
+@media (max-width: $breakpoint-md) {
+  .audit-trail {
+    .audit-content .audit-entry {
+      flex-direction: column;
+      gap: $spacing-2;
+      
+      .entry-time {
+        align-self: flex-start;
+      }
+    }
+  }
+  
+  .onboarding-flow .onboarding-content {
+    margin: $spacing-2;
+    
+    .onboarding-footer {
+      flex-direction: column;
+      gap: $spacing-3;
+      
+      .onboarding-actions {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+  
+  .help-system {
+    .help-sidebar {
+      margin-bottom: $spacing-4;
+    }
+  }
+  
+  .advanced-search {
+    .search-filters {
+      grid-template-columns: 1fr;
+    }
+    
+    .search-actions {
+      flex-direction: column;
+      
+      .search-button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Print optimizations
+@media print {
+  .audit-trail,
+  .help-system,
+  .advanced-search {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+  
+  .onboarding-flow {
+    display: none !important;
+  }
+}

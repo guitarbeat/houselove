@@ -1,0 +1,1085 @@
+// ============================================================================
+// BRAND IDENTITY & PERSONALITY - HOUSE LOVE PREMIUM PROFESSIONAL
+// ============================================================================
+// This file contains brand-specific styling, custom animations, personality
+// elements, and cohesive brand voice implementation.
+
+@import './design-system.scss';
+@import './advanced-effects.scss';
+
+// ============================================================================
+// BRAND PERSONALITY VARIABLES
+// ============================================================================
+
+// Brand personality traits
+$brand-personality: (
+  'warm': true,
+  'trustworthy': true,
+  'professional': true,
+  'caring': true,
+  'innovative': true,
+  'accessible': true
+);
+
+// Brand voice characteristics
+$brand-voice: (
+  'tone': 'warm and professional',
+  'style': 'clear and caring',
+  'personality': 'trusted advisor',
+  'emotion': 'empathetic and supportive'
+);
+
+// Brand illustration style
+$brand-illustration: (
+  'style': 'warm and geometric',
+  'colors': 'brand palette with soft edges',
+  'mood': 'inviting and comforting',
+  'complexity': 'simple but sophisticated'
+);
+
+// ============================================================================
+// BRAND-SPECIFIC ILLUSTRATION STYLE
+// ============================================================================
+
+// Custom illustration components
+.brand-illustration {
+  position: relative;
+  display: inline-block;
+  
+  // House Love signature illustration style
+  &.house-love-logo {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, $primary-500, $secondary-500);
+    border-radius: $radius-2xl;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include shadow('lg');
+    
+    .logo-icon {
+      font-size: 3rem;
+      color: $text-primary;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+    
+    // Subtle texture overlay
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.05;
+      border-radius: $radius-2xl;
+    }
+  }
+  
+  // Brand mascot illustration
+  &.brand-mascot {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, $primary-400, $primary-600);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include shadow('md');
+    
+    .mascot-icon {
+      font-size: 2.5rem;
+      color: $text-primary;
+    }
+    
+    // Warm glow effect
+    &::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: radial-gradient(circle, rgba($primary-500, 0.2), transparent);
+      border-radius: 50%;
+      z-index: -1;
+    }
+  }
+  
+  // Brand pattern illustration
+  &.brand-pattern {
+    width: 100%;
+    height: 120px;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba($primary-300, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba($secondary-300, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba($primary-400, 0.05) 0%, transparent 50%);
+    border-radius: $radius-lg;
+    position: relative;
+    overflow: hidden;
+    
+    // Animated floating elements
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgba($primary-500, 0.1);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    &::before {
+      top: 20%;
+      left: 15%;
+      animation-delay: 0s;
+    }
+    
+    &::after {
+      top: 60%;
+      right: 20%;
+      animation-delay: 3s;
+    }
+  }
+}
+
+// Floating animation for brand elements
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.1;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 0.3;
+  }
+}
+
+// ============================================================================
+// CUSTOM BRANDED LOADING ANIMATIONS
+// ============================================================================
+
+// House Love branded loading spinner
+.branded-loading {
+  display: inline-block;
+  position: relative;
+  
+  &.branded-spinner {
+    width: 3rem;
+    height: 3rem;
+    
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      animation: brandedSpin 1.5s linear infinite;
+    }
+    
+    &::before {
+      width: 100%;
+      height: 100%;
+      border: 3px solid rgba($primary-500, 0.2);
+      border-top-color: $primary-500;
+      animation: brandedSpin 1.5s linear infinite;
+    }
+    
+    &::after {
+      width: 70%;
+      height: 70%;
+      top: 15%;
+      left: 15%;
+      border: 2px solid rgba($secondary-500, 0.3);
+      border-bottom-color: $secondary-500;
+      animation: brandedSpin 1.5s linear infinite reverse;
+    }
+  }
+  
+  &.branded-dots {
+    display: flex;
+    gap: $spacing-2;
+    
+    .branded-dot {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 50%;
+      background: $primary-500;
+      animation: brandedBounce 1.4s ease-in-out infinite both;
+      
+      &:nth-child(1) { 
+        animation-delay: -0.32s;
+        background: $primary-500;
+      }
+      &:nth-child(2) { 
+        animation-delay: -0.16s;
+        background: $secondary-500;
+      }
+      &:nth-child(3) { 
+        animation-delay: 0s;
+        background: $primary-600;
+      }
+    }
+  }
+  
+  &.branded-pulse {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: $primary-500;
+    animation: brandedPulse 2s ease-in-out infinite;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 50%;
+      background: rgba($primary-500, 0.3);
+      animation: brandedPulse 2s ease-in-out infinite 0.5s;
+    }
+  }
+}
+
+// Branded loading animations
+@keyframes brandedSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes brandedBounce {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes brandedPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+}
+
+// ============================================================================
+// BRANDED EMPTY STATES
+// ============================================================================
+
+// Branded empty state with personality
+.branded-empty-state {
+  text-align: center;
+  padding: $spacing-16 $spacing-6;
+  max-width: 600px;
+  margin: 0 auto;
+  
+  .empty-illustration {
+    margin-bottom: $spacing-8;
+    
+    .brand-illustration {
+      margin: 0 auto;
+    }
+  }
+  
+  .empty-title {
+    @include heading-3;
+    color: $text-inverse;
+    margin-bottom: $spacing-4;
+    
+    // Brand voice: warm and encouraging
+    &::after {
+      content: ' 💝';
+      font-size: 0.8em;
+    }
+  }
+  
+  .empty-description {
+    @include body-large;
+    color: $text-secondary;
+    margin-bottom: $spacing-8;
+    line-height: $line-height-relaxed;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    // Brand voice: caring and helpful
+    font-style: italic;
+  }
+  
+  .empty-actions {
+    display: flex;
+    gap: $spacing-4;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: $spacing-8;
+    
+    .empty-button {
+      @extend .btn;
+      @extend .btn-md;
+      min-width: 160px;
+      
+      &.primary {
+        @extend .btn-primary;
+        // Brand personality: warm and inviting
+        background: linear-gradient(135deg, $primary-500, $primary-600);
+        border: none;
+        @include shadow('md');
+        
+        &:hover {
+          background: linear-gradient(135deg, $primary-600, $primary-700);
+          @include shadow('lg');
+          transform: translateY(-2px);
+        }
+      }
+      
+      &.secondary {
+        @extend .btn-outline;
+        border-color: $primary-500;
+        color: $primary-500;
+        
+        &:hover {
+          background: $primary-500;
+          color: $text-primary;
+        }
+      }
+    }
+  }
+  
+  .empty-suggestions {
+    background: rgba($primary-500, 0.05);
+    border: 1px solid rgba($primary-500, 0.1);
+    border-radius: $radius-lg;
+    padding: $spacing-6;
+    
+    .suggestions-title {
+      @include body-medium;
+      font-weight: $font-weight-semibold;
+      color: $primary-600;
+      margin-bottom: $spacing-4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-2;
+      
+      .suggestion-icon {
+        font-size: $icon-size-md;
+        color: $primary-500;
+      }
+    }
+    
+    .suggestions-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      
+      .suggestion-item {
+        @include body-small;
+        color: $text-secondary;
+        padding: $spacing-2 0;
+        display: flex;
+        align-items: center;
+        gap: $spacing-3;
+        
+        .suggestion-bullet {
+          width: 8px;
+          height: 8px;
+          background: $primary-500;
+          border-radius: 50%;
+          flex-shrink: 0;
+          @include shadow('sm');
+        }
+        
+        // Brand voice: encouraging and supportive
+        &::before {
+          content: '✨ ';
+          color: $primary-400;
+        }
+      }
+    }
+  }
+}
+
+// Contextual branded empty states
+.branded-empty-state {
+  &.empty-search {
+    .empty-title::after {
+      content: ' 🔍';
+    }
+    
+    .empty-description {
+      color: $text-secondary;
+      font-style: normal;
+    }
+  }
+  
+  &.empty-results {
+    .empty-title::after {
+      content: ' 🏠';
+    }
+    
+    .empty-suggestions {
+      background: rgba($warning-500, 0.05);
+      border-color: rgba($warning-500, 0.1);
+      
+      .suggestions-title {
+        color: $warning-600;
+        
+        .suggestion-icon {
+          color: $warning-500;
+        }
+      }
+      
+      .suggestion-item .suggestion-bullet {
+        background: $warning-500;
+      }
+    }
+  }
+  
+  &.empty-favorites {
+    .empty-title::after {
+      content: ' ❤️';
+    }
+    
+    .empty-description {
+      color: $text-secondary;
+    }
+  }
+}
+
+// ============================================================================
+// BRAND VOICE COPYWRITING
+// ============================================================================
+
+// Brand voice typography classes
+.brand-voice {
+  &.warm {
+    color: $primary-600;
+    font-weight: $font-weight-semibold;
+  }
+  
+  &.caring {
+    font-style: italic;
+    color: $text-secondary;
+  }
+  
+  &.trustworthy {
+    font-weight: $font-weight-semibold;
+    color: $text-inverse;
+  }
+  
+  &.professional {
+    font-weight: $font-weight-regular;
+    color: $text-primary;
+  }
+  
+  &.encouraging {
+    color: $success-600;
+    font-weight: $font-weight-medium;
+  }
+  
+  &.supportive {
+    color: $info-600;
+    font-weight: $font-weight-medium;
+  }
+}
+
+// Brand voice message components
+.brand-message {
+  padding: $spacing-4;
+  border-radius: $radius-md;
+  margin: $spacing-4 0;
+  
+  &.message-welcome {
+    background: rgba($primary-500, 0.1);
+    border: 1px solid rgba($primary-500, 0.2);
+    
+    .message-title {
+      @include body-medium;
+      font-weight: $font-weight-semibold;
+      color: $primary-600;
+      margin-bottom: $spacing-2;
+    }
+    
+    .message-text {
+      @include body-small;
+      color: $text-secondary;
+      line-height: $line-height-relaxed;
+    }
+  }
+  
+  &.message-celebration {
+    background: linear-gradient(135deg, rgba($success-500, 0.1), rgba($primary-500, 0.1));
+    border: 1px solid rgba($success-500, 0.2);
+    
+    .message-title {
+      @include body-medium;
+      font-weight: $font-weight-semibold;
+      color: $success-600;
+      margin-bottom: $spacing-2;
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+      
+      .celebration-icon {
+        font-size: $icon-size-md;
+        animation: celebrationBounce 1s ease-in-out infinite;
+      }
+    }
+    
+    .message-text {
+      @include body-small;
+      color: $text-secondary;
+    }
+  }
+  
+  &.message-support {
+    background: rgba($info-500, 0.1);
+    border: 1px solid rgba($info-500, 0.2);
+    
+    .message-title {
+      @include body-medium;
+      font-weight: $font-weight-semibold;
+      color: $info-600;
+      margin-bottom: $spacing-2;
+    }
+    
+    .message-text {
+      @include body-small;
+      color: $text-secondary;
+    }
+  }
+}
+
+// Celebration animation
+@keyframes celebrationBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+// ============================================================================
+// BRANDED SUCCESS STATES
+// ============================================================================
+
+// Branded success celebration
+.branded-success {
+  text-align: center;
+  padding: $spacing-8;
+  
+  .success-illustration {
+    margin-bottom: $spacing-6;
+    
+    .brand-illustration {
+      margin: 0 auto;
+      animation: successCelebration 0.6s ease-out;
+    }
+  }
+  
+  .success-title {
+    @include heading-4;
+    color: $success-600;
+    margin-bottom: $spacing-3;
+    
+    // Brand personality: warm and celebratory
+    &::after {
+      content: ' 🎉';
+      font-size: 0.8em;
+    }
+  }
+  
+  .success-description {
+    @include body-medium;
+    color: $text-secondary;
+    margin-bottom: $spacing-6;
+    line-height: $line-height-relaxed;
+  }
+  
+  .success-actions {
+    display: flex;
+    gap: $spacing-3;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    .success-button {
+      @extend .btn;
+      @extend .btn-md;
+      min-width: 140px;
+      
+      &.primary {
+        @extend .btn-success;
+        background: linear-gradient(135deg, $success-500, $success-600);
+        border: none;
+        @include shadow('md');
+        
+        &:hover {
+          background: linear-gradient(135deg, $success-600, $success-700);
+          @include shadow('lg');
+          transform: translateY(-2px);
+        }
+      }
+      
+      &.secondary {
+        @extend .btn-outline;
+        border-color: $success-500;
+        color: $success-500;
+        
+        &:hover {
+          background: $success-500;
+          color: $text-primary;
+        }
+      }
+    }
+  }
+}
+
+// Success celebration animation
+@keyframes successCelebration {
+  0% {
+    transform: scale(0.8) rotate(-10deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+// ============================================================================
+// BRANDED ERROR PAGES
+// ============================================================================
+
+// Branded error page with personality
+.branded-error-page {
+  text-align: center;
+  padding: $spacing-12 $spacing-6;
+  max-width: 600px;
+  margin: 0 auto;
+  
+  .error-illustration {
+    margin-bottom: $spacing-6;
+    
+    .brand-illustration {
+      margin: 0 auto;
+      opacity: 0.7;
+    }
+  }
+  
+  .error-title {
+    @include heading-3;
+    color: $text-inverse;
+    margin-bottom: $spacing-4;
+    
+    // Brand voice: caring and supportive
+    &::after {
+      content: ' 🤗';
+      font-size: 0.8em;
+    }
+  }
+  
+  .error-description {
+    @include body-large;
+    color: $text-secondary;
+    margin-bottom: $spacing-6;
+    line-height: $line-height-relaxed;
+    
+    // Brand voice: empathetic and helpful
+    font-style: italic;
+  }
+  
+  .error-actions {
+    display: flex;
+    gap: $spacing-4;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: $spacing-6;
+    
+    .error-button {
+      @extend .btn;
+      @extend .btn-md;
+      min-width: 140px;
+      
+      &.primary {
+        @extend .btn-primary;
+        background: linear-gradient(135deg, $primary-500, $primary-600);
+        border: none;
+        @include shadow('md');
+        
+        &:hover {
+          background: linear-gradient(135deg, $primary-600, $primary-700);
+          @include shadow('lg');
+          transform: translateY(-2px);
+        }
+      }
+      
+      &.secondary {
+        @extend .btn-outline;
+        border-color: $primary-500;
+        color: $primary-500;
+        
+        &:hover {
+          background: $primary-500;
+          color: $text-primary;
+        }
+      }
+    }
+  }
+  
+  .error-help {
+    background: rgba($info-500, 0.05);
+    border: 1px solid rgba($info-500, 0.1);
+    border-radius: $radius-lg;
+    padding: $spacing-4;
+    
+    .help-title {
+      @include body-medium;
+      font-weight: $font-weight-semibold;
+      color: $info-600;
+      margin-bottom: $spacing-2;
+    }
+    
+    .help-text {
+      @include body-small;
+      color: $text-secondary;
+      line-height: $line-height-relaxed;
+    }
+  }
+}
+
+// ============================================================================
+// BRANDED NOTIFICATION STYLING
+// ============================================================================
+
+// Branded notification system
+.branded-notification {
+  position: fixed;
+  top: $spacing-6;
+  right: $spacing-6;
+  background: $bg-surface;
+  border-radius: $radius-lg;
+  @include shadow('xl');
+  z-index: $z-modal;
+  max-width: 400px;
+  overflow: hidden;
+  animation: notificationSlideIn 0.3s ease-out;
+  
+  .notification-header {
+    padding: $spacing-4;
+    border-bottom: 1px solid rgba($neutral-200, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    .notification-title {
+      @include body-medium;
+      font-weight: $font-weight-semibold;
+      color: $text-inverse;
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+      
+      .notification-icon {
+        font-size: $icon-size-md;
+        color: $primary-500;
+      }
+    }
+    
+    .notification-close {
+      background: none;
+      border: none;
+      color: $text-muted;
+      cursor: pointer;
+      padding: $spacing-1;
+      border-radius: $radius-sm;
+      
+      &:hover {
+        background: rgba($neutral-500, 0.1);
+        color: $text-inverse;
+      }
+    }
+  }
+  
+  .notification-body {
+    padding: $spacing-4;
+    
+    .notification-message {
+      @include body-small;
+      color: $text-secondary;
+      line-height: $line-height-relaxed;
+    }
+  }
+  
+  .notification-footer {
+    padding: $spacing-3 $spacing-4;
+    background: rgba($neutral-50, 0.5);
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-2;
+    
+    .notification-action {
+      @extend .btn;
+      @extend .btn-sm;
+      min-width: 80px;
+      
+      &.primary {
+        @extend .btn-primary;
+      }
+      
+      &.secondary {
+        @extend .btn-outline;
+      }
+    }
+  }
+  
+  // Notification variants
+  &.notification-success {
+    border-left: 4px solid $success-500;
+    
+    .notification-icon {
+      color: $success-500;
+    }
+  }
+  
+  &.notification-warning {
+    border-left: 4px solid $warning-500;
+    
+    .notification-icon {
+      color: $warning-500;
+    }
+  }
+  
+  &.notification-error {
+    border-left: 4px solid $error-500;
+    
+    .notification-icon {
+      color: $error-500;
+    }
+  }
+  
+  &.notification-info {
+    border-left: 4px solid $info-500;
+    
+    .notification-icon {
+      color: $info-500;
+    }
+  }
+}
+
+// Notification animation
+@keyframes notificationSlideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// ============================================================================
+// BRANDED EMAIL TEMPLATES
+// ============================================================================
+
+// Branded email styling
+.branded-email {
+  max-width: 600px;
+  margin: 0 auto;
+  background: $bg-surface;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  @include shadow('lg');
+  
+  .email-header {
+    background: linear-gradient(135deg, $primary-500, $primary-600);
+    padding: $spacing-8;
+    text-align: center;
+    
+    .email-logo {
+      margin-bottom: $spacing-4;
+      
+      .brand-illustration {
+        margin: 0 auto;
+      }
+    }
+    
+    .email-title {
+      @include heading-3;
+      color: $text-primary;
+      margin: 0;
+    }
+  }
+  
+  .email-body {
+    padding: $spacing-8;
+    
+    .email-greeting {
+      @include body-large;
+      color: $text-inverse;
+      margin-bottom: $spacing-6;
+      line-height: $line-height-relaxed;
+    }
+    
+    .email-content {
+      @include body-medium;
+      color: $text-inverse;
+      line-height: $line-height-relaxed;
+      margin-bottom: $spacing-6;
+    }
+    
+    .email-cta {
+      text-align: center;
+      margin: $spacing-8 0;
+      
+      .cta-button {
+        @extend .btn;
+        @extend .btn-primary;
+        @extend .btn-lg;
+        background: linear-gradient(135deg, $primary-500, $primary-600);
+        border: none;
+        @include shadow('md');
+        text-decoration: none;
+        display: inline-block;
+        
+        &:hover {
+          background: linear-gradient(135deg, $primary-600, $primary-700);
+          @include shadow('lg');
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+  
+  .email-footer {
+    background: rgba($neutral-50, 0.5);
+    padding: $spacing-6;
+    text-align: center;
+    border-top: 1px solid rgba($neutral-200, 0.5);
+    
+    .footer-text {
+      @include body-small;
+      color: $text-muted;
+      margin-bottom: $spacing-4;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: $spacing-4;
+      
+      .footer-link {
+        @include body-small;
+        color: $primary-500;
+        text-decoration: none;
+        
+        &:hover {
+          color: $primary-600;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+// ============================================================================
+// RESPONSIVE BRAND IDENTITY
+// ============================================================================
+
+// Mobile optimizations for brand elements
+@media (max-width: $breakpoint-md) {
+  .branded-empty-state {
+    padding: $spacing-12 $spacing-4;
+    
+    .empty-actions {
+      flex-direction: column;
+      
+      .empty-button {
+        width: 100%;
+      }
+    }
+  }
+  
+  .branded-success {
+    padding: $spacing-6;
+    
+    .success-actions {
+      flex-direction: column;
+      
+      .success-button {
+        width: 100%;
+      }
+    }
+  }
+  
+  .branded-error-page {
+    padding: $spacing-8 $spacing-4;
+    
+    .error-actions {
+      flex-direction: column;
+      
+      .error-button {
+        width: 100%;
+      }
+    }
+  }
+  
+  .branded-notification {
+    right: $spacing-4;
+    left: $spacing-4;
+    max-width: none;
+  }
+}
+
+// High DPI display optimizations
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .brand-illustration {
+    .brand-illustration::after {
+      background-size: 50% 50%;
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .brand-illustration .brand-pattern::before,
+  .brand-illustration .brand-pattern::after {
+    animation: none;
+  }
+  
+  .branded-loading .branded-spinner::before,
+  .branded-loading .branded-spinner::after {
+    animation: none;
+  }
+  
+  .branded-loading .branded-dots .branded-dot {
+    animation: none;
+  }
+  
+  .branded-loading .branded-pulse {
+    animation: none;
+  }
+  
+  .branded-success .success-illustration .brand-illustration {
+    animation: none;
+  }
+  
+  .branded-notification {
+    animation: none;
+  }
+}
