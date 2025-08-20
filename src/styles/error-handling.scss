@@ -1,0 +1,901 @@
+// ============================================================================
+// ERROR HANDLING & EDGE CASES - HOUSE LOVE PREMIUM UX
+// ============================================================================
+// This file contains comprehensive error handling, empty states, offline
+// functionality, and edge case management for a robust premium experience.
+
+@import './design-system.scss';
+@import './interactions.scss';
+
+// ============================================================================
+// COMPREHENSIVE ERROR STATES
+// ============================================================================
+
+// Error Container
+.error-container {
+  text-align: center;
+  padding: $spacing-8;
+  max-width: 500px;
+  margin: 0 auto;
+  
+  .error-icon {
+    font-size: 4rem;
+    color: $error-500;
+    margin-bottom: $spacing-4;
+    animation: errorBounce 0.6s ease-out;
+  }
+  
+  .error-title {
+    @include heading-3;
+    color: $text-inverse;
+    margin-bottom: $spacing-3;
+  }
+  
+  .error-message {
+    @include body-large;
+    color: $text-secondary;
+    margin-bottom: $spacing-6;
+    line-height: $line-height-relaxed;
+  }
+  
+  .error-actions {
+    display: flex;
+    gap: $spacing-3;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    .error-button {
+      @extend .btn;
+      @extend .btn-md;
+      min-width: 120px;
+      
+      &.retry {
+        @extend .btn-primary;
+      }
+      
+      &.back {
+        @extend .btn-outline;
+      }
+      
+      &.help {
+        @extend .btn-ghost;
+      }
+    }
+  }
+  
+  .error-details {
+    margin-top: $spacing-6;
+    padding: $spacing-4;
+    background: rgba($error-500, 0.1);
+    border: 1px solid rgba($error-500, 0.2);
+    border-radius: $radius-md;
+    text-align: left;
+    
+    .error-details-title {
+      @include body-medium;
+      font-weight: $font-weight-semibold;
+      color: $error-600;
+      margin-bottom: $spacing-2;
+    }
+    
+    .error-details-text {
+      @include body-small;
+      color: $text-muted;
+      font-family: monospace;
+      word-break: break-word;
+    }
+  }
+}
+
+// Error Bounce Animation
+@keyframes errorBounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+// Field-level Error States
+.field-error {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  margin-top: $spacing-1;
+  @include body-small;
+  color: $error-500;
+  animation: errorShake 0.6s ease-out;
+  
+  .error-icon {
+    font-size: $icon-size-sm;
+    flex-shrink: 0;
+  }
+  
+  .error-text {
+    flex: 1;
+  }
+  
+  .error-help {
+    color: $text-muted;
+    cursor: help;
+    
+    &:hover {
+      color: $text-primary;
+    }
+  }
+}
+
+// Form Validation Errors
+.form-errors {
+  background: rgba($error-500, 0.05);
+  border: 1px solid rgba($error-500, 0.2);
+  border-radius: $radius-md;
+  padding: $spacing-4;
+  margin-bottom: $spacing-6;
+  
+  .form-errors-title {
+    @include body-medium;
+    font-weight: $font-weight-semibold;
+    color: $error-600;
+    margin-bottom: $spacing-3;
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    
+    .error-icon {
+      font-size: $icon-size-md;
+    }
+  }
+  
+  .form-errors-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    .form-error-item {
+      @include body-small;
+      color: $error-600;
+      padding: $spacing-1 0;
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+      
+      .error-bullet {
+        width: 6px;
+        height: 6px;
+        background: $error-500;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// HELPFUL EMPTY STATES
+// ============================================================================
+
+// Empty State Container
+.empty-state {
+  text-align: center;
+  padding: $spacing-12 $spacing-6;
+  max-width: 600px;
+  margin: 0 auto;
+  
+  .empty-icon {
+    font-size: 5rem;
+    color: $neutral-400;
+    margin-bottom: $spacing-6;
+    opacity: 0.6;
+  }
+  
+  .empty-title {
+    @include heading-3;
+    color: $text-inverse;
+    margin-bottom: $spacing-3;
+  }
+  
+  .empty-description {
+    @include body-large;
+    color: $text-secondary;
+    margin-bottom: $spacing-6;
+    line-height: $line-height-relaxed;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .empty-actions {
+    display: flex;
+    gap: $spacing-3;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    .empty-button {
+      @extend .btn;
+      @extend .btn-md;
+      min-width: 140px;
+      
+      &.primary {
+        @extend .btn-primary;
+      }
+      
+      &.secondary {
+        @extend .btn-outline;
+      }
+    }
+  }
+  
+  .empty-suggestions {
+    margin-top: $spacing-6;
+    padding: $spacing-4;
+    background: rgba($info-500, 0.05);
+    border: 1px solid rgba($info-500, 0.2);
+    border-radius: $radius-md;
+    
+    .suggestions-title {
+      @include body-medium;
+      font-weight: $font-weight-semibold;
+      color: $info-600;
+      margin-bottom: $spacing-3;
+    }
+    
+    .suggestions-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      
+      .suggestion-item {
+        @include body-small;
+        color: $text-secondary;
+        padding: $spacing-1 0;
+        display: flex;
+        align-items: center;
+        gap: $spacing-2;
+        
+        .suggestion-bullet {
+          width: 6px;
+          height: 6px;
+          background: $info-500;
+          border-radius: 50%;
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
+}
+
+// Contextual Empty States
+.empty-state-search {
+  .empty-icon {
+    color: $primary-400;
+  }
+  
+  .empty-suggestions {
+    background: rgba($primary-500, 0.05);
+    border-color: rgba($primary-500, 0.2);
+    
+    .suggestions-title {
+      color: $primary-600;
+    }
+    
+    .suggestion-item .suggestion-bullet {
+      background: $primary-500;
+    }
+  }
+}
+
+.empty-state-results {
+  .empty-icon {
+    color: $warning-400;
+  }
+  
+  .empty-suggestions {
+    background: rgba($warning-500, 0.05);
+    border-color: rgba($warning-500, 0.2);
+    
+    .suggestions-title {
+      color: $warning-600;
+    }
+    
+    .suggestion-item .suggestion-bullet {
+      background: $warning-500;
+    }
+  }
+}
+
+// ============================================================================
+// OFFLINE FUNCTIONALITY
+// ============================================================================
+
+// Offline Banner
+.offline-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: $warning-500;
+  color: $text-primary;
+  padding: $spacing-3 $spacing-6;
+  text-align: center;
+  z-index: $z-fixed;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+  
+  &.show {
+    transform: translateY(0);
+  }
+  
+  .offline-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-2;
+    @include body-medium;
+    
+    .offline-icon {
+      font-size: $icon-size-md;
+    }
+    
+    .offline-text {
+      font-weight: $font-weight-semibold;
+    }
+  }
+}
+
+// Offline Indicator
+.offline-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-2;
+  @include body-small;
+  color: $warning-600;
+  background: rgba($warning-500, 0.1);
+  padding: $spacing-1 $spacing-3;
+  border-radius: $radius-full;
+  
+  .offline-dot {
+    width: 8px;
+    height: 8px;
+    background: $warning-500;
+    border-radius: 50%;
+    animation: offlinePulse 2s infinite;
+  }
+}
+
+@keyframes offlinePulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// Sync Status
+.sync-status {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  @include body-small;
+  
+  .sync-icon {
+    font-size: $icon-size-sm;
+    
+    &.syncing {
+      animation: spin 1s linear infinite;
+      color: $warning-500;
+    }
+    
+    &.synced {
+      color: $success-500;
+    }
+    
+    &.sync-error {
+      color: $error-500;
+    }
+  }
+  
+  .sync-text {
+    transition: color 0.2s ease;
+    
+    &.syncing {
+      color: $warning-500;
+    }
+    
+    &.synced {
+      color: $success-500;
+    }
+    
+    &.sync-error {
+      color: $error-500;
+    }
+  }
+}
+
+// ============================================================================
+// TIMEOUT HANDLING
+// ============================================================================
+
+// Timeout Warning
+.timeout-warning {
+  background: rgba($warning-500, 0.1);
+  border: 1px solid rgba($warning-500, 0.2);
+  border-radius: $radius-md;
+  padding: $spacing-4;
+  margin: $spacing-4 0;
+  
+  .timeout-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    margin-bottom: $spacing-2;
+    
+    .timeout-icon {
+      font-size: $icon-size-md;
+      color: $warning-500;
+    }
+    
+    .timeout-title {
+      @include body-medium;
+      font-weight: $font-weight-semibold;
+      color: $warning-600;
+    }
+  }
+  
+  .timeout-message {
+    @include body-small;
+    color: $text-secondary;
+    margin-bottom: $spacing-3;
+  }
+  
+  .timeout-actions {
+    display: flex;
+    gap: $spacing-2;
+    
+    .timeout-button {
+      @extend .btn;
+      @extend .btn-sm;
+      
+      &.extend {
+        @extend .btn-warning;
+      }
+      
+      &.continue {
+        @extend .btn-outline;
+      }
+    }
+  }
+}
+
+// Connection Status
+.connection-status {
+  position: fixed;
+  bottom: $spacing-4;
+  right: $spacing-4;
+  background: $bg-surface;
+  border: 1px solid $neutral-200;
+  border-radius: $radius-lg;
+  padding: $spacing-3;
+  box-shadow: $shadow-lg;
+  z-index: $z-fixed;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  
+  &.show {
+    transform: translateX(0);
+  }
+  
+  .connection-content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    @include body-small;
+    
+    .connection-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      
+      &.connected {
+        background: $success-500;
+      }
+      
+      &.connecting {
+        background: $warning-500;
+        animation: offlinePulse 1s infinite;
+      }
+      
+      &.disconnected {
+        background: $error-500;
+      }
+    }
+    
+    .connection-text {
+      color: $text-muted;
+    }
+  }
+}
+
+// ============================================================================
+// GRACEFUL DEGRADATION
+// ============================================================================
+
+// Feature Unavailable
+.feature-unavailable {
+  background: rgba($neutral-500, 0.05);
+  border: 1px solid rgba($neutral-500, 0.2);
+  border-radius: $radius-md;
+  padding: $spacing-4;
+  text-align: center;
+  
+  .unavailable-icon {
+    font-size: $icon-size-xl;
+    color: $neutral-400;
+    margin-bottom: $spacing-2;
+  }
+  
+  .unavailable-title {
+    @include body-medium;
+    font-weight: $font-weight-semibold;
+    color: $text-muted;
+    margin-bottom: $spacing-2;
+  }
+  
+  .unavailable-message {
+    @include body-small;
+    color: $text-muted;
+    margin-bottom: $spacing-3;
+  }
+  
+  .unavailable-fallback {
+    @include body-small;
+    color: $info-500;
+    
+    .fallback-link {
+      color: inherit;
+      text-decoration: underline;
+      
+      &:hover {
+        color: $info-600;
+      }
+    }
+  }
+}
+
+// Fallback Content
+.fallback-content {
+  opacity: 0.7;
+  filter: grayscale(0.3);
+  
+  .fallback-notice {
+    background: rgba($info-500, 0.1);
+    border: 1px solid rgba($info-500, 0.2);
+    border-radius: $radius-sm;
+    padding: $spacing-2 $spacing-3;
+    margin-bottom: $spacing-3;
+    
+    .fallback-text {
+      @include body-small;
+      color: $info-600;
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+      
+      .fallback-icon {
+        font-size: $icon-size-sm;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// CONFIRMATION DIALOGS
+// ============================================================================
+
+// Confirmation Modal
+.confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: $z-modal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-4;
+  
+  .confirmation-content {
+    background: $bg-surface;
+    border-radius: $radius-xl;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: $shadow-xl;
+    animation: fadeInUp 0.3s ease;
+    
+    .confirmation-header {
+      padding: $spacing-6 $spacing-6 $spacing-4;
+      border-bottom: 1px solid $neutral-200;
+      
+      .confirmation-title {
+        @include heading-4;
+        color: $text-inverse;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: $spacing-3;
+        
+        .confirmation-icon {
+          font-size: $icon-size-xl;
+          
+          &.warning {
+            color: $warning-500;
+          }
+          
+          &.danger {
+            color: $error-500;
+          }
+          
+          &.info {
+            color: $info-500;
+          }
+        }
+      }
+    }
+    
+    .confirmation-body {
+      padding: $spacing-4 $spacing-6;
+      
+      .confirmation-message {
+        @include body-medium;
+        color: $text-inverse;
+        line-height: $line-height-relaxed;
+        margin-bottom: $spacing-4;
+      }
+      
+      .confirmation-details {
+        background: $neutral-50;
+        border: 1px solid $neutral-200;
+        border-radius: $radius-md;
+        padding: $spacing-3;
+        @include body-small;
+        color: $text-muted;
+      }
+    }
+    
+    .confirmation-footer {
+      padding: $spacing-4 $spacing-6 $spacing-6;
+      display: flex;
+      gap: $spacing-3;
+      justify-content: flex-end;
+      
+      .confirmation-button {
+        @extend .btn;
+        @extend .btn-md;
+        min-width: 100px;
+        
+        &.cancel {
+          @extend .btn-ghost;
+        }
+        
+        &.confirm {
+          @extend .btn-primary;
+          
+          &.danger {
+            background: $error-500;
+            
+            &:hover {
+              background: $error-600;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Inline Confirmation
+.inline-confirmation {
+  background: rgba($warning-500, 0.1);
+  border: 1px solid rgba($warning-500, 0.2);
+  border-radius: $radius-md;
+  padding: $spacing-4;
+  margin: $spacing-4 0;
+  
+  .confirmation-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    margin-bottom: $spacing-3;
+    
+    .confirmation-icon {
+      font-size: $icon-size-md;
+      color: $warning-500;
+    }
+    
+    .confirmation-title {
+      @include body-medium;
+      font-weight: $font-weight-semibold;
+      color: $warning-600;
+    }
+  }
+  
+  .confirmation-message {
+    @include body-small;
+    color: $text-secondary;
+    margin-bottom: $spacing-3;
+  }
+  
+  .confirmation-actions {
+    display: flex;
+    gap: $spacing-2;
+    
+    .confirmation-button {
+      @extend .btn;
+      @extend .btn-sm;
+      
+      &.cancel {
+        @extend .btn-ghost;
+      }
+      
+      &.confirm {
+        @extend .btn-warning;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// SMART DEFAULTS & AUTO-SAVE
+// ============================================================================
+
+// Auto-save Status
+.auto-save-status {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  @include body-small;
+  margin-top: $spacing-2;
+  
+  .save-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    
+    &.saving {
+      background: $warning-500;
+      animation: offlinePulse 1s infinite;
+    }
+    
+    &.saved {
+      background: $success-500;
+    }
+    
+    &.error {
+      background: $error-500;
+    }
+  }
+  
+  .save-text {
+    color: $text-muted;
+    transition: color 0.3s ease;
+    
+    &.saving {
+      color: $warning-500;
+    }
+    
+    &.saved {
+      color: $success-500;
+    }
+    
+    &.error {
+      color: $error-500;
+    }
+  }
+  
+  .save-time {
+    color: $text-muted;
+    margin-left: auto;
+  }
+}
+
+// Smart Defaults Notice
+.smart-defaults-notice {
+  background: rgba($info-500, 0.1);
+  border: 1px solid rgba($info-500, 0.2);
+  border-radius: $radius-md;
+  padding: $spacing-3;
+  margin-bottom: $spacing-4;
+  
+  .defaults-content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    @include body-small;
+    
+    .defaults-icon {
+      font-size: $icon-size-sm;
+      color: $info-500;
+    }
+    
+    .defaults-text {
+      color: $info-600;
+    }
+    
+    .defaults-action {
+      margin-left: auto;
+      
+      .defaults-button {
+        @extend .btn;
+        @extend .btn-sm;
+        @extend .btn-info;
+        padding: $spacing-1 $spacing-2;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// RESPONSIVE ERROR HANDLING
+// ============================================================================
+
+@media (max-width: $breakpoint-md) {
+  .error-container {
+    padding: $spacing-6 $spacing-4;
+    
+    .error-actions {
+      flex-direction: column;
+      
+      .error-button {
+        width: 100%;
+      }
+    }
+  }
+  
+  .empty-state {
+    padding: $spacing-8 $spacing-4;
+    
+    .empty-actions {
+      flex-direction: column;
+      
+      .empty-button {
+        width: 100%;
+      }
+    }
+  }
+  
+  .confirmation-modal {
+    .confirmation-content {
+      margin: $spacing-4;
+      
+      .confirmation-footer {
+        flex-direction: column;
+        
+        .confirmation-button {
+          width: 100%;
+        }
+      }
+    }
+  }
+  
+  .inline-confirmation {
+    .confirmation-actions {
+      flex-direction: column;
+      
+      .confirmation-button {
+        width: 100%;
+      }
+    }
+  }
+}

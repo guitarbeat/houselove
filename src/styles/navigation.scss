@@ -1,0 +1,746 @@
+// ============================================================================
+// ENHANCED NAVIGATION & USER FLOW - HOUSE LOVE PREMIUM UX
+// ============================================================================
+// This file contains enhanced navigation components, breadcrumbs, smart search,
+// and optimized user flows for creating an intuitive premium experience.
+
+@import './design-system.scss';
+@import './interactions.scss';
+
+// ============================================================================
+// BREADCRUMB NAVIGATION
+// ============================================================================
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  padding: $spacing-4 0;
+  @include body-small;
+  
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    
+    &:not(:last-child)::after {
+      content: '/';
+      color: $text-muted;
+      margin-left: $spacing-2;
+    }
+    
+    .breadcrumb-link {
+      color: $text-muted;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      border-radius: $radius-sm;
+      padding: $spacing-1 $spacing-2;
+      
+      &:hover {
+        color: $text-primary;
+        background: rgba($primary-500, 0.1);
+      }
+      
+      &:focus {
+        @include focus-ring;
+      }
+    }
+    
+    &.current {
+      .breadcrumb-link {
+        color: $primary-500;
+        font-weight: $font-weight-semibold;
+      }
+    }
+  }
+  
+  // Mobile optimization
+  @media (max-width: $breakpoint-md) {
+    flex-wrap: wrap;
+    gap: $spacing-1;
+    
+    .breadcrumb-item {
+      font-size: $font-size-xs;
+    }
+  }
+}
+
+// ============================================================================
+// SMART SEARCH SYSTEM
+// ============================================================================
+
+.search-container {
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  
+  .search-input {
+    width: 100%;
+    padding: $spacing-3 $spacing-4;
+    padding-left: $spacing-12; // Space for search icon
+    border: 2px solid $neutral-300;
+    border-radius: $radius-lg;
+    @include body-medium;
+    transition: all 0.2s ease;
+    
+    &:focus {
+      border-color: $primary-500;
+      box-shadow: 0 0 0 3px rgba($primary-500, 0.1);
+      transform: translateY(-1px);
+    }
+    
+    &::placeholder {
+      color: $text-muted;
+    }
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: $spacing-4;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $text-muted;
+    font-size: $icon-size-lg;
+    pointer-events: none;
+  }
+  
+  .search-clear {
+    position: absolute;
+    right: $spacing-4;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: $text-muted;
+    cursor: pointer;
+    padding: $spacing-1;
+    border-radius: $radius-sm;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      color: $text-primary;
+      background: $neutral-100;
+    }
+  }
+}
+
+// Search Results Dropdown
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: $bg-surface;
+  border: 1px solid $neutral-200;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-xl;
+  z-index: $z-dropdown;
+  margin-top: $spacing-2;
+  max-height: 400px;
+  overflow-y: auto;
+  
+  .search-result-item {
+    padding: $spacing-3 $spacing-4;
+    border-bottom: 1px solid $neutral-100;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    &:hover,
+    &:focus {
+      background: $neutral-50;
+      outline: none;
+    }
+    
+    .result-title {
+      @include body-medium;
+      font-weight: $font-weight-semibold;
+      color: $text-primary;
+      margin-bottom: $spacing-1;
+    }
+    
+    .result-description {
+      @include body-small;
+      color: $text-muted;
+    }
+    
+    .result-meta {
+      display: flex;
+      align-items: center;
+      gap: $spacing-3;
+      margin-top: $spacing-2;
+      
+      .result-category {
+        @include caption;
+        color: $primary-500;
+        background: rgba($primary-500, 0.1);
+        padding: $spacing-1 $spacing-2;
+        border-radius: $radius-full;
+      }
+      
+      .result-date {
+        @include caption;
+        color: $text-muted;
+      }
+    }
+  }
+  
+  .search-no-results {
+    padding: $spacing-6;
+    text-align: center;
+    color: $text-muted;
+    @include body-medium;
+  }
+}
+
+// Recent Searches
+.recent-searches {
+  padding: $spacing-4;
+  border-bottom: 1px solid $neutral-200;
+  
+  .recent-title {
+    @include body-small;
+    font-weight: $font-weight-semibold;
+    color: $text-muted;
+    margin-bottom: $spacing-3;
+  }
+  
+  .recent-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-2;
+    
+    .recent-tag {
+      background: $neutral-100;
+      color: $text-muted;
+      padding: $spacing-1 $spacing-3;
+      border-radius: $radius-full;
+      @include body-small;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background: $primary-100;
+        color: $primary-600;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// CONTEXTUAL HELP & ONBOARDING
+// ============================================================================
+
+.help-tooltip {
+  position: relative;
+  display: inline-block;
+  
+  .help-icon {
+    color: $info-500;
+    font-size: $icon-size-sm;
+    cursor: help;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: $info-600;
+    }
+  }
+  
+  .help-content {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: $neutral-900;
+    color: $text-primary;
+    padding: $spacing-3;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    z-index: $z-tooltip;
+    margin-bottom: $spacing-2;
+    max-width: 300px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: $neutral-900;
+    }
+    
+    .help-title {
+      @include body-medium;
+      font-weight: $font-weight-semibold;
+      margin-bottom: $spacing-2;
+    }
+    
+    .help-text {
+      @include body-small;
+      line-height: $line-height-relaxed;
+    }
+  }
+  
+  &:hover .help-content,
+  &:focus .help-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-4px);
+  }
+}
+
+// Onboarding Tour
+.onboarding-tour {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: $z-modal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .tour-content {
+    background: $bg-surface;
+    border-radius: $radius-xl;
+    padding: $spacing-6;
+    max-width: 500px;
+    margin: $spacing-4;
+    box-shadow: $shadow-xl;
+    animation: fadeInUp 0.4s ease;
+    
+    .tour-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: $spacing-4;
+      
+      .tour-title {
+        @include heading-4;
+        color: $text-inverse;
+        margin: 0;
+      }
+      
+      .tour-close {
+        background: none;
+        border: none;
+        color: $text-muted;
+        cursor: pointer;
+        padding: $spacing-1;
+        border-radius: $radius-sm;
+        
+        &:hover {
+          background: $neutral-100;
+          color: $text-inverse;
+        }
+      }
+    }
+    
+    .tour-body {
+      @include body-medium;
+      color: $text-inverse;
+      line-height: $line-height-relaxed;
+      margin-bottom: $spacing-6;
+    }
+    
+    .tour-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      .tour-progress {
+        @include body-small;
+        color: $text-muted;
+      }
+      
+      .tour-actions {
+        display: flex;
+        gap: $spacing-3;
+        
+        .btn {
+          min-width: 80px;
+        }
+      }
+    }
+  }
+}
+
+// ============================================================================
+// ENHANCED NAVIGATION PATTERNS
+// ============================================================================
+
+// Smart Back Navigation
+.back-navigation {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  margin-bottom: $spacing-6;
+  
+  .back-button {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    background: none;
+    border: none;
+    color: $text-muted;
+    cursor: pointer;
+    padding: $spacing-2;
+    border-radius: $radius-md;
+    transition: all 0.2s ease;
+    @include body-medium;
+    
+    &:hover {
+      color: $text-primary;
+      background: $neutral-100;
+    }
+    
+    &:focus {
+      @include focus-ring;
+    }
+    
+    .back-icon {
+      font-size: $icon-size-md;
+    }
+  }
+  
+  .navigation-context {
+    @include body-small;
+    color: $text-muted;
+    padding: $spacing-1 $spacing-3;
+    background: $neutral-100;
+    border-radius: $radius-full;
+  }
+}
+
+// Forward Navigation
+.forward-navigation {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  margin-top: $spacing-6;
+  padding-top: $spacing-4;
+  border-top: 1px solid $neutral-200;
+  
+  .next-button {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    background: $primary-500;
+    color: $text-primary;
+    border: none;
+    padding: $spacing-3 $spacing-4;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    @include body-medium;
+    font-weight: $font-weight-semibold;
+    
+    &:hover {
+      background: $primary-600;
+      transform: translateY(-1px);
+      box-shadow: $shadow-md;
+    }
+    
+    &:focus {
+      @include focus-ring;
+    }
+    
+    .next-icon {
+      font-size: $icon-size-md;
+    }
+  }
+  
+  .navigation-hint {
+    @include body-small;
+    color: $text-muted;
+  }
+}
+
+// ============================================================================
+// CALL-TO-ACTION HIERARCHY
+// ============================================================================
+
+.cta-hierarchy {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+  margin: $spacing-8 0;
+  
+  .cta-primary {
+    @extend .btn;
+    @extend .btn-primary;
+    @extend .btn-lg;
+    width: 100%;
+    justify-content: center;
+    font-size: $font-size-lg;
+    padding: $spacing-4 $spacing-6;
+    
+    @media (min-width: $breakpoint-md) {
+      width: auto;
+      min-width: 200px;
+    }
+  }
+  
+  .cta-secondary {
+    @extend .btn;
+    @extend .btn-outline;
+    @extend .btn-md;
+    width: 100%;
+    justify-content: center;
+    
+    @media (min-width: $breakpoint-md) {
+      width: auto;
+      min-width: 150px;
+    }
+  }
+  
+  .cta-tertiary {
+    @extend .btn;
+    @extend .btn-ghost;
+    @extend .btn-sm;
+    width: 100%;
+    justify-content: center;
+    
+    @media (min-width: $breakpoint-md) {
+      width: auto;
+    }
+  }
+  
+  // Horizontal layout for larger screens
+  @media (min-width: $breakpoint-md) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+    .cta-primary {
+      order: 1;
+    }
+    
+    .cta-secondary {
+      order: 2;
+    }
+    
+    .cta-tertiary {
+      order: 3;
+    }
+  }
+}
+
+// ============================================================================
+// SMART FORM FLOWS
+// ============================================================================
+
+.smart-form {
+  .form-step {
+    display: none;
+    
+    &.active {
+      display: block;
+      animation: fadeInUp 0.4s ease;
+    }
+    
+    .step-header {
+      text-align: center;
+      margin-bottom: $spacing-6;
+      
+      .step-title {
+        @include heading-3;
+        color: $text-inverse;
+        margin-bottom: $spacing-2;
+      }
+      
+      .step-description {
+        @include body-large;
+        color: $text-secondary;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+    }
+    
+    .form-fields {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+  
+  .form-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: $spacing-8;
+    padding-top: $spacing-4;
+    border-top: 1px solid $neutral-200;
+    
+    .nav-button {
+      @extend .btn;
+      @extend .btn-outline;
+      @extend .btn-md;
+      min-width: 120px;
+      
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+    
+    .progress-indicator {
+      @include body-small;
+      color: $text-muted;
+    }
+  }
+}
+
+// Auto-save indicator
+.auto-save-indicator {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  @include body-small;
+  color: $text-muted;
+  margin-top: $spacing-3;
+  
+  .save-icon {
+    font-size: $icon-size-sm;
+    
+    &.saving {
+      animation: spin 1s linear infinite;
+      color: $warning-500;
+    }
+    
+    &.saved {
+      color: $success-500;
+    }
+    
+    &.error {
+      color: $error-500;
+    }
+  }
+  
+  .save-text {
+    transition: color 0.2s ease;
+    
+    &.saving {
+      color: $warning-500;
+    }
+    
+    &.saved {
+      color: $success-500;
+    }
+    
+    &.error {
+      color: $error-500;
+    }
+  }
+}
+
+// ============================================================================
+// PROGRESS INDICATORS FOR MULTI-STEP PROCESSES
+// ============================================================================
+
+.multi-step-progress {
+  margin: $spacing-8 0;
+  
+  .progress-header {
+    text-align: center;
+    margin-bottom: $spacing-6;
+    
+    .progress-title {
+      @include heading-4;
+      color: $text-inverse;
+      margin-bottom: $spacing-2;
+    }
+    
+    .progress-subtitle {
+      @include body-medium;
+      color: $text-secondary;
+    }
+  }
+  
+  .progress-steps {
+    @extend .step-progress;
+  }
+  
+  .progress-actions {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-4;
+    margin-top: $spacing-6;
+    
+    .progress-button {
+      @extend .btn;
+      @extend .btn-md;
+      min-width: 120px;
+      
+      &.progress-next {
+        @extend .btn-primary;
+      }
+      
+      &.progress-prev {
+        @extend .btn-outline;
+      }
+      
+      &.progress-skip {
+        @extend .btn-ghost;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// RESPONSIVE NAVIGATION OPTIMIZATIONS
+// ============================================================================
+
+// Mobile-first navigation
+@media (max-width: $breakpoint-md) {
+  .search-container {
+    max-width: 100%;
+    
+    .search-results {
+      position: fixed;
+      top: 50%;
+      left: $spacing-4;
+      right: $spacing-4;
+      transform: translateY(-50%);
+      max-height: 60vh;
+    }
+  }
+  
+  .cta-hierarchy {
+    .cta-primary,
+    .cta-secondary,
+    .cta-tertiary {
+      width: 100%;
+    }
+  }
+  
+  .smart-form {
+    .form-navigation {
+      flex-direction: column;
+      gap: $spacing-3;
+      
+      .nav-button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Touch-friendly interactions
+@media (hover: none) and (pointer: coarse) {
+  .help-tooltip .help-content {
+    display: none; // Disable hover tooltips on touch devices
+  }
+  
+  .search-container .search-input {
+    font-size: 16px; // Prevent zoom on iOS
+  }
+}
