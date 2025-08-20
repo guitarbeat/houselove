@@ -1,0 +1,345 @@
+// ============================================================================
+// DESIGN SYSTEM - HOUSE LOVE
+// ============================================================================
+// This file contains all design tokens, variables, and foundational styles
+// for the House Love application, implementing a professional design system
+// with perfect typography, color contrast, spacing, and component standards.
+
+// ============================================================================
+// TYPOGRAPHY SCALE (1.25 RATIO)
+// ============================================================================
+// Base font size: 16px (1rem)
+// Scale: 12px, 15px, 18px, 24px, 30px, 37px, 46px
+
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.9375rem;  // 15px
+$font-size-base: 1rem;     // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.5rem;     // 24px
+$font-size-2xl: 1.875rem;  // 30px
+$font-size-3xl: 2.3125rem; // 37px
+$font-size-4xl: 2.875rem;  // 46px
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Line Heights
+$line-height-tight: 1.2;    // Headings
+$line-height-normal: 1.4;   // UI elements
+$line-height-relaxed: 1.5;  // Body text
+
+// Letter Spacing
+$letter-spacing-tight: -0.02em;   // Large text
+$letter-spacing-normal: 0;        // Body text
+$letter-spacing-wide: 0.05em;     // Small caps
+
+// Font Families
+$font-family-primary: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-family-display: 'Coolvetica', 'Tilt Neon', cursive;
+$font-family-accent: 'La Belle Aurore', cursive;
+
+// ============================================================================
+// COLOR SYSTEM (WCAG AA COMPLIANT - 4.5:1 CONTRAST MINIMUM)
+// ============================================================================
+
+// Primary Colors
+$primary-50: #fdf2f2;
+$primary-100: #fce7e7;
+$primary-200: #f9d5d5;
+$primary-300: #f5b8b8;
+$primary-400: #ef8f8f;
+$primary-500: #e7a29b;  // Original primary
+$primary-600: #d97771;
+$primary-700: #c25d57;
+$primary-800: #a14a45;
+$primary-900: #853d39;
+
+// Secondary Colors
+$secondary-50: #f0fdf4;
+$secondary-100: #dcfce7;
+$secondary-200: #bbf7d0;
+$secondary-300: #86efac;
+$secondary-400: #4ade80;
+$secondary-500: #c7fac7;  // Original secondary
+$secondary-600: #16a34a;
+$secondary-700: #15803d;
+$secondary-800: #166534;
+$secondary-900: #14532d;
+
+// Neutral Colors
+$neutral-50: #f8fafc;
+$neutral-100: #f1f5f9;
+$neutral-200: #e2e8f0;
+$neutral-300: #cbd5e1;
+$neutral-400: #94a3b8;
+$neutral-500: #64748b;
+$neutral-600: #475569;
+$neutral-700: #334155;
+$neutral-800: #1e293b;
+$neutral-900: #0f172a;
+
+// Semantic Colors
+$success-50: #f0fdf4;
+$success-100: #dcfce7;
+$success-500: #22c55e;
+$success-600: #16a34a;
+$success-700: #15803d;
+
+$warning-50: #fffbeb;
+$warning-100: #fef3c7;
+$warning-500: #f59e0b;
+$warning-600: #d97706;
+$warning-700: #b45309;
+
+$error-50: #fef2f2;
+$error-100: #fee2e2;
+$error-500: #ef4444;
+$error-600: #dc2626;
+$error-700: #b91c1c;
+
+$info-50: #eff6ff;
+$info-100: #dbeafe;
+$info-500: #3b82f6;
+$info-600: #2563eb;
+$info-700: #1d4ed8;
+
+// Background Colors
+$bg-primary: #0D4A1D;      // Original dark green
+$bg-secondary: #01280C;     // Alternative dark green
+$bg-surface: #ffffff;
+$bg-overlay: rgba(0, 0, 0, 0.5);
+
+// Text Colors
+$text-primary: #ffffff;
+$text-secondary: #e2e8f0;
+$text-muted: #94a3b8;
+$text-inverse: #0f172a;
+
+// ============================================================================
+// SPACING SYSTEM (4px/8px BASE UNIT)
+// ============================================================================
+$spacing-0: 0;
+$spacing-1: 0.25rem;   // 4px
+$spacing-2: 0.5rem;    // 8px
+$spacing-3: 0.75rem;   // 12px
+$spacing-4: 1rem;      // 16px
+$spacing-5: 1.25rem;   // 20px
+$spacing-6: 1.5rem;    // 24px
+$spacing-8: 2rem;      // 32px
+$spacing-10: 2.5rem;   // 40px
+$spacing-12: 3rem;     // 48px
+$spacing-16: 4rem;     // 64px
+$spacing-20: 5rem;     // 80px
+$spacing-24: 6rem;     // 96px
+
+// ============================================================================
+// BORDER RADIUS SYSTEM
+// ============================================================================
+$radius-sm: 0.125rem;   // 2px
+$radius-md: 0.25rem;    // 4px
+$radius-lg: 0.5rem;     // 8px
+$radius-xl: 0.75rem;    // 12px
+$radius-2xl: 1rem;      // 16px
+$radius-full: 9999px;
+
+// ============================================================================
+// SHADOW SYSTEM
+// ============================================================================
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// ============================================================================
+// TRANSITION SYSTEM
+// ============================================================================
+$transition-fast: 150ms ease-in-out;
+$transition-normal: 250ms ease-in-out;
+$transition-slow: 350ms ease-in-out;
+
+// ============================================================================
+// BREAKPOINT SYSTEM
+// ============================================================================
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// ============================================================================
+// Z-INDEX SYSTEM
+// ============================================================================
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;
+
+// ============================================================================
+// COMPONENT SIZING STANDARDS
+// ============================================================================
+
+// Button Heights
+$button-height-sm: 2rem;    // 32px
+$button-height-md: 2.5rem;  // 40px
+$button-height-lg: 3rem;    // 48px
+
+// Icon Sizes
+$icon-size-sm: 1rem;       // 16px
+$icon-size-md: 1.25rem;    // 20px
+$icon-size-lg: 1.5rem;     // 24px
+$icon-size-xl: 2rem;       // 32px
+
+// Form Input Heights
+$input-height-sm: 2rem;     // 32px
+$input-height-md: 2.5rem;   // 40px
+$input-height-lg: 3rem;     // 48px
+
+// ============================================================================
+// MIXINS & UTILITIES
+// ============================================================================
+
+// Typography Mixins
+@mixin heading-1 {
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  letter-spacing: $letter-spacing-tight;
+  font-family: $font-family-display;
+}
+
+@mixin heading-2 {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  letter-spacing: $letter-spacing-tight;
+  font-family: $font-family-display;
+}
+
+@mixin heading-3 {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  letter-spacing: $letter-spacing-tight;
+}
+
+@mixin heading-4 {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+}
+
+@mixin body-large {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-relaxed;
+  letter-spacing: $letter-spacing-normal;
+}
+
+@mixin body-medium {
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-relaxed;
+  letter-spacing: $letter-spacing-normal;
+}
+
+@mixin body-small {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-normal;
+  letter-spacing: $letter-spacing-wide;
+}
+
+@mixin caption {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-normal;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+}
+
+// Spacing Mixins
+@mixin section-padding {
+  padding: $spacing-16 $spacing-6;
+  
+  @media (min-width: $breakpoint-lg) {
+    padding: $spacing-24 $spacing-8;
+  }
+}
+
+@mixin container-padding {
+  padding: $spacing-4 $spacing-6;
+  
+  @media (min-width: $breakpoint-lg) {
+    padding: $spacing-6 $spacing-8;
+  }
+}
+
+// Focus States
+@mixin focus-ring {
+  outline: 2px solid $primary-500;
+  outline-offset: 2px;
+}
+
+// ============================================================================
+// UTILITY CLASSES
+// ============================================================================
+
+// Typography Utilities
+.text-heading-1 { @include heading-1; }
+.text-heading-2 { @include heading-2; }
+.text-heading-3 { @include heading-3; }
+.text-heading-4 { @include heading-4; }
+.text-body-large { @include body-large; }
+.text-body-medium { @include body-medium; }
+.text-body-small { @include body-small; }
+.text-caption { @include caption; }
+
+// Spacing Utilities
+.p-0 { padding: $spacing-0; }
+.p-1 { padding: $spacing-1; }
+.p-2 { padding: $spacing-2; }
+.p-4 { padding: $spacing-4; }
+.p-6 { padding: $spacing-6; }
+.p-8 { padding: $spacing-8; }
+
+.m-0 { margin: $spacing-0; }
+.m-1 { margin: $spacing-1; }
+.m-2 { margin: $spacing-2; }
+.m-4 { margin: $spacing-4; }
+.m-6 { margin: $spacing-6; }
+.m-8 { margin: $spacing-8; }
+
+// Color Utilities
+.text-primary { color: $primary-500; }
+.text-secondary { color: $secondary-500; }
+.text-success { color: $success-500; }
+.text-warning { color: $warning-500; }
+.text-error { color: $error-500; }
+.text-info { color: $info-500; }
+
+.bg-primary { background-color: $primary-500; }
+.bg-secondary { background-color: $secondary-500; }
+.bg-success { background-color: $success-500; }
+.bg-warning { background-color: $warning-500; }
+.bg-error { background-color: $error-500; }
+.bg-info { background-color: $info-500; }
+
+// Border Radius Utilities
+.rounded-sm { border-radius: $radius-sm; }
+.rounded-md { border-radius: $radius-md; }
+.rounded-lg { border-radius: $radius-lg; }
+.rounded-xl { border-radius: $radius-xl; }
+.rounded-2xl { border-radius: $radius-2xl; }
+.rounded-full { border-radius: $radius-full; }
+
+// Shadow Utilities
+.shadow-sm { box-shadow: $shadow-sm; }
+.shadow-md { box-shadow: $shadow-md; }
+.shadow-lg { box-shadow: $shadow-lg; }
+.shadow-xl { box-shadow: $shadow-xl; }

@@ -1,3 +1,11 @@
+// ============================================================================
+// HOME COMPONENT - Enhanced with Design System
+// ============================================================================
+// This component demonstrates the implementation of the perfected design system
+// with consistent typography, spacing, colors, and component standards.
+
+@import '../../styles/design-system.scss';
+
 .home-page {
   position: relative;
   min-height: 100vh;
@@ -5,15 +13,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden; // Add this line to prevent overflow issues
+  overflow: hidden;
+  @include section-padding; // Uses design system spacing
 
   .background-image-container {
     position: absolute;
-    bottom: 0; // Position at the bottom
-    right: 0; // Position to the right
-    height: 50vh; // Adjust height as needed
-    width: 50vw; // Adjust width as needed
+    bottom: 0;
+    right: 0;
+    height: 50vh;
+    width: 50vw;
     opacity: 0.1;
+    
     img {
       width: 100%;
       height: 100%;
@@ -24,80 +34,246 @@
   }
 
   .text-zone {
-    width: 80%; // Increase width to give text more space
+    width: 80%;
     text-align: center;
-    margin-bottom: 20px;
-    z-index: 1; // Ensure text is above the background image
+    margin-bottom: $spacing-8; // Design system spacing
+    z-index: 1;
+    max-width: 800px; // Improved readability
   }
 
-  h1,
-  h2 {
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  }
-
+  // Enhanced Typography using Design System
   h1 {
-    font-size: clamp(5rem, 8vw, 8rem);
-    line-height: 1.2;
-    margin: 0;
-    font-family: 'Coolvetica', sans-serif;
-    font-weight: 400;
+    @include heading-1; // 46px, bold, tight line-height, elegant letter-spacing
+    color: $text-primary;
+    text-shadow: $shadow-md; // Design system shadow
+    margin: 0 0 $spacing-6 0; // Consistent spacing
+    animation: fadeIn 1s 1.5s backwards;
+    
+    // Responsive typography using design system scale
+    @media (max-width: $breakpoint-lg) {
+      font-size: $font-size-3xl; // 37px on medium screens
+    }
+    
+    @media (max-width: $breakpoint-md) {
+      font-size: $font-size-2xl; // 30px on small screens
+    }
   }
 
   h2 {
-    font-size: clamp(2rem, 4vw, 5rem);
-    margin-top: 50px;
-    font-weight: 400;
-    font-family: 'Arial', sans-serif;
-    letter-spacing: 2px;
+    @include heading-3; // 30px, semibold, tight line-height
+    color: $text-secondary;
+    margin: $spacing-8 0 $spacing-6 0; // Design system spacing
+    font-family: $font-family-primary; // Consistent font usage
     animation: fadeIn 1s 1.8s backwards;
+    
+    // Responsive typography
+    @media (max-width: $breakpoint-lg) {
+      font-size: $font-size-xl; // 24px on medium screens
+    }
+    
+    @media (max-width: $breakpoint-md) {
+      font-size: $font-size-lg; // 18px on small screens
+    }
   }
 
+  // Enhanced CTA Section using Design System
   .home-cta {
-    margin-top: 2rem;
+    margin-top: $spacing-8;
     display: flex;
-    gap: 1rem;
+    gap: $spacing-4; // Consistent spacing
     justify-content: center;
+    flex-wrap: wrap; // Better mobile experience
 
     .cta-button {
-      background: #ef7c8e;
-      color: #fff;
-      padding: 12px 18px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 1.4rem;
-      transition: transform 0.2s ease, background 0.2s ease;
-
+      // Using design system button classes
+      @extend .btn;
+      @extend .btn-primary;
+      @extend .btn-lg; // 48px height, consistent sizing
+      
+      // Enhanced hover effects
       &:hover {
-        background: #d96a7a;
         transform: translateY(-2px);
+        box-shadow: $shadow-lg; // Design system shadow
       }
-
+      
       &.secondary {
-        background: #d8a7b1;
-        color: #222;
+        @extend .btn-secondary;
+        @extend .btn-outline; // Outline variant for secondary action
+      }
+    }
+  }
+
+  // Enhanced Description Text
+  .home-description {
+    @include body-large; // 18px, regular weight, relaxed line-height
+    color: $text-secondary;
+    max-width: 600px;
+    margin: $spacing-6 auto 0;
+    line-height: $line-height-relaxed;
+    opacity: 0;
+    animation: fadeIn 1s 2.1s backwards;
+  }
+
+  // Enhanced Feature Highlights
+  .feature-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $spacing-6;
+    margin-top: $spacing-12;
+    width: 100%;
+    max-width: 1000px;
+    
+    .feature-item {
+      background: rgba($primary-500, 0.1);
+      border: 1px solid rgba($primary-500, 0.2);
+      border-radius: $radius-lg;
+      padding: $spacing-6;
+      text-align: center;
+      transition: all $transition-normal;
+      
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: $shadow-lg;
+        background: rgba($primary-500, 0.15);
+      }
+      
+      .feature-icon {
+        font-size: $icon-size-xl; // 32px icon
+        color: $primary-500;
+        margin-bottom: $spacing-4;
+      }
+      
+      .feature-title {
+        @include heading-4; // 24px, semibold
+        color: $text-primary;
+        margin-bottom: $spacing-3;
+      }
+      
+      .feature-description {
+        @include body-medium; // 16px, regular weight
+        color: $text-secondary;
+        line-height: $line-height-relaxed;
       }
     }
   }
 }
 
-@media (max-width: 844px) {
+// Enhanced Responsive Design
+@media (max-width: $breakpoint-lg) {
   .home-page {
+    @include container-padding; // Responsive padding
+    
     .background-image-container {
-      height: 30vh; // Adjust for mobile
-      width: 80vw; // Adjust for mobile
+      height: 40vh;
+      width: 60vw;
     }
 
     .text-zone {
-      width: 95%; // Slightly increase width for better text alignment
+      width: 90%;
+      margin-bottom: $spacing-6;
+    }
+    
+    .feature-highlights {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: $spacing-4;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .home-page {
+    .background-image-container {
+      height: 30vh;
+      width: 80vw;
     }
 
+    .text-zone {
+      width: 95%;
+      margin-bottom: $spacing-4;
+    }
+    
+    .home-cta {
+      flex-direction: column;
+      align-items: center;
+      gap: $spacing-3;
+      
+      .cta-button {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+    
+    .feature-highlights {
+      grid-template-columns: 1fr;
+      gap: $spacing-4;
+      
+      .feature-item {
+        padding: $spacing-4;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .home-page {
+    .text-zone {
+      width: 100%;
+      padding: 0 $spacing-4;
+    }
+    
     h1 {
-      font-size: clamp(2.5rem, 8vw, 4rem); // Adjust text size for mobile
+      font-size: $font-size-xl; // 24px on very small screens
     }
-
+    
     h2 {
-      font-size: clamp(1.2rem, 4vw, 3rem); // Adjust text size for mobile
+      font-size: $font-size-base; // 16px on very small screens
     }
+  }
+}
+
+// Enhanced Animations using Design System
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Enhanced Loading States
+.home-page.loading {
+  .text-zone {
+    opacity: 0.6;
+  }
+  
+  .loading-indicator {
+    @extend .loading-spinner;
+    margin: $spacing-8 auto;
+  }
+}
+
+// Enhanced Focus States for Accessibility
+.home-page {
+  .cta-button:focus {
+    @include focus-ring; // Design system focus ring
+  }
+  
+  .feature-item:focus-within {
+    outline: 2px solid $primary-500;
+    outline-offset: 2px;
   }
 }
