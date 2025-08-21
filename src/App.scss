@@ -1,5 +1,5 @@
-// Define the primary color variable
-$primary-color: #E7A29B;;
+// Import design system tokens
+@import './styles/design-tokens.css';
 
 // Import external animate.css library
 @import 'animate.css';
@@ -33,9 +33,9 @@ $primary-color: #E7A29B;;
   font-style: normal;  
 }
 
-// Style rules for input and textarea elements
+// Style rules for input and textarea elements using design tokens
 input, textarea {
-  font-family: 'Helvetica Neue', sans-serif; // Set the font-family for these elements
+  font-family: var(--font-family-sans); // Set the font-family for these elements
 }
 
 // Class for hiding loaders
@@ -50,13 +50,12 @@ input, textarea {
   left: 0; right: 0;             // Stretch horizontally
   margin: auto;                  // Center the element
   top: 0; bottom: 0;             // Stretch vertically
-  width: 50px; height: 50px;    // Set dimensions
+  width: 50px; height: 50px;    // Set dimensions using design tokens
   animation: fadeOut 1s 1s;     // Apply fadeOut animation, starts after 1s
   animation-fill-mode: forwards; // The animation will apply the property values for the time the animation is not playing
 }
 
-
-@media screen and (max-width: 1200px) {
+@media (max-width: 1200px) {
   .loader-active {
     display: flex;
     justify-content: center;

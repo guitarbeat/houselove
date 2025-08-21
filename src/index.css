@@ -1,3 +1,6 @@
+/* Import design system tokens */
+@import './styles/design-tokens.css';
+
 /* Root styling; sets base font size for rem units */
 html {
   font-size: 62.5%;
@@ -5,26 +8,21 @@ html {
 
 body {
   margin: 0;
-  /* Set font weight, size, line-height, and font-family */
-  font: 300 11px/1.4 'Helvetica Neue', sans-serif;
-  color: #444;  /* Dark grey text color for better readability */
-  
+  /* Set font weight, size, line-height, and font-family using design tokens */
+  font: var(--fw-light) var(--fs-15) / var(--lh-body) var(--font-family-sans);
+  color: var(--text-body);
+
   /* Font smoothing for better text rendering */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
-  background: #0D4A1D;
 
-  /* background: #01280C; */
-
-
+  background: var(--bg-page);
   overflow: hidden;
   display: block;
-
 }
-
 
 @media screen and (max-width: 1200px) {
   body {
     overflow: visible;
-  }}
+  }
+}

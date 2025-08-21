@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Loader from 'react-loaders';
 import AnimatedLetters from '../AnimatedLetters';
-import ResourceCard from './ResourceCard'; 
+import ResourceCard from './ResourceCard';
 import googleSheetsApi from '../../utils/googleSheetsApi';
-import { withGoogleSheets } from 'react-db-google-sheets'; // Keep this for now, will remove after full merge
 import './index.scss';
 
-const Resources = ({ db }) => {
+const Resources = () => {
   const [letterClass, setLetterClass] = useState('text-animate');
   const [resources, setResources] = useState([]);
   const [activeFilter, setActiveFilter] = useState('All');
@@ -30,7 +29,7 @@ const Resources = ({ db }) => {
         setLoading(true);
         const data = await googleSheetsApi.fetchResources();
         setResources(data);
-        
+
         const resourceTypes = new Set(data.map(resource => resource['Resource Type']).filter(Boolean));
         setUniqueResourceTypes(['All', ...Array.from(resourceTypes)]);
       } catch (err) {
@@ -134,14 +133,14 @@ const Resources = ({ db }) => {
             </a>
             .
           </p>
-          
+
           {/* Loading State */}
           {loading && (
             <div className="loading-message">
               <p>Loading resources...</p>
             </div>
           )}
-          
+
           {/* Error State */}
           {error && (
             <div className="error-message">
@@ -192,7 +191,7 @@ const Resources = ({ db }) => {
             </div>
           )}
         </div>
-        
+
         {/* Resource Cards */}
         {!loading && !error && (
           <>
@@ -208,7 +207,7 @@ const Resources = ({ db }) => {
           </>
         )}
       </div>
-      
+
       <Loader type="pacman" />
     </>
   );

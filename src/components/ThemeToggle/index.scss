@@ -1,0 +1,22 @@
+.theme-toggle {
+  position: fixed;
+  top: var(--space-16);
+  right: var(--space-16);
+  z-index: 1000;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  
+  &:hover {
+    background: var(--bg-surface-2);
+    transform: scale(1.05);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+  
+  /* Ensure emoji is properly sized */
+  font-size: var(--fs-18);
+  line-height: 1;
+}

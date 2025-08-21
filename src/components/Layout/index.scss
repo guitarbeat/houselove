@@ -6,7 +6,6 @@
   position: absolute;
 }
 
-
 .container {
   width: 100%;
   will-change: contents;
@@ -27,21 +26,21 @@
 .container.mediators-page {
 
   h1 {
-    font-size: 53px;
+    font-size: var(--fs-46);
     font-family: 'Tilt Neon', cursive;  /* Updated font */
-    color: #E7A29B;
-    font-weight: 400;
+    color: var(--brand-primary);
+    font-weight: var(--fw-regular);
     margin-top: 0;
     position: relative;
-    margin-bottom: 40px;
+    margin-bottom: var(--space-40);
     left: -10px;
   }
 
   p {
-    font-size: 18px;
-    color: #fff;
-    font-family: sans-serif;
-    font-weight: 300;
+    font-size: var(--fs-18);
+    color: var(--text-inverse);
+    font-family: var(--font-family-sans);
+    font-weight: var(--fw-light);
     max-width: fit-content;
     animation: pulse 1s;
     &:nth-of-type(1) {
@@ -68,10 +67,11 @@
 
   .text-animate-hover {
     &:hover {
-      color: #fff;
+      color: var(--text-inverse);
     }
   }
 }
+
 @media (max-width: 1200px) {
   .page {
     position: initial;
@@ -91,15 +91,15 @@
         transform: none;
         width: 100%;
         display: block;
-        padding: 20px;
+        padding: var(--space-20);
         box-sizing: border-box;
         text-align: center; /* Center-align text on smaller screens */
       }
       h1 {
-        font-size: 36px; /* Reduce font size for smaller screens */
+        font-size: var(--fs-30); /* Reduce font size for smaller screens */
       }
       p {
-        font-size: 16px; /* Reduce font size for smaller screens */
+        font-size: var(--fs-16); /* Reduce font size for smaller screens */
       }
     }
   }
