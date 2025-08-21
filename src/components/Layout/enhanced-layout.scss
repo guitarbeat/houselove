@@ -1,0 +1,432 @@
+/* Enhanced Layout Styles */
+
+.enhanced-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-page);
+}
+
+.enhanced-layout__main {
+  flex: 1;
+  margin-left: 80px; /* * Default collapsed sidebar width */
+  transition: margin-left var(--transition-smooth);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+  /* * Adjust for expanded sidebar */
+  @media (min-width: 1025px) {
+    margin-left: 280px;
+  }
+  
+  /* * Mobile layout */
+  @media (max-width: 1024px) {
+    margin-left: 0;
+  }
+}
+
+.enhanced-layout__content {
+  flex: 1;
+  padding: var(--space-24);
+  max-width: 100%;
+  
+  /* * Mobile padding adjustments */
+  @media (max-width: 768px) {
+    padding: var(--space-16);
+  }
+  
+  /* * Large screen optimization */
+  @media (min-width: 1440px) {
+    padding: var(--space-32);
+  }
+}
+
+/* * Skip Link for Accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--primary-600);
+  color: white;
+  padding: var(--space-8) var(--space-16);
+  text-decoration: none;
+  border-radius: var(--radius-4);
+  z-index: var(--z-toast);
+  transition: top var(--transition-normal);
+  
+  &:focus {
+    top: 6px;
+  }
+}
+
+/* * Offline Indicator */
+.offline-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--warning-500);
+  color: var(--on-warning);
+  z-index: var(--z-toast);
+  padding: var(--space-8) var(--space-16);
+  text-align: center;
+  font-size: var(--fs-14);
+  font-weight: var(--fw-medium);
+  box-shadow: var(--shadow-sm);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.offline-indicator__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  max-width: var(--container-lg);
+  margin: 0 auto;
+}
+
+.offline-indicator__icon {
+  font-size: var(--fs-16);
+}
+
+.offline-indicator__text {
+  margin: 0;
+}
+
+/* * App Loading State */
+.app-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--bg-page);
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+/* * Toast Container */
+.toast-container {
+  position: fixed;
+  top: var(--space-16);
+  right: var(--space-16);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  max-width: var(--toast-max-width);
+  
+  /* * Mobile positioning */
+  @media (max-width: 768px) {
+    top: auto;
+    bottom: var(--space-16);
+    left: var(--space-16);
+    right: var(--space-16);
+  }
+}
+
+/* * Developer Tools (Development Only) */
+.dev-tools {
+  position: fixed;
+  bottom: var(--space-16);
+  left: var(--space-16);
+  z-index: var(--z-modal);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-12);
+  box-shadow: var(--shadow-lg);
+  max-width: 300px;
+  
+  summary {
+    padding: var(--space-12) var(--space-16);
+    cursor: pointer;
+    font-weight: var(--fw-semibold);
+    color: var(--text-strong);
+    border-bottom: 1px solid var(--border-subtle);
+    user-select: none;
+    
+    &:hover {
+      background: var(--bg-surface-2);
+    }
+  }
+}
+
+.dev-tools__content {
+  padding: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* * Error Boundary */
+#error-boundary {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-surface);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-24);
+  
+  /* * Hidden by default */
+  display: none;
+  
+  /* * Show when error occurs */
+  &.error-active {
+    display: flex;
+  }
+}
+
+/* * Page Transition Enhancements */
+.page-transition {
+  width: 100%;
+  min-height: 100%;
+  
+  /* * Ensure smooth transitions */
+  will-change: transform, opacity;
+  
+  /* * Hardware acceleration */
+  transform: translateZ(0);
+}
+
+/* * Loading Spinner Container */
+.loading-spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  width: 100%;
+}
+
+/* * Content Loading States */
+.content-loading {
+  position: relative;
+  min-height: 200px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-surface);
+    border-radius: var(--radius-12);
+    z-index: 1;
+  }
+}
+
+/* * Responsive Grid System */
+.responsive-grid {
+  display: grid;
+  gap: var(--grid-gutter);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  
+  @media (max-width: 768px) {
+    gap: var(--grid-gutter-sm);
+    grid-template-columns: 1fr;
+  }
+  
+  @media (min-width: 1024px) {
+    gap: var(--grid-gutter-lg);
+  }
+}
+
+/* * Container System */
+.container {
+  width: 100%;
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: 0 var(--space-16);
+  
+  &--sm {
+    max-width: var(--container-sm);
+  }
+  
+  &--md {
+    max-width: var(--container-md);
+  }
+  
+  &--xl {
+    max-width: var(--container-xl);
+  }
+  
+  &--2xl {
+    max-width: var(--container-2xl);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 0 var(--space-12);
+  }
+}
+
+/* * Section Spacing */
+.section {
+  padding: var(--space-48) 0;
+  
+  &--sm {
+    padding: var(--space-32) 0;
+  }
+  
+  &--lg {
+    padding: var(--space-64) 0;
+  }
+  
+  @media (max-width: 768px) {
+    padding: var(--space-32) 0;
+    
+    &--sm {
+      padding: var(--space-24) 0;
+    }
+    
+    &--lg {
+      padding: var(--space-48) 0;
+    }
+  }
+}
+
+/* * Focus Management */
+.focus-trap {
+  outline: none;
+}
+
+/* * Print Styles */
+@media print {
+  .enhanced-layout__main {
+    margin-left: 0;
+  }
+  
+  .enhanced-sidebar,
+  .sidebar-mobile-toggle,
+  .toast-container,
+  .dev-tools,
+  .offline-indicator {
+    display: none !important;
+  }
+  
+  .enhanced-layout__content {
+    padding: 0;
+  }
+}
+
+/* * High Contrast Mode */
+@media (prefers-contrast: high) {
+  .enhanced-layout {
+    border: 2px solid var(--text-strong);
+  }
+  
+  .offline-indicator {
+    border-bottom: 2px solid var(--text-strong);
+  }
+}
+
+/* * Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .enhanced-layout__main,
+  .page-transition,
+  .offline-indicator {
+    transition: none;
+    animation: none;
+  }
+  
+  .page-transition {
+    will-change: auto;
+    transform: none;
+  }
+}
+
+/* * Dark Mode Enhancements */
+[data-theme='dark'] {
+  .offline-indicator {
+    background: var(--warning-600);
+    color: var(--on-warning);
+  }
+  
+  .dev-tools {
+    background: var(--bg-surface);
+    border-color: var(--border-strong);
+  }
+}
+
+/* * Performance Optimizations */
+.enhanced-layout {
+  /* * Optimize for mobile performance */
+  @media (max-width: 768px) {
+    /* * Reduce animations on mobile */
+    .page-transition {
+      animation-duration: 0.2s;
+    }
+    
+    /* * Optimize touch interactions */
+    .interactive {
+      touch-action: manipulation;
+    }
+  }
+  
+  /* * Optimize for high-DPI displays */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .enhanced-layout__content {
+      /* * Ensure crisp rendering on high-DPI displays */
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+  }
+}
+
+/* * Accessibility Enhancements */
+.enhanced-layout {
+  /* * Ensure sufficient color contrast */
+  color: var(--text-body);
+  background: var(--bg-page);
+  
+  /* * Support for screen readers */
+  &[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+/* * Loading State Management */
+.enhanced-layout--loading {
+  .enhanced-layout__content {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+/* * Error State Management */
+.enhanced-layout--error {
+  .enhanced-layout__content {
+    opacity: 0.8;
+  }
+}
+
+/* * Success State Management */
+.enhanced-layout--success {
+  .enhanced-layout__content {
+    animation: successPulse 0.6s ease-out;
+  }
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,311 @@
+/* Smart Search Component Styles */
+
+.smart-search {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.smart-search__input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--bg-surface);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-12);
+  transition: all var(--transition-normal);
+  overflow: hidden;
+  
+  &:focus-within {
+    border-color: var(--primary-500);
+    box-shadow: var(--focus-ring-primary);
+    transform: translateY(-1px);
+  }
+  
+  &:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.smart-search__input {
+  flex: 1;
+  padding: var(--space-12) var(--space-16);
+  padding-left: var(--space-48);
+  padding-right: var(--space-48);
+  border: none;
+  background: transparent;
+  font-size: var(--fs-16);
+  color: var(--text-body);
+  outline: none;
+  min-height: var(--touch-target-min);
+  
+  &::placeholder {
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+  }
+  
+  &:focus::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+}
+
+.smart-search__icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+  pointer-events: none;
+  
+  &--search {
+    left: var(--space-16);
+  }
+  
+  &--loading {
+    right: var(--space-16);
+    color: var(--primary-500);
+  }
+}
+
+.smart-search__clear-btn {
+  position: absolute;
+  right: var(--space-16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: var(--neutral-200);
+  color: var(--text-muted);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  
+  &:hover {
+    background: var(--neutral-300);
+    color: var(--text-body);
+    transform: scale(1.1);
+  }
+  
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring-primary);
+    background: var(--neutral-300);
+  }
+}
+
+.smart-search__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-12);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-dropdown);
+  max-height: 400px;
+  overflow-y: auto;
+  animation: dropdownSlideIn 0.2s ease-out;
+}
+
+@keyframes dropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.smart-search__section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-16);
+  background: var(--bg-surface-2);
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  color: var(--text-muted);
+  
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.smart-search__suggestions-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.smart-search__suggestion-item {
+  padding: var(--space-12) var(--space-16);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-bottom: 1px solid var(--border-subtle);
+  
+  &:hover {
+    background: var(--bg-surface-2);
+  }
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &--selected {
+    background: var(--primary-50);
+    border-left: 3px solid var(--primary-500);
+  }
+}
+
+.smart-search__suggestion-text {
+  display: block;
+  font-weight: var(--fw-medium);
+  color: var(--text-body);
+  margin-bottom: var(--space-4);
+}
+
+.smart-search__suggestion-description {
+  display: block;
+  font-size: var(--fs-13);
+  color: var(--text-muted);
+  line-height: var(--lh-body);
+}
+
+.smart-search__history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.smart-search__history-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  width: 100%;
+  padding: var(--space-12) var(--space-16);
+  border: none;
+  background: transparent;
+  color: var(--text-body);
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-bottom: 1px solid var(--border-subtle);
+  
+  &:hover {
+    background: var(--bg-surface-2);
+    color: var(--primary-600);
+  }
+  
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring-primary);
+    background: var(--bg-surface-2);
+  }
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  svg {
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+}
+
+.smart-search__clear-history-btn {
+  margin-left: auto;
+  padding: var(--space-4);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-4);
+  transition: all var(--transition-fast);
+  
+  &:hover {
+    background: var(--neutral-200);
+    color: var(--text-body);
+  }
+  
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring-primary);
+  }
+}
+
+.smart-search__no-results {
+  padding: var(--space-24);
+  text-align: center;
+  color: var(--text-muted);
+  
+  p {
+    margin: 0 0 var(--space-8) 0;
+    font-size: var(--fs-16);
+  }
+}
+
+.smart-search__no-results-hint {
+  font-size: var(--fs-14) !important;
+  opacity: 0.8;
+}
+
+/* * Mobile optimizations */
+@media (max-width: 768px) {
+  .smart-search__input {
+    font-size: var(--fs-16); /* Prevent zoom on iOS */
+    padding: var(--space-14) var(--space-16);
+    padding-left: var(--space-44);
+    padding-right: var(--space-44);
+  }
+  
+  .smart-search__dropdown {
+    position: fixed;
+    top: 50%;
+    left: var(--space-16);
+    right: var(--space-16);
+    transform: translateY(-50%);
+    max-height: 70vh;
+    margin-top: 0;
+  }
+}
+
+/* * High contrast mode */
+@media (prefers-contrast: high) {
+  .smart-search__input-wrapper {
+    border-width: 2px;
+  }
+  
+  .smart-search__suggestion-item--selected {
+    border-left-width: 4px;
+  }
+}
+
+/* * Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .smart-search__input-wrapper,
+  .smart-search__clear-btn,
+  .smart-search__suggestion-item,
+  .smart-search__history-item {
+    transition: none;
+  }
+  
+  .smart-search__dropdown {
+    animation: none;
+  }
+  
+  .smart-search__input-wrapper:focus-within {
+    transform: none;
+  }
+}

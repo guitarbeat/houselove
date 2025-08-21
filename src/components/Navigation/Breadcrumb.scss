@@ -1,0 +1,122 @@
+/* Breadcrumb Navigation Styles */
+
+.breadcrumb {
+  padding: var(--space-16) var(--space-24);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: var(--space-24);
+}
+
+.breadcrumb__list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumb__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.breadcrumb__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-6) var(--space-8);
+  border-radius: var(--radius-6);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: var(--fs-14);
+  font-weight: var(--fw-medium);
+  transition: all var(--transition-normal);
+  min-height: var(--touch-target-min);
+  
+  &:hover {
+    color: var(--text-body);
+    background: var(--bg-surface-2);
+    transform: translateY(-1px);
+  }
+  
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring-primary);
+    background: var(--bg-surface-2);
+  }
+}
+
+.breadcrumb__current {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-6) var(--space-8);
+  border-radius: var(--radius-6);
+  color: var(--text-strong);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  background: var(--primary-50);
+  border: 1px solid var(--primary-200);
+}
+
+.breadcrumb__icon {
+  width: 16px;
+  height: 16px;
+  color: var(--primary-500);
+}
+
+.breadcrumb__separator {
+  width: 12px;
+  height: 12px;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* * Mobile optimizations */
+@media (max-width: 768px) {
+  .breadcrumb {
+    padding: var(--space-12) var(--space-16);
+    margin-bottom: var(--space-16);
+  }
+  
+  .breadcrumb__list {
+    gap: var(--space-4);
+  }
+  
+  .breadcrumb__link,
+  .breadcrumb__current {
+    padding: var(--space-8) var(--space-10);
+    font-size: var(--fs-13);
+  }
+  
+  .breadcrumb__separator {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* * High contrast mode */
+@media (prefers-contrast: high) {
+  .breadcrumb__current {
+    background: var(--primary-100);
+    border-color: var(--primary-500);
+  }
+  
+  .breadcrumb__separator {
+    opacity: 1;
+  }
+}
+
+/* * Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .breadcrumb__link {
+    transition: none;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+}
