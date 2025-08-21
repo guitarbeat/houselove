@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
+import './styles/design-system.scss'
 import './index.css'
 
 const container = document.getElementById('root')

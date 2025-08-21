@@ -32,40 +32,16 @@
     }
   }
 
-  input[type='text'],
-  input[type='email'] {
-    width: 100%;
-    border: 0;
-    background: #115173;
-    height: 50px;
-    font-size: 16px;
-    color: #fff;
-    padding: 0 20px;
-    box-sizing: border-box;
-  }
+  /* standardized form controls are wrapped with .input */
+  .input { width: 100%; }
+  .input.input--lg { height: 48px; }
+  textarea { min-height: 150px; }
 
 
 
-  .flat-button {
-    color: #ffd700;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-decoration: none;
-    padding: 8px 10px;
-    border: 1px solid #ffd700;
-    float: left;
-    border-radius: 4px;
-    background: 0 0;
-    text-transform: uppercase;
-    float: right;
-    text-align: center;
-    margin-right: 10px;
-    
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-  }
+  /* submit button now uses .btn */
+  .btn { float: right; }
+  .btn + .btn { margin-left: var(--space-12); }
   
   .status-message {
     margin-top: 20px;

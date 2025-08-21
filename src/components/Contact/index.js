@@ -110,14 +110,14 @@ const ContactForm = ({ form, sendEmail, isSubmitting, submitStatus }) => (
   <div className="contact-form">
     <form ref={form} onSubmit={sendEmail}>
       <ul>
-        <li className="half"><input placeholder="Name" type="text" name="name" required disabled={isSubmitting} /></li>
-        <li className="half"><input placeholder="Email" type="email" name="email" required disabled={isSubmitting} /></li>
-        <li><input placeholder="Subject" type="text" name="subject" required disabled={isSubmitting} /></li>
-        <li><textarea placeholder="Message" name="message" required disabled={isSubmitting} /></li>
+        <li className="half"><div className="input input--md"><input placeholder="Name" type="text" name="name" required disabled={isSubmitting} /></div></li>
+        <li className="half"><div className="input input--md"><input placeholder="Email" type="email" name="email" required disabled={isSubmitting} /></div></li>
+        <li><div className="input input--md"><input placeholder="Subject" type="text" name="subject" required disabled={isSubmitting} /></div></li>
+        <li><div className="input input--lg"><textarea placeholder="Message" name="message" required disabled={isSubmitting} rows={4} /></div></li>
         <li>
           <input 
             type="submit" 
-            className="flat-button" 
+            className="btn btn--primary btn--md" 
             value={isSubmitting ? "SENDING..." : "SEND"} 
             disabled={isSubmitting}
           />

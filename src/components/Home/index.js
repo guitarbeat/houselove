@@ -46,8 +46,8 @@ const Home = () => {
           community.
         </h2>
         <div className="home-cta">
-          <Link to="/resources" className="cta-button">Explore Resources</Link>
-          <Link to="/mediators" className="cta-button secondary">Find Mediators</Link>
+          <Link to="/resources" className="btn btn--primary btn--md">Explore Resources</Link>
+          <Link to="/mediators" className="btn btn--secondary btn--md">Find Mediators</Link>
         </div>
       </section>
       <div className="background-image-container" aria-hidden="true">

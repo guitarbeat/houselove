@@ -16,24 +16,11 @@ $mediator-breakpoint-md: 768px;
 
 .mediators-controls {
   display: flex;
-  gap: 1rem;
+  gap: var(--space-12);
   flex-wrap: wrap;
-  margin: 1rem 0 2rem;
+  margin: var(--space-16) 0 var(--space-24);
 
-  .mediators-search-input,
-  .mediators-spec-select,
-  .mediators-locate-btn {
-    background: $mediator-card-hover-bg-color;
-    color: #fff;
-    border: none;
-    padding: 10px 12px;
-    border-radius: 8px;
-    font-size: 1.2rem;
-  }
-
-  .mediators-search-input::placeholder {
-    color: rgba(255,255,255,0.85);
-  }
+  /* standardized inputs/buttons already styled via .input/.btn */
 }
 
 .mediator-card {

@@ -3,7 +3,7 @@ import Loader from 'react-loaders';
 import AnimatedLetters from '../AnimatedLetters';
 import ResourceCard from './ResourceCard'; 
 import googleSheetsApi from '../../utils/googleSheetsApi';
-import { withGoogleSheets } from 'react-db-google-sheets'; // Keep this for now, will remove after full merge
+// import removed: react-db-google-sheets (legacy)
 import './index.scss';
 
 const Resources = ({ db }) => {
@@ -159,7 +159,7 @@ const Resources = ({ db }) => {
                     <button
                       key={type}
                       onClick={handleFilterClick(type)}
-                      className={activeFilter === type ? 'active' : ''}
+                      className={activeFilter === type ? 'btn btn--primary btn--md' : 'btn btn--ghost btn--md'}
                       aria-pressed={activeFilter === type}
                     >
                       {type}
@@ -169,25 +169,27 @@ const Resources = ({ db }) => {
               </div>
 
               <div className="resource-search-sort">
-                <input
-                  type="search"
-                  className="resource-search-input"
-                  placeholder="Search resources..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  aria-label="Search resources"
-                />
-                <select
-                  className="resource-sort-select"
-                  aria-label="Sort resources"
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                >
-                  <option value="newest">Newest</option>
-                  <option value="oldest">Oldest</option>
-                  <option value="az">A–Z</option>
-                  <option value="za">Z–A</option>
-                </select>
+                <div className="input input--md" style={{width:'280px'}}>
+                  <input
+                    type="search"
+                    placeholder="Search resources..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    aria-label="Search resources"
+                  />
+                </div>
+                <div className="input input--md">
+                  <select
+                    aria-label="Sort resources"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                  >
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="az">A–Z</option>
+                    <option value="za">Z–A</option>
+                  </select>
+                </div>
               </div>
             </div>
           )}

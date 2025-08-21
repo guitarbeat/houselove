@@ -148,25 +148,27 @@ const MediatorText = ({ mediators, updateMap, searchQuery, setSearchQuery, speci
 
     {!loading && !error && (
       <div className="mediators-controls">
-        <input
-          type="search"
-          className="mediators-search-input"
-          placeholder="Search mediators..."
-          aria-label="Search mediators"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <select
-          className="mediators-spec-select"
-          aria-label="Filter by specialization"
-          value={activeSpec}
-          onChange={(e) => setActiveSpec(e.target.value)}
-        >
-          {specializations.map((s) => (
-            <option key={s} value={s}>{s}</option>
-          ))}
-        </select>
-        <button className="mediators-locate-btn" onClick={handleLocateMe}>Locate me</button>
+        <div className="input input--md" style={{width:'280px'}}>
+          <input
+            type="search"
+            placeholder="Search mediators..."
+            aria-label="Search mediators"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+        <div className="input input--md">
+          <select
+            aria-label="Filter by specialization"
+            value={activeSpec}
+            onChange={(e) => setActiveSpec(e.target.value)}
+          >
+            {specializations.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+        </div>
+        <button className="btn btn--secondary btn--md" onClick={handleLocateMe}>Locate me</button>
       </div>
     )}
 
