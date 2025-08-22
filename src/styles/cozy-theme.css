@@ -1,0 +1,52 @@
+/* Cozy Felt Theme Overrides */
+:root {
+  /* Earthy brand palette */
+  --brand-primary: #b2996e; /* warm brown */
+  --brand-secondary: #d2b48c; /* soft tan */
+  --brand-accent: #8f9779; /* muted sage */
+  --brand-dark: #f5f1e8; /* cream background */
+  --brand-darker: #e0d6c3; /* deeper beige */
+
+  /* Primary earthy ramp */
+  --primary-50: #f9f6f1;
+  --primary-100: #f0e8db;
+  --primary-200: #e2d3bd;
+  --primary-300: #d4bfa0;
+  --primary-400: #c6ab82;
+  --primary-500: #b2996e;
+  --primary-600: #9c845c;
+  --primary-700: #836d4b;
+  --primary-800: #6a553a;
+  --primary-900: #4f3e2b;
+
+  /* Secondary sage ramp */
+  --secondary-50: #f3f4f1;
+  --secondary-100: #e6e9e0;
+  --secondary-200: #d2d7c9;
+  --secondary-300: #bdc5b1;
+  --secondary-400: #a7b399;
+  --secondary-500: #8f9779;
+  --secondary-600: #7c8368;
+  --secondary-700: #696f57;
+  --secondary-800: #565b46;
+  --secondary-900: #434735;
+
+  /* Surface & focus adjustments */
+  --bg-page: var(--brand-dark);
+  --bg-surface: #ffffff;
+  --bg-surface-2: var(--primary-50);
+  --focus-ring-outer: rgba(178, 153, 110, 0.25);
+  --focus-ring-inner: var(--primary-600);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] {
+  /* Deep earthy surfaces */
+  --brand-dark: #2b241c;
+  --brand-darker: #1a1610;
+  --bg-page: var(--brand-dark);
+  --bg-surface: var(--primary-800);
+  --bg-surface-2: var(--primary-700);
+  --focus-ring-outer: rgba(178, 153, 110, 0.35);
+  --focus-ring-inner: var(--primary-400);
+}
