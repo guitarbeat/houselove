@@ -1,5 +1,7 @@
 /* Import design system tokens */
 @import './styles/design-tokens.css';
+/* Earthy cozy theme overrides */
+@import './styles/cozy-theme.css';
 
 /* Root styling; sets base font size for rem units */
 html {
@@ -16,9 +18,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background: var(--bg-page);
+  background-color: var(--bg-page);
+  background-image: radial-gradient(
+    rgba(0, 0, 0, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
   overflow: hidden;
   display: block;
+}
+
+[data-theme='dark'] body {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+  );
 }
 
 @media screen and (max-width: 1200px) {
