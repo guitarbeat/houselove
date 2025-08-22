@@ -33,6 +33,7 @@
 
   /* Surface & focus adjustments */
   --bg-page: var(--brand-dark);
+  --bg-surface: #ffffff;
   --bg-surface-2: var(--primary-50);
   --focus-ring-outer: rgba(178, 153, 110, 0.25);
   --focus-ring-inner: var(--primary-600);
