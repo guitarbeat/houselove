@@ -33,7 +33,20 @@
 
   /* Surface & focus adjustments */
   --bg-page: var(--brand-dark);
+
   --bg-surface-2: var(--primary-50);
   --focus-ring-outer: rgba(178, 153, 110, 0.25);
   --focus-ring-inner: var(--primary-600);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] {
+  /* Deep earthy surfaces */
+  --brand-dark: #2b241c;
+  --brand-darker: #1a1610;
+  --bg-page: var(--brand-dark);
+  --bg-surface: var(--primary-800);
+  --bg-surface-2: var(--primary-700);
+  --focus-ring-outer: rgba(178, 153, 110, 0.35);
+  --focus-ring-inner: var(--primary-400);
 }

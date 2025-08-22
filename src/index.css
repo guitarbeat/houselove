@@ -28,6 +28,13 @@ body {
   display: block;
 }
 
+[data-theme='dark'] body {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+  );
+}
+
 @media screen and (max-width: 1200px) {
   body {
     overflow: visible;
