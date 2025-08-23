@@ -12,7 +12,8 @@ import {
   faChevronRight,
   faSearch,
   faCog,
-  faQuestionCircle
+  faQuestionCircle,
+  faMinus
 } from '@fortawesome/free-solid-svg-icons';
 import SmartSearch from '../Search/SmartSearch';
 import ThemeToggle from '../ThemeToggle';
@@ -107,7 +108,11 @@ const SidebarItem = ({
 
 const EnhancedSidebar = () => {
   const [showNav, setShowNav] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(window.innerWidth > 1024);
+  const defaultExpanded = window.innerWidth > 1024;
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  const [sidebarWidth, setSidebarWidth] = useState(defaultExpanded ? 280 : 80);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   
@@ -118,15 +123,61 @@ const EnhancedSidebar = () => {
   // * Handle window resize
   useEffect(() => {
     const handleResize = () => {
-      setIsExpanded(window.innerWidth > 1024);
+      const shouldExpand = window.innerWidth > 1024;
+      setIsExpanded(shouldExpand);
+      setSidebarWidth(shouldExpand ? 280 : 80);
       if (window.innerWidth > 768) {
         setShowNav(false);
       }
     };
-    
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    const width = isMinimized ? 0 : sidebarWidth;
+    document.documentElement.style.setProperty('--sidebar-width', `${width}px`);
+  }, [sidebarWidth, isMinimized]);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!isDragging) return;
+      let newWidth = e.clientX;
+      const min = 80;
+      const max = 400;
+      if (newWidth < min) newWidth = min;
+      if (newWidth > max) newWidth = max;
+      setSidebarWidth(newWidth);
+      setIsExpanded(newWidth > 120);
+    };
+
+    const handleMouseUp = () => setIsDragging(false);
+
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging]);
+
+  const startResizing = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const minimizeSidebar = () => {
+    setIsMinimized(true);
+    setShowNav(false);
+  };
+
+  const restoreSidebar = () => {
+    setIsMinimized(false);
+  };
   
   // * Close mobile nav when route changes
   useEffect(() => {
@@ -163,7 +214,10 @@ const EnhancedSidebar = () => {
   
   // * Toggle sidebar expansion
   const toggleExpansion = () => {
-    setIsExpanded(!isExpanded);
+    const next = !isExpanded;
+    setIsExpanded(next);
+    setIsMinimized(false);
+    setSidebarWidth(next ? 280 : 80);
   };
   
   // * Close mobile navigation
@@ -202,55 +256,67 @@ const EnhancedSidebar = () => {
     <>
       {/* * Mobile Overlay */}
       {showNav && (
-        <div 
+        <div
           ref={mobileOverlayRef}
           className="sidebar-overlay"
           onClick={() => setShowNav(false)}
           aria-hidden="true"
         />
       )}
-      
+
       {/* * Enhanced Sidebar */}
-      <div 
-        ref={sidebarRef}
-        className={`enhanced-sidebar ${showNav ? 'enhanced-sidebar--mobile-open' : ''} ${
-          isExpanded ? 'enhanced-sidebar--expanded' : 'enhanced-sidebar--collapsed'
-        }`}
-        role="navigation"
-        aria-label="Main navigation"
-      >
-        {/* * Header Section */}
-        <div className="sidebar-header">
-          <Link
-            className="sidebar-logo interactive"
-            to="/"
-            onClick={closeNav}
-            aria-label="Go to homepage"
-          >
-            <img 
-              src="/logo.png" 
-              alt="HouseLove Logo" 
-              className="sidebar-logo__image"
-            />
-            {isExpanded && (
-              <span className="sidebar-logo__text">HouseLove</span>
-            )}
-          </Link>
-          
-          {/* * Toggle Button */}
-          <button
-            type="button"
-            className="sidebar-toggle-btn interactive focus-ring"
-            onClick={toggleExpansion}
-            aria-label={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
-            aria-expanded={isExpanded}
-          >
-            <FontAwesomeIcon 
-              icon={isExpanded ? faChevronRight : faChevronRight} 
-              className="sidebar-toggle-btn__icon"
-            />
-          </button>
-        </div>
+      {!isMinimized && (
+        <div
+          ref={sidebarRef}
+          className={`enhanced-sidebar ${showNav ? 'enhanced-sidebar--mobile-open' : ''} ${
+            isExpanded ? 'enhanced-sidebar--expanded' : 'enhanced-sidebar--collapsed'
+          }`}
+          role="navigation"
+          aria-label="Main navigation"
+          style={{ width: sidebarWidth }}
+        >
+          {/* * Header Section */}
+          <div className="sidebar-header">
+            <Link
+              className="sidebar-logo interactive"
+              to="/"
+              onClick={closeNav}
+              aria-label="Go to homepage"
+            >
+              <img
+                src="/logo.png"
+                alt="HouseLove Logo"
+                className="sidebar-logo__image"
+              />
+              {isExpanded && (
+                <span className="sidebar-logo__text">HouseLove</span>
+              )}
+            </Link>
+
+            <div className="sidebar-header__actions">
+              {/* * Toggle Button */}
+              <button
+                type="button"
+                className="sidebar-toggle-btn interactive focus-ring"
+                onClick={toggleExpansion}
+                aria-label={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
+                aria-expanded={isExpanded}
+              >
+                <FontAwesomeIcon
+                  icon={faChevronRight}
+                  className="sidebar-toggle-btn__icon"
+                />
+              </button>
+              <button
+                type="button"
+                className="sidebar-minimize-btn interactive focus-ring"
+                onClick={minimizeSidebar}
+                aria-label="Minimize sidebar"
+              >
+                <FontAwesomeIcon icon={faMinus} />
+              </button>
+            </div>
+          </div>
         
         {/* * Search Section */}
         {isExpanded && (
@@ -332,7 +398,7 @@ const EnhancedSidebar = () => {
         >
           <FontAwesomeIcon icon={faBars} />
         </button>
-        
+
         {/* * Mobile Close Button */}
         {showNav && (
           <button
@@ -344,8 +410,22 @@ const EnhancedSidebar = () => {
             <FontAwesomeIcon icon={faClose} />
           </button>
         )}
+
+        <div className="sidebar-resizer" onMouseDown={startResizing} />
       </div>
-      
+      )}
+
+      {isMinimized && (
+        <button
+          type="button"
+          className="sidebar-minimized-toggle interactive focus-ring"
+          onClick={restoreSidebar}
+          aria-label="Restore sidebar"
+        >
+          <FontAwesomeIcon icon={faBars} />
+        </button>
+      )}
+
       {/* * Mobile Search Overlay */}
       {showSearch && (
         <div className="mobile-search-overlay">
@@ -370,7 +450,7 @@ const EnhancedSidebar = () => {
           </div>
         </div>
       )}
-      
+
       {/* * Mobile Help Overlay */}
       {showHelp && (
         <div className="mobile-help-overlay">
@@ -393,12 +473,12 @@ const EnhancedSidebar = () => {
                 <li>Search for specific content using the search bar</li>
                 <li>Contact us for personalized assistance</li>
               </ul>
-              
+
               <h4>Need More Help?</h4>
               <p>Our support team is here to help you navigate our services and find the information you need.</p>
-              
-              <Link 
-                to="/contact" 
+
+              <Link
+                to="/contact"
                 className="btn btn--primary"
                 onClick={() => setShowHelp(false)}
               >

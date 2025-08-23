@@ -8,17 +8,12 @@
 
 .enhanced-layout__main {
   flex: 1;
-  margin-left: 80px; /* * Default collapsed sidebar width */
+  margin-left: var(--sidebar-width, 80px);
   transition: margin-left var(--transition-smooth);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  
-  /* * Adjust for expanded sidebar */
-  @media (min-width: 1025px) {
-    margin-left: 280px;
-  }
-  
+
   /* * Mobile layout */
   @media (max-width: 1024px) {
     margin-left: 0;
