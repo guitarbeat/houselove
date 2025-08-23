@@ -2,11 +2,10 @@
 
 :root {
   /* Typography */
-  /* Modern font stacks */
-  --font-family-sans: 'Inter', ui-sans-serif, system-ui, -apple-system,
-    'Segoe UI', Roboto, Helvetica, Arial, 'Apple Color Emoji',
-    'Segoe UI Emoji', sans-serif;
-  --font-family-brand: 'Poppins', 'Inter', sans-serif;
+  --font-family-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Inter, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-family-brand: 'Helvetica Neue', 'Coolvetica', 'La Belle Aurore',
+    sans-serif;
   --fw-light: 300;
   --fw-regular: 400;
   --fw-semibold: 600;
