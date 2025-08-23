@@ -5,34 +5,6 @@
 @import 'animate.css';
 @import '~loaders.css/loaders.css'; // Import loaders.css library
 
-// Define the font-face for 'Helvetica Neue'
-@font-face {
-  font-family: 'Helvetica Neue'; // Name of the font
-  src: url('./assets/fonts/helvetica-neu.ttf') format('ttf'); // Source and format of the font file
-  font-weight: normal; // Default weight for the font
-  font-style: normal;  // Default style for the font
-}
-
-// Define the font-face for 'La Belle Aurore'
-@font-face {
-  font-family: 'La Belle Aurore'; 
-  // Provide multiple sources and their respective formats for better compatibility
-  src: url('./assets/fonts/LaBelleAurore.woff2') format('woff2'),
-    url('./assets/fonts/LaBelleAurore.woff') format('woff');
-  font-weight: normal; 
-  font-style: normal;  
-}
-
-// Define the font-face for 'Coolvetica'
-@font-face {
-  font-family: 'Coolvetica'; 
-  // Provide multiple sources and their respective formats for better compatibility
-  src: url('./assets/fonts/CoolveticaRg-Regular.woff2') format('woff2'),
-    url('./assets/fonts/CoolveticaRg-Regular.woff') format('woff');
-  font-weight: normal; 
-  font-style: normal;  
-}
-
 // Style rules for input and textarea elements using design tokens
 input, textarea {
   font-family: var(--font-family-sans); // Set the font-family for these elements

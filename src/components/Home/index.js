@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 const Home = () => {
   const [letterClass, setLetterClass] = useState('text-animate')
   // Split the introduction text into two lines
-  const line1Array = 'Empowering Cooperative'.split('')
+  const line1Array = 'Empowering Co-op'.split('')
   const line2Array = 'Communities'.split('')
 
   useEffect(() => {
@@ -42,12 +42,12 @@ const Home = () => {
           />
         </h1>
         <h2 id="main-description">
-          Find conflict mediators, share resources, and build a sustainable
-          community.
+          Discover mediators, share resources, and grow a resilient
+          cooperative.
         </h2>
         <div className="home-cta">
-          <Link to="/resources" className="cta-button">Explore Resources</Link>
-          <Link to="/mediators" className="cta-button secondary">Find Mediators</Link>
+          <Link to="/resources" className="cta-button">Browse Resources</Link>
+          <Link to="/mediators" className="cta-button secondary">Find a Mediator</Link>
         </div>
       </section>
       <div className="background-image-container" aria-hidden="true">

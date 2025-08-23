@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
-
 .page {
   width: 100%;
   height: 100%;
@@ -27,7 +25,7 @@
 
   h1 {
     font-size: var(--fs-46);
-    font-family: 'Tilt Neon', cursive;  /* Updated font */
+    font-family: var(--font-family-brand);
     color: var(--brand-primary);
     font-weight: var(--fw-regular);
     margin-top: 0;

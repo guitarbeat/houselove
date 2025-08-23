@@ -9,5 +9,5 @@ it('renders Home description text', async () => {
       <App />
     </BrowserRouter>
   );
-  expect(await screen.findByText(/Find conflict mediators/i)).toBeInTheDocument();
+  expect(await screen.findByText(/Discover mediators/i)).toBeInTheDocument();
 });

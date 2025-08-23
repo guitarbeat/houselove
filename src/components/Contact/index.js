@@ -99,7 +99,8 @@ const ContactText = ({ letterClass, form, sendEmail, isSubmitting, submitStatus 
       />
     </h1>
     <p>
-      If you have any questions, suggestions, or want to contribute to "House Love", please get in touch. We value your feedback and collaboration to make this platform even better for our community.
+      Have questions or ideas for HouseLove? We'd love to hear from you. Drop
+      us a line and help make this platform better for the community.
     </p>
     <ContactForm form={form} sendEmail={sendEmail} isSubmitting={isSubmitting} submitStatus={submitStatus} />
   </div>
