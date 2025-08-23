@@ -1,6 +1,7 @@
-import { Outlet } from 'react-router-dom'
-import Sidebar from '../Sidebar/'
-import './index.scss'
+import { Outlet } from 'react-router-dom';
+import Sidebar from '../Sidebar';
+import BackToTop from '../BackToTop';
+import './index.scss';
 
 const Layout = () => {
   return (
@@ -9,8 +10,9 @@ const Layout = () => {
       <div className="page">
         <Outlet />
       </div>
+      <BackToTop />
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
