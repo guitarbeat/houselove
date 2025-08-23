@@ -1,25 +1,33 @@
 .toast {
   position: relative;
-  margin: 0.5rem;
-  padding: 0.75rem 1rem;
-  border-radius: 0.25rem;
-  background: #333;
-  color: #fff;
+  margin: var(--space-8);
+  padding: var(--space-12) var(--space-16);
+  border-radius: var(--radius-4);
+  background: var(--neutral-800);
+  color: var(--text-inverse);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-8);
 }
 
 .toast--success {
-  background: #2e7d32;
+  background: var(--success-600);
+  color: var(--on-success);
 }
 
 .toast--error {
-  background: #c62828;
+  background: var(--danger-600);
+  color: var(--on-danger);
 }
 
 .toast--warning {
-  background: #ed6c02;
+  background: var(--warning-600);
+  color: var(--on-warning);
+}
+
+.toast--info {
+  background: var(--info-600);
+  color: var(--on-info);
 }
 
 .toast__close-btn {
@@ -34,7 +42,8 @@
   bottom: 0;
   left: 0;
   height: 4px;
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--text-inverse);
+  opacity: 0.5;
   width: 100%;
 }
 
