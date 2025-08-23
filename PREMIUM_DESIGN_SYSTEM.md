@@ -481,7 +481,7 @@ src/
 │   ├── enhanced-tokens.css
 │   ├── animations.css
 │   └── premium-effects.css
-└── App.enhanced.js
+└── App.js
 ```
 
 ### Import Order

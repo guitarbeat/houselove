@@ -3,11 +3,11 @@ import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 import App from './App';
 
-it('renders Home description text', () => {
+it('renders Home description text', async () => {
   render(
     <BrowserRouter>
       <App />
     </BrowserRouter>
   );
-  expect(screen.getByText(/Find conflict mediators/i)).toBeInTheDocument();
+  expect(await screen.findByText(/Find conflict mediators/i)).toBeInTheDocument();
 });

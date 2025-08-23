@@ -240,11 +240,11 @@ src/
 ├── styles/
 │   ├── enhanced-tokens.css
 │   └── animations.css
-└── App.enhanced.js
+└── App.js
 ```
 
 ### Usage Instructions
-1. **Replace App.js**: Use `App.enhanced.js` for the enhanced experience
+1. **Entry Point**: `App.js` now includes the enhanced experience
 2. **Import Styles**: Ensure enhanced tokens and animations are imported
 3. **Component Integration**: Replace existing components with enhanced versions
 4. **Testing**: Test all interactions across devices and accessibility tools
