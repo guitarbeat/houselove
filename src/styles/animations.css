@@ -18,7 +18,7 @@
 
 /* * Button press effects */
 .btn:active {
-  transform: scale(var(--btn-active-scale) translateY(1px));
+  transform: scale(var(--btn-active-scale)) translateY(1px);
   transition: transform var(--transition-fast);
 }
 
@@ -29,7 +29,7 @@
 }
 
 .card--interactive:hover {
-  transform: scale(var(--card-hover-scale);
+  transform: scale(var(--card-hover-scale));
   box-shadow: var(--card-hover-shadow);
 }
 
