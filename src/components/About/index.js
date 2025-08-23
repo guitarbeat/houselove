@@ -3,7 +3,14 @@ import Loader from 'react-loaders'
 import AnimatedLetters from '../AnimatedLetters'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './index.scss'
-import { faHandshake, faHome, faUsers, faHeart, faLeaf, faBalanceScale } from '@fortawesome/free-solid-svg-icons'
+import {
+  faHandshake,
+  faHome,
+  faUsers,
+  faHeart,
+  faLeaf,
+  faBalanceScale,
+} from '@fortawesome/free-solid-svg-icons'
 
 
 const About = () => {
@@ -30,13 +37,19 @@ const About = () => {
             />
           </h1>
           <p>
-            Welcome to House Love, a collaborative hub designed for cooperative resource sharing. This platform is built with the vision of streamlining the sharing of essential resources within housing cooperatives. With a simple Google Sheet update, resources can be added and displayed here in an easily digestible manner. 
+            HouseLove is a collaborative hub that streamlines resource sharing in
+            housing cooperatives. Update a simple Google Sheet and resources are
+            published here in a clear, accessible format.
           </p>
           <p>
-            Another key feature of House Love is the conflict mediator database. Mediators can register their details, making it easy for co-op members to find and connect with them. This ensures that any disputes or disagreements can be resolved amicably and professionally.
+            The platform also features a searchable directory of conflict
+            mediators so members can quickly connect with trusted support and
+            resolve disputes constructively.
           </p>
           <p>
-            I'm Aaron Woods, a resident of the co-op Pink Palace and the creator of this platform. My goal is to foster a sense of community and cooperation among co-op members. Let's work together to make our co-ops better for everyone!
+            I'm Aaron Woods, a member of the Pink Palace co-op and creator of
+            HouseLove. Together we can strengthen our communities through
+            cooperation and shared resources.
           </p>
         </div>
 

@@ -40,7 +40,7 @@
     font-size: clamp(5rem, 8vw, 8rem);
     line-height: var(--lh-heading);
     margin: 0;
-    font-family: 'Coolvetica', sans-serif;
+    font-family: var(--font-family-brand);
     font-weight: var(--fw-regular);
   }
 
@@ -48,7 +48,7 @@
     font-size: clamp(2rem, 4vw, 5rem);
     margin-top: var(--space-50);
     font-weight: var(--fw-regular);
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-family-sans);
     letter-spacing: var(--ls-normal);
     animation: fadeIn 1s 1.8s backwards;
   }
