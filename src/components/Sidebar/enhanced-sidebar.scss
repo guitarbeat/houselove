@@ -15,8 +15,6 @@
   
   /* * Collapsed state */
   &--collapsed {
-    width: 80px;
-    
     .sidebar-logo__text,
     .sidebar-item__label,
     .sidebar-action-btn span {
@@ -24,11 +22,9 @@
       visibility: hidden;
     }
   }
-  
+
   /* * Expanded state */
   &--expanded {
-    width: 280px;
-    
     .sidebar-logo__text,
     .sidebar-item__label,
     .sidebar-action-btn span {
@@ -122,6 +118,54 @@
   width: 16px;
   height: 16px;
   transition: transform var(--transition-normal);
+}
+
+.sidebar-header__actions {
+  display: flex;
+  gap: var(--space-8);
+}
+
+.sidebar-minimize-btn {
+  @extend .sidebar-toggle-btn;
+}
+
+.sidebar-resizer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  cursor: col-resize;
+  background: transparent;
+  transition: background var(--transition-normal);
+}
+
+.sidebar-resizer:hover {
+  background: var(--neutral-200);
+}
+
+.sidebar-minimized-toggle {
+  position: fixed;
+  top: var(--space-20);
+  left: var(--space-16);
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--bg-surface);
+  color: var(--text-body);
+  border-radius: var(--radius-6);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  z-index: var(--z-fixed);
+
+  &:hover {
+    background: var(--neutral-200);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring-primary);
+  }
 }
 
 .enhanced-sidebar--expanded .sidebar-toggle-btn__icon {
