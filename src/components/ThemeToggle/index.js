@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import './index.scss';
 
-const ThemeToggle = () => {
+const ThemeToggle = ({ className = '', fixed = true }) => {
     const [isDark, setIsDark] = useState(false);
 
     useEffect(() => {
@@ -31,14 +33,18 @@ const ThemeToggle = () => {
         }
     };
 
+    const classes = `theme-toggle btn btn--ghost btn--icon ${
+        fixed ? 'theme-toggle--fixed' : ''
+    } ${className}`.trim();
+
     return (
         <button
-            className="theme-toggle btn btn--ghost btn--icon"
+            className={classes}
             onClick={toggleTheme}
             aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
             title={`Switch to ${isDark ? 'light' : 'dark'} theme`}
         >
-            {isDark ? '☀️' : '🌙'}
+            <FontAwesomeIcon icon={isDark ? faSun : faMoon} />
         </button>
     );
 };

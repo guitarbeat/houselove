@@ -1,8 +1,4 @@
 .theme-toggle {
-  position: fixed;
-  top: var(--space-16);
-  right: var(--space-16);
-  z-index: 1000;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-sm);
@@ -16,7 +12,13 @@
     transform: scale(0.95);
   }
   
-  /* Ensure emoji is properly sized */
   font-size: var(--fs-18);
   line-height: 1;
+}
+
+.theme-toggle--fixed {
+  position: fixed;
+  top: var(--space-16);
+  right: var(--space-16);
+  z-index: 1000;
 }

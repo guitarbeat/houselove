@@ -15,6 +15,7 @@ import {
   faQuestionCircle
 } from '@fortawesome/free-solid-svg-icons';
 import SmartSearch from '../Search/SmartSearch';
+import ThemeToggle from '../ThemeToggle';
 import './enhanced-sidebar.scss';
 
 const navItems = [
@@ -280,6 +281,12 @@ const EnhancedSidebar = () => {
         
         {/* * Footer Actions */}
         <div className="sidebar-footer">
+          {/* * Theme Toggle */}
+          <ThemeToggle
+            className="sidebar-action-btn interactive focus-ring"
+            fixed={false}
+          />
+
           {/* * Search Toggle (Mobile) */}
           <button
             type="button"
