@@ -8,16 +8,14 @@ import ThemeToggle from './components/ThemeToggle';
 import StyleGuide from './components/StyleGuide';
 import Toast from './components/UI/Toast';
 import LoadingSpinner from './components/UI/LoadingSpinner';
+import './styles/enhanced-tokens.css';
+import './styles/animations.css';
+import './App.scss';
 
 // * Lazy load components for better performance
 const Mediators = lazy(() => import('./components/Mediators'));
 const Contact = lazy(() => import('./components/Contact'));
 const NotFound = lazy(() => import('./components/NotFound'));
-
-// * Import enhanced styles
-import './styles/enhanced-tokens.css';
-import './styles/animations.css';
-import './App.scss';
 
 function App() {
   const [toasts, setToasts] = useState([]);
