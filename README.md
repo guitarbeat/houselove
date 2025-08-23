@@ -17,6 +17,7 @@ House Love connects cooperative housing communities with:
 - **Contact System** via EmailJS
 - **Interactive Map** using Leaflet + React Leaflet
 - **Responsive Design** with SCSS
+- **Theme Toggle** for light and dark modes
 
 ## 🛠️ Tech Stack
 
