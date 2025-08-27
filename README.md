@@ -21,6 +21,7 @@ House Love connects cooperative housing communities with:
 
 ## 🛠️ Tech Stack
 
+- **Runtime**: Node.js 22.x
 - **Frontend**: React 18.3.1, React DOM 18.3.1
 - **Routing**: React Router DOM 6.17.0
 - **Styling**: SCSS (`sass` 1.69.4)
@@ -31,6 +32,8 @@ House Love connects cooperative housing communities with:
 - **Build**: Create React App (`react-scripts` 5.0.1)
 
 ## ⚡ Quickstart
+
+> Requires Node.js 22.x. If you use `nvm`, run `nvm use` to switch versions.
 
 1. Clone and install
    ```bash
