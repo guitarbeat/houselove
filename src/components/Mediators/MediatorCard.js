@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEnvelope,
   faPhone,
-  faCopy,
 } from '@fortawesome/free-solid-svg-icons';
 
 const MediatorCard = ({ 
@@ -15,7 +14,6 @@ const MediatorCard = ({
   updateMap,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
-  const [copiedKey, setCopiedKey] = useState(null);
 
   const handleClick = () => {
     setIsClicked(!isClicked);
@@ -35,16 +33,6 @@ const MediatorCard = ({
     return value;
   };
 
-  const handleCopy = async (key, value, e) => {
-    e.stopPropagation();
-    try {
-      await navigator.clipboard.writeText(String(value || ''));
-      setCopiedKey(key);
-      setTimeout(() => setCopiedKey(null), 1500);
-    } catch (_) {
-      // no-op
-    }
-  };
 
   return (
     <div className="mediator-card" onClick={handleClick}>
@@ -58,12 +46,8 @@ const MediatorCard = ({
           <div key={type} className="mediator-card__contact">
             <FontAwesomeIcon icon={contactIcons[type]} />
             <a href={getContactHref(type, value)} onClick={(e) => e.stopPropagation()}>
-              <span>{value}</span>
+              {type === 'email' ? 'Email' : 'Call'}
             </a>
-            <button className="copy-contact-btn" onClick={(e) => handleCopy(type, value, e)} aria-label={`Copy ${type}`}>
-              <FontAwesomeIcon icon={faCopy} />
-              <span>{copiedKey === type ? 'Copied' : 'Copy'}</span>
-            </button>
           </div>
         ))}
       </div>

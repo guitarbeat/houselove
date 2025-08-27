@@ -52,7 +52,8 @@ export const mockMediators = [
     "Longitude": "-97.7431",
     "Specialization": "Housing Disputes",
     "Email": "jane.doe@email.com",
-    "Phone": "555-1234"
+    "Phone": "555-1234",
+    "City": "Austin"
   },
   {
     "Name": "John Smith",
@@ -61,7 +62,8 @@ export const mockMediators = [
     "Longitude": "-97.7500",
     "Specialization": "Tenant-Landlord Disputes",
     "Email": "john.smith@email.com",
-    "Phone": "555-5678"
+    "Phone": "555-5678",
+    "City": "Austin"
   },
   {
     "Name": "Emily Johnson",
@@ -70,7 +72,8 @@ export const mockMediators = [
     "Longitude": "-97.7300",
     "Specialization": "Cooperative Housing",
     "Email": "emily.j@email.com",
-    "Phone": "555-9101"
+    "Phone": "555-9101",
+    "City": "Austin"
   },
   {
     "Name": "Michael Brown",
@@ -79,7 +82,8 @@ export const mockMediators = [
     "Longitude": "-97.7600",
     "Specialization": "Community Communication",
     "Email": "michael.b@email.com",
-    "Phone": "555-1213"
+    "Phone": "555-1213",
+    "City": "Austin"
   },
   {
     "Name": "Sarah Davis",
@@ -88,7 +92,8 @@ export const mockMediators = [
     "Longitude": "-97.7450",
     "Specialization": "Peaceful Living",
     "Email": "sarah.d@email.com",
-    "Phone": "555-1415"
+    "Phone": "555-1415",
+    "City": "Austin"
   }
 ];
 

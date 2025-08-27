@@ -13,7 +13,9 @@ import {
   faSearch,
   faCog,
   faQuestionCircle,
-  faMinus
+  faMinus,
+  faRightToBracket,
+  faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
 import SmartSearch from '../Search/SmartSearch';
 import ThemeToggle from '../ThemeToggle';
@@ -48,12 +50,26 @@ const navItems = [
     className: 'mediators-link',
     description: 'Find qualified mediators'
   }, 
-  { 
-    to: '/contact', 
-    icon: faEnvelope, 
-    label: 'Contact', 
+  {
+    to: '/contact',
+    icon: faEnvelope,
+    label: 'Contact',
     className: 'contact-link',
     description: 'Get in touch with us'
+  },
+  {
+    to: '/login',
+    icon: faRightToBracket,
+    label: 'Login',
+    className: 'login-link',
+    description: 'Access your account'
+  },
+  {
+    to: '/signup',
+    icon: faUserPlus,
+    label: 'Sign Up',
+    className: 'signup-link',
+    description: 'Create a new account'
   },
 ];
 

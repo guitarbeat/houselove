@@ -116,12 +116,13 @@ const ContactForm = ({ form, sendEmail, isSubmitting, submitStatus }) => (
         <li><input placeholder="Subject" type="text" name="subject" required disabled={isSubmitting} /></li>
         <li><textarea placeholder="Message" name="message" required disabled={isSubmitting} /></li>
         <li>
-          <input 
-            type="submit" 
-            className="flat-button" 
-            value={isSubmitting ? "SENDING..." : "SEND"} 
+          <button
+            type="submit"
+            className="flat-button"
             disabled={isSubmitting}
-          />
+          >
+            {isSubmitting ? 'SENDING...' : 'SEND'}
+          </button>
         </li>
       </ul>
     </form>
@@ -150,7 +151,7 @@ const ContactInfo = () => (
     Austin TX 78705
     <br />
     <br />
-    <span>aaronlorenzowoods@gmail.com</span>
+    <span>Use the form to reach out</span>
   </div>
 );
 
