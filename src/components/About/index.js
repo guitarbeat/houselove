@@ -38,8 +38,9 @@ const About = () => {
           </h1>
           <p>
             HouseLove is a collaborative hub that streamlines resource sharing in
-            housing cooperatives. Update a simple Google Sheet and resources are
-            published here in a clear, accessible format.
+            housing cooperatives. Resources are managed through a read‑only Google
+            Sheet; to add new items, submit details through our contribution
+            form and they will be reviewed before publishing.
           </p>
           <p>
             The platform also features a searchable directory of conflict

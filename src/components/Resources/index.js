@@ -10,6 +10,8 @@ const Resources = () => {
   const [resources, setResources] = useState([]);
   const [activeFilter, setActiveFilter] = useState('All');
   const [uniqueResourceTypes, setUniqueResourceTypes] = useState([]);
+  const [activeSubmitter, setActiveSubmitter] = useState('All');
+  const [uniqueSubmitters, setUniqueSubmitters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,6 +34,8 @@ const Resources = () => {
 
         const resourceTypes = new Set(data.map(resource => resource['Resource Type']).filter(Boolean));
         setUniqueResourceTypes(['All', ...Array.from(resourceTypes)]);
+        const submitters = new Set(data.map(r => r['Submitted By']).filter(Boolean));
+        setUniqueSubmitters(['All', ...Array.from(submitters)]);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -45,10 +49,17 @@ const Resources = () => {
   const filteredAndSortedResources = useMemo(() => {
     let currentResources = resources;
 
-    // Apply filter
+    // Apply type filter
     if (activeFilter !== 'All') {
       currentResources = currentResources.filter(
         (resource) => resource['Resource Type'] === activeFilter
+      );
+    }
+
+    // Apply submitter filter
+    if (activeSubmitter !== 'All') {
+      currentResources = currentResources.filter(
+        (resource) => resource['Submitted By'] === activeSubmitter
       );
     }
 
@@ -113,16 +124,16 @@ const Resources = () => {
             Explore documentation, guides, tools, and more to assist you in managing and participating in your cooperative living experience.
           </p>
           <p>
-            Contribute to our list of resources by adding to our{' '}
+            Browse our resources via a{' '}
             <a
-              href="https://docs.google.com/spreadsheets/d/1zG32wvIIPsXn0J6i88GF6CisVvlePeZGah53FbTBpzw/edit?usp=sharing"
+              href="https://docs.google.com/spreadsheets/d/1zG32wvIIPsXn0J6i88GF6CisVvlePeZGah53FbTBpzw/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="resource-link"
             >
-              public Google Sheet
+              read‑only Google Sheet
             </a>
-            {' or '}
+            . To suggest additions, use the{' '}
             <a
               href="https://forms.gle/nYYfwdMbC4rL3hMY6"
               target="_blank"
@@ -131,7 +142,7 @@ const Resources = () => {
             >
               Google Form
             </a>
-            .
+            ; submissions are reviewed before being published.
           </p>
 
           {/* Loading State */}
@@ -176,6 +187,16 @@ const Resources = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   aria-label="Search resources"
                 />
+                <select
+                  className="resource-submit-select"
+                  aria-label="Filter by submitter"
+                  value={activeSubmitter}
+                  onChange={(e) => setActiveSubmitter(e.target.value)}
+                >
+                  {uniqueSubmitters.map((s) => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
+                </select>
                 <select
                   className="resource-sort-select"
                   aria-label="Sort resources"

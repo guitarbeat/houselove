@@ -4,6 +4,8 @@ import EnhancedLayout from './components/Layout/enhanced-layout';
 import Home from './components/Home';
 import About from './components/About';
 import Resources from './components/Resources';
+import Login from './components/Auth/Login';
+import Signup from './components/Auth/Signup';
 import ThemeToggle from './components/ThemeToggle';
 import StyleGuide from './components/StyleGuide';
 import Toast from './components/UI/Toast';
@@ -127,6 +129,8 @@ function App() {
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="resources" element={<Resources />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
             <Route path="mediators" element={<Mediators />} />
             <Route path="contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />

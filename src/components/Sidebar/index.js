@@ -11,14 +11,18 @@ import {
   faBars,
   faClose,
   faHandshake,
+  faRightToBracket,
+  faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
 const navItems = [
   { to: '/', icon: faHome, label: 'Home', end: true },
   { to: '/about', icon: faUser, label: 'About', className: 'about-link' },
   { to: '/resources', icon: faBook, label: 'Resources', className: 'resources-link' },
-  { to: '/mediators', icon: faHandshake, label: 'Mediators', className: 'mediators-link' }, 
+  { to: '/mediators', icon: faHandshake, label: 'Mediators', className: 'mediators-link' },
   { to: '/contact', icon: faEnvelope, label: 'Contact', className: 'contact-link' },
+  { to: '/login', icon: faRightToBracket, label: 'Login', className: 'login-link' },
+  { to: '/signup', icon: faUserPlus, label: 'Sign Up', className: 'signup-link' },
 ];
 
 const SidebarItem = ({ to, icon, label, className, onClick, end }) => (

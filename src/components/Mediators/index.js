@@ -17,6 +17,8 @@ const Mediators = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [specializations, setSpecializations] = useState([])
   const [activeSpec, setActiveSpec] = useState('All')
+  const [cities, setCities] = useState([])
+  const [activeCity, setActiveCity] = useState('All')
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1200)
@@ -37,6 +39,8 @@ const Mediators = () => {
         }
         const specs = new Set(data.map(m => m.Specialization).filter(Boolean))
         setSpecializations(['All', ...Array.from(specs)])
+        const citySet = new Set(data.map(m => m.City).filter(Boolean))
+        setCities(['All', ...Array.from(citySet)])
 
       } catch (err) {
         setError(err.message)
@@ -65,13 +69,15 @@ const Mediators = () => {
     const q = searchQuery.trim().toLowerCase()
     return mediators.filter((m) => {
       const specOk = activeSpec === 'All' || String(m.Specialization || '') === activeSpec
-      if (!q) return specOk
+      const cityOk = activeCity === 'All' || String(m.City || '') === activeCity
+      if (!q) return specOk && cityOk
       const name = String(m.Name || '').toLowerCase()
       const desc = String(m.Description || '').toLowerCase()
       const spec = String(m.Specialization || '').toLowerCase()
-      return specOk && (name.includes(q) || desc.includes(q) || spec.includes(q))
+      const city = String(m.City || '').toLowerCase()
+      return specOk && cityOk && (name.includes(q) || desc.includes(q) || spec.includes(q) || city.includes(q))
     })
-  }, [mediators, searchQuery, activeSpec])
+  }, [mediators, searchQuery, activeSpec, activeCity])
 
   return (
     <>
@@ -80,14 +86,17 @@ const Mediators = () => {
           isMobile ? 'mobile' : 'desktop'
         }`}
       >
-        <MediatorText 
-          mediators={filteredMediators} 
+        <MediatorText
+          mediators={filteredMediators}
           updateMap={updateMap}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           specializations={specializations}
           activeSpec={activeSpec}
           setActiveSpec={setActiveSpec}
+          cities={cities}
+          activeCity={activeCity}
+          setActiveCity={setActiveCity}
           handleLocateMe={handleLocateMe}
           loading={loading}
           error={error}
@@ -101,7 +110,7 @@ const Mediators = () => {
   )
 }
 
-const MediatorText = ({ mediators, updateMap, searchQuery, setSearchQuery, specializations, activeSpec, setActiveSpec, handleLocateMe, loading, error }) => (
+const MediatorText = ({ mediators, updateMap, searchQuery, setSearchQuery, specializations, activeSpec, setActiveSpec, cities, activeCity, setActiveCity, handleLocateMe, loading, error }) => (
   <div className="text-zone">
     <h1>Mediators</h1>
     <p>
@@ -112,12 +121,12 @@ const MediatorText = ({ mediators, updateMap, searchQuery, setSearchQuery, speci
     <p>
       Help us grow our mediator list! If you know someone great, add them to our{' '}
       <a
-        href="https://docs.google.com/spreadsheets/d/1zG32wvIIPsXn0J6i88GF6CisVvlePeZGah53FbTBpzw/edit?usp=sharing"
+        href="https://docs.google.com/spreadsheets/d/1zG32wvIIPsXn0J6i88GF6CisVvlePeZGah53FbTBpzw/view?usp=sharing"
         target="_blank"
         rel="noopener noreferrer"
         className="resource-link"
       >
-        Google Sheet
+        view‑only Google Sheet
       </a>
       , or quickly recommend them through this{' '}
       <a
@@ -128,7 +137,7 @@ const MediatorText = ({ mediators, updateMap, searchQuery, setSearchQuery, speci
       >
         Google Form
       </a>
-      . Your input makes our community stronger. Thanks for chipping in!
+      . Submissions are reviewed before being added. Your input makes our community stronger. Thanks for chipping in!
     </p>
 
     {/* Loading State */}
@@ -164,6 +173,16 @@ const MediatorText = ({ mediators, updateMap, searchQuery, setSearchQuery, speci
         >
           {specializations.map((s) => (
             <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
+        <select
+          className="mediators-city-select"
+          aria-label="Filter by city"
+          value={activeCity}
+          onChange={(e) => setActiveCity(e.target.value)}
+        >
+          {cities.map((c) => (
+            <option key={c} value={c}>{c}</option>
           ))}
         </select>
         <button className="mediators-locate-btn" onClick={handleLocateMe}>Locate me</button>

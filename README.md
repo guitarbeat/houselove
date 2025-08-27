@@ -123,7 +123,7 @@ This project is licensed under the MIT License — see the `LICENSE` file.
 
 ## 🆘 Support
 
-For support, email aaronlorenzowoods@gmail.com or open an issue.
+For support, use the website's contact form or open an issue.
 
 ---
 
