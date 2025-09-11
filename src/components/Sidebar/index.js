@@ -1,5 +1,6 @@
 import './index.scss';
-import Logo from '../../assets/images/logo.png';
+// Use public ICC logo with transparent background
+const Logo = process.env.PUBLIC_URL + '/icc.png';
 import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
@@ -49,7 +50,7 @@ const Sidebar = () => {
           to="/"
           onClick={() => setShowNav(false)}
         >
-          <img src={Logo} alt="Logo" />
+          <img src={Logo} alt="ICC Logo" />
         </Link>
       </div>
       <nav className={showNav ? 'mobile-show' : ''}>
