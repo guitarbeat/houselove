@@ -1,7 +1,8 @@
 /* Breadcrumb Navigation Styles */
 
 .breadcrumb {
-  padding: var(--space-16) var(--space-24);
+  /* Keep padding consistent with layout content padding vars */
+  padding: var(--space-16) var(--content-padding-x, var(--space-24));
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border-subtle);
   margin-bottom: var(--space-24);
@@ -78,7 +79,7 @@
 /* * Mobile optimizations */
 @media (max-width: 768px) {
   .breadcrumb {
-    padding: var(--space-12) var(--space-16);
+    padding: var(--space-12) var(--content-padding-x, var(--space-16));
     margin-bottom: var(--space-16);
   }
   

@@ -1,11 +1,14 @@
 .home-page {
   position: relative;
-  min-height: 100vh;
+  /* Fit the visible viewport within layout content area by subtracting breadcrumb + content padding */
+  /* Breadcrumb has margin-bottom; use a conservative estimate via CSS var with fallback */
+  --breadcrumb-block-gap: var(--space-24);
+  min-height: calc(100vh - (var(--content-padding-y, 0px) * 2) - var(--breadcrumb-block-gap));
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden; // Add this line to prevent overflow issues
+  overflow: hidden; // prevent overflow issues
 
   .background-image-container {
     position: absolute;
@@ -83,6 +86,7 @@
 
 @media (max-width: 844px) {
   .home-page {
+    --breadcrumb-block-gap: var(--space-16);
     .background-image-container {
       height: 30vh; // Adjust for mobile
       width: 80vw; // Adjust for mobile
