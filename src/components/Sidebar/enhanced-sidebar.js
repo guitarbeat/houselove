@@ -20,6 +20,7 @@ import {
 import SmartSearch from '../Search/SmartSearch';
 import ThemeToggle from '../ThemeToggle';
 import './enhanced-sidebar.scss';
+import logger from '../../utils/logger';
 
 const navItems = [
   { 
@@ -253,7 +254,7 @@ const EnhancedSidebar = () => {
   
   // * Handle search
   const handleSearch = (query) => {
-    console.log('Search query:', query);
+    logger.info('Search query:', query);
     // * Implement search functionality
     setShowSearch(false);
   };
