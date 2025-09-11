@@ -300,8 +300,8 @@ const EnhancedSidebar = () => {
               aria-label="Go to homepage"
             >
               <img
-                src="/logo.png"
-                alt="HouseLove Logo"
+                src="/icc.png"
+                alt="ICC Logo"
                 className="sidebar-logo__image"
               />
               {isExpanded && (
