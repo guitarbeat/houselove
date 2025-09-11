@@ -11,6 +11,7 @@ import emailjs from '@emailjs/browser';
 // Local imports
 import AnimatedLetters from '../AnimatedLetters';
 import './index.scss';
+import logger from '../../utils/logger';
 
 // Leaflet configuration
 delete L.Icon.Default.prototype._getIconUrl;
@@ -43,7 +44,7 @@ const Contact = () => {
     const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey) {
-      console.error(
+      logger.error(
         'Missing EmailJS configuration. Please set REACT_APP_EMAILJS_SERVICE_ID, REACT_APP_EMAILJS_TEMPLATE_ID, REACT_APP_EMAILJS_PUBLIC_KEY.'
       );
       setSubmitStatus('error');
@@ -61,7 +62,7 @@ const Contact = () => {
           setTimeout(() => setSubmitStatus(null), 5000);
         },
         (error) => {
-          console.error('EmailJS error:', error);
+          logger.error('EmailJS error:', error);
           setSubmitStatus('error');
           setIsSubmitting(false);
           // Auto-hide error message after 5 seconds

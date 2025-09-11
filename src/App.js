@@ -13,6 +13,7 @@ import LoadingSpinner from './components/UI/LoadingSpinner';
 import './styles/enhanced-tokens.css';
 import './styles/animations.css';
 import './App.scss';
+import logger from './utils/logger';
 
 // * Lazy load components for better performance
 const Mediators = lazy(() => import('./components/Mediators'));
@@ -71,7 +72,7 @@ function App() {
   
   // * Handle errors with user-friendly messages
   const handleError = (error, context = '') => {
-    console.error('Error:', error);
+    logger.error('Error:', error);
     showToast('error', 'Something went wrong', 
       context || 'Please try again or contact support if the problem persists.'
     );
@@ -80,7 +81,7 @@ function App() {
   // * Show loading states for better UX
   const showLoading = (message = 'Loading...') => {
     // * This could be integrated with a global loading state
-    console.log('Loading:', message);
+    logger.info('Loading:', message);
   };
   
   // * Handle route changes with analytics and user tracking
@@ -88,7 +89,7 @@ function App() {
     // * Track page views for analytics
     if (process.env.NODE_ENV === 'production') {
       // * Implement analytics tracking here
-      console.log('Page view:', location.pathname);
+      logger.info('Page view:', location.pathname);
     }
     
     // * Show welcome toast for new users

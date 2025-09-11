@@ -1,5 +1,6 @@
 // Custom Google Sheets API utility
 import { mockResources, mockMediators } from '../data/mockData';
+import logger from './logger';
 
 const API_KEY = process.env.REACT_APP_GOOGLE_SHEETS_API_KEY;
 const SPREADSHEET_ID = process.env.REACT_APP_GOOGLE_SHEETS_DOC_ID;
@@ -11,7 +12,7 @@ class GoogleSheetsAPI {
 
   async fetchSheetData(sheetName) {
     if (!API_KEY || !SPREADSHEET_ID) {
-      console.warn('Missing Google Sheets API configuration, using mock data');
+      logger.warn('Missing Google Sheets API configuration, using mock data');
       return this.getMockData(sheetName);
     }
 
@@ -22,14 +23,16 @@ class GoogleSheetsAPI {
       
       if (!response.ok) {
         const errorData = await response.json();
-        console.warn(`Google Sheets API error: ${errorData.error?.message || response.statusText}, falling back to mock data`);
+        logger.warn(
+          `Google Sheets API error: ${errorData.error?.message || response.statusText}, falling back to mock data`
+        );
         return this.getMockData(sheetName);
       }
       
       const data = await response.json();
       return this.parseSheetData(data.values);
     } catch (error) {
-      console.warn(`Error fetching ${sheetName} data:`, error.message, 'falling back to mock data');
+      logger.warn(`Error fetching ${sheetName} data:`, error.message, 'falling back to mock data');
       return this.getMockData(sheetName);
     }
   }
