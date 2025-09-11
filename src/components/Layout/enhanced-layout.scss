@@ -22,17 +22,24 @@
 
 .enhanced-layout__content {
   flex: 1;
-  padding: var(--space-24);
+  /* Expose padding as CSS variables so inner pages can calculate viewport-fit heights */
+  --content-padding-y: var(--space-24);
+  --content-padding-x: var(--space-24);
+  padding: var(--content-padding-y) var(--content-padding-x);
   max-width: 100%;
   
   /* * Mobile padding adjustments */
   @media (max-width: 768px) {
-    padding: var(--space-16);
+    --content-padding-y: var(--space-16);
+    --content-padding-x: var(--space-16);
+    padding: var(--content-padding-y) var(--content-padding-x);
   }
   
   /* * Large screen optimization */
   @media (min-width: 1440px) {
-    padding: var(--space-32);
+    --content-padding-y: var(--space-32);
+    --content-padding-x: var(--space-32);
+    padding: var(--content-padding-y) var(--content-padding-x);
   }
 }
 
