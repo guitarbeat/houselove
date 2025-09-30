@@ -19,6 +19,7 @@ import logger from './utils/logger';
 const Mediators = lazy(() => import('./components/Mediators'));
 const Contact = lazy(() => import('./components/Contact'));
 const NotFound = lazy(() => import('./components/NotFound'));
+const LiquidGlassDemo = lazy(() => import('./components/LiquidGlassDemo'));
 
 function App() {
   const [toasts, setToasts] = useState([]);
@@ -137,6 +138,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route path="/styleguide" element={<StyleGuide />} />
+          <Route path="/liquid-glass" element={<LiquidGlassDemo />} />
         </Routes>
       </Suspense>
       

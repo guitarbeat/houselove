@@ -9,6 +9,42 @@
   justify-content: center;
   align-items: center;
   overflow: hidden; // prevent overflow issues
+  
+  /* Liquid glass background */
+  background: var(--gradient-liquid-1);
+  background-size: 400% 400%;
+  animation: gradientMorph 15s var(--ease-flow) infinite;
+  
+  /* Liquid particles */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(231, 162, 155, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(239, 124, 142, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 60%, rgba(216, 167, 177, 0.1) 0%, transparent 50%);
+    animation: liquidBackgroundFlow 20s var(--ease-flow) infinite;
+    z-index: 0;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 60% 40%, rgba(239, 124, 142, 0.08) 0%, transparent 60%),
+      radial-gradient(circle at 30% 70%, rgba(216, 167, 177, 0.08) 0%, transparent 60%),
+      radial-gradient(circle at 70% 30%, rgba(231, 162, 155, 0.08) 0%, transparent 60%);
+    animation: liquidBackgroundMorph 25s var(--ease-morph) infinite reverse;
+    z-index: 0;
+  }
 
   .background-image-container {
     position: absolute;
@@ -31,12 +67,38 @@
     text-align: center;
     margin-bottom: var(--space-20);
     z-index: 1; // Ensure text is above the background image
+    
+    /* Liquid glass text container */
+    background: var(--glass-bg-primary);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
+    border: var(--glass-border);
+    border-radius: var(--radius-liquid-lg);
+    padding: var(--space-32);
+    box-shadow: var(--liquid-shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .text-zone::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-liquid-2);
+    opacity: 0.1;
+    z-index: -1;
+    animation: liquidFlow 8s var(--ease-flow) infinite;
   }
 
   h1,
   h2 {
     color: var(--text-inverse);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 2;
   }
 
   h1 {
@@ -45,6 +107,14 @@
     margin: 0;
     font-family: var(--font-family-brand);
     font-weight: var(--fw-regular);
+    
+    /* Liquid text effect */
+    background: var(--liquid-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: liquidTextFlow 6s var(--ease-flow) infinite;
   }
 
   h2 {
@@ -54,6 +124,14 @@
     font-family: var(--font-family-sans);
     letter-spacing: var(--ls-normal);
     animation: fadeIn 1s 1.8s backwards;
+    
+    /* Liquid text effect */
+    background: var(--liquid-secondary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: liquidTextFlow 8s var(--ease-flow) infinite reverse;
   }
 
   .home-cta {
@@ -61,24 +139,40 @@
     display: flex;
     gap: var(--space-16);
     justify-content: center;
+    position: relative;
+    z-index: 2;
 
     .cta-button {
-      background: var(--brand-secondary);
+      @extend .liquid-glass-btn;
+      background: var(--liquid-secondary);
       color: var(--text-inverse);
-      padding: var(--space-12) var(--space-18);
-      border-radius: var(--radius-10);
+      padding: var(--space-16) var(--space-24);
+      border-radius: var(--radius-liquid-md);
       text-decoration: none;
       font-size: var(--fs-18);
-      transition: transform 0.2s ease, background 0.2s ease;
+      font-weight: var(--fw-semibold);
+      position: relative;
+      overflow: hidden;
+      transition: all var(--morph-duration-normal) var(--ease-liquid);
+      
+      /* Liquid button effects */
+      background-size: 200% 200%;
+      animation: gradientMorph 4s var(--ease-flow) infinite;
 
       &:hover {
-        background: var(--secondary-600);
-        transform: translateY(-2px);
+        transform: translateY(-4px) scale(var(--hover-scale)) var(--gpu-transform);
+        box-shadow: var(--liquid-shadow-xl);
+        background-size: 300% 300%;
+      }
+      
+      &:active {
+        transform: translateY(-2px) scale(var(--active-scale)) var(--gpu-transform);
       }
 
       &.secondary {
-        background: var(--brand-accent);
+        background: var(--liquid-accent);
         color: var(--text-strong);
+        animation: gradientMorph 6s var(--ease-flow) infinite reverse;
       }
     }
   }
@@ -87,6 +181,16 @@
 @media (max-width: 844px) {
   .home-page {
     --breadcrumb-block-gap: var(--space-16);
+    
+    /* Mobile liquid glass optimizations */
+    background-size: 200% 200%;
+    animation-duration: 20s;
+    
+    &::before,
+    &::after {
+      animation-duration: 15s;
+    }
+    
     .background-image-container {
       height: 30vh; // Adjust for mobile
       width: 80vw; // Adjust for mobile
@@ -94,14 +198,44 @@
 
     .text-zone {
       width: 95%; // Slightly increase width for better text alignment
+      padding: var(--space-24);
+      border-radius: var(--radius-liquid-md);
+      
+      /* Mobile glass effects */
+      backdrop-filter: blur(calc(var(--blur-liquid-md) * var(--liquid-mobile-blur))) 
+        saturate(calc(var(--saturate-liquid) * var(--liquid-mobile-saturate)));
+      -webkit-backdrop-filter: blur(calc(var(--blur-liquid-md) * var(--liquid-mobile-blur))) 
+        saturate(calc(var(--saturate-liquid) * var(--liquid-mobile-saturate)));
     }
 
     h1 {
       font-size: clamp(2.5rem, 8vw, 4rem); // Adjust text size for mobile
+      animation-duration: 8s;
     }
 
     h2 {
       font-size: clamp(1.2rem, 4vw, 3rem); // Adjust text size for mobile
+      animation-duration: 10s;
+    }
+    
+    .home-cta {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-12);
+      
+      .cta-button {
+        width: 100%;
+        max-width: 300px;
+        padding: var(--space-14) var(--space-20);
+        font-size: var(--fs-16);
+        
+        /* Mobile button optimizations */
+        animation-duration: 6s;
+        
+        &:hover {
+          transform: translateY(-2px) scale(calc(var(--hover-scale) * var(--liquid-mobile-scale))) var(--gpu-transform);
+        }
+      }
     }
   }
 }

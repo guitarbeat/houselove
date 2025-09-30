@@ -1,0 +1,257 @@
+/* Liquid Glass Design System - Advanced Fluid Styling */
+
+:root {
+  /* ===== LIQUID GLASS FOUNDATION ===== */
+  
+  /* Fluid Color Palettes */
+  --liquid-primary: linear-gradient(135deg, 
+    rgba(231, 162, 155, 0.9) 0%, 
+    rgba(239, 124, 142, 0.8) 25%, 
+    rgba(216, 167, 177, 0.7) 50%, 
+    rgba(231, 162, 155, 0.9) 75%, 
+    rgba(239, 124, 142, 0.8) 100%);
+    
+  --liquid-secondary: linear-gradient(135deg, 
+    rgba(239, 124, 142, 0.9) 0%, 
+    rgba(216, 167, 177, 0.8) 25%, 
+    rgba(231, 162, 155, 0.7) 50%, 
+    rgba(239, 124, 142, 0.9) 75%, 
+    rgba(216, 167, 177, 0.8) 100%);
+    
+  --liquid-accent: linear-gradient(135deg, 
+    rgba(216, 167, 177, 0.9) 0%, 
+    rgba(231, 162, 155, 0.8) 25%, 
+    rgba(239, 124, 142, 0.7) 50%, 
+    rgba(216, 167, 177, 0.9) 75%, 
+    rgba(231, 162, 155, 0.8) 100%);
+
+  /* Dynamic Glass Backgrounds */
+  --glass-bg-primary: rgba(255, 255, 255, 0.08);
+  --glass-bg-secondary: rgba(255, 255, 255, 0.12);
+  --glass-bg-strong: rgba(255, 255, 255, 0.18);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.04);
+  
+  /* Dark Mode Glass */
+  --glass-bg-dark: rgba(0, 0, 0, 0.15);
+  --glass-bg-dark-strong: rgba(0, 0, 0, 0.25);
+  --glass-bg-dark-subtle: rgba(0, 0, 0, 0.08);
+
+  /* Liquid Border Gradients */
+  --liquid-border: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(231, 162, 155, 0.3) 20%, 
+    rgba(239, 124, 142, 0.4) 50%, 
+    rgba(216, 167, 177, 0.3) 80%, 
+    transparent 100%);
+    
+  --liquid-border-strong: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(231, 162, 155, 0.5) 20%, 
+    rgba(239, 124, 142, 0.6) 50%, 
+    rgba(216, 167, 177, 0.5) 80%, 
+    transparent 100%);
+
+  /* Fluid Shadow System */
+  --liquid-shadow-sm: 0 2px 8px rgba(231, 162, 155, 0.1),
+    0 1px 3px rgba(239, 124, 142, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+  --liquid-shadow-md: 0 4px 16px rgba(231, 162, 155, 0.15),
+    0 2px 8px rgba(239, 124, 142, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    
+  --liquid-shadow-lg: 0 8px 32px rgba(231, 162, 155, 0.2),
+    0 4px 16px rgba(239, 124, 142, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    
+  --liquid-shadow-xl: 0 16px 64px rgba(231, 162, 155, 0.25),
+    0 8px 32px rgba(239, 124, 142, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+  /* Morphing Animation Durations */
+  --morph-duration-fast: 0.3s;
+  --morph-duration-normal: 0.6s;
+  --morph-duration-slow: 1.2s;
+  --morph-duration-slower: 2.4s;
+
+  /* Liquid Easing Functions */
+  --ease-liquid: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-morph: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-flow: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Fluid Blur Levels */
+  --blur-liquid-xs: 2px;
+  --blur-liquid-sm: 4px;
+  --blur-liquid-md: 8px;
+  --blur-liquid-lg: 16px;
+  --blur-liquid-xl: 24px;
+  --blur-liquid-2xl: 40px;
+
+  /* Liquid Saturation Levels */
+  --saturate-liquid: 180%;
+  --saturate-liquid-strong: 200%;
+  --saturate-liquid-subtle: 120%;
+
+  /* ===== ADVANCED GLASSMORPHISM ===== */
+  
+  /* Base Glass Properties */
+  --glass-backdrop: blur(20px) saturate(var(--saturate-liquid));
+  --glass-backdrop-strong: blur(30px) saturate(var(--saturate-liquid-strong));
+  --glass-backdrop-subtle: blur(10px) saturate(var(--saturate-liquid-subtle));
+
+  /* Liquid Glass Borders */
+  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+  --glass-border-strong: 1px solid rgba(255, 255, 255, 0.3);
+  --glass-border-subtle: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* ===== FLUID GRADIENTS ===== */
+  
+  /* Animated Gradient Backgrounds */
+  --gradient-liquid-1: linear-gradient(
+    45deg,
+    rgba(231, 162, 155, 0.1) 0%,
+    rgba(239, 124, 142, 0.15) 25%,
+    rgba(216, 167, 177, 0.1) 50%,
+    rgba(231, 162, 155, 0.15) 75%,
+    rgba(239, 124, 142, 0.1) 100%
+  );
+  
+  --gradient-liquid-2: linear-gradient(
+    135deg,
+    rgba(239, 124, 142, 0.1) 0%,
+    rgba(216, 167, 177, 0.15) 25%,
+    rgba(231, 162, 155, 0.1) 50%,
+    rgba(239, 124, 142, 0.15) 75%,
+    rgba(216, 167, 177, 0.1) 100%
+  );
+  
+  --gradient-liquid-3: linear-gradient(
+    225deg,
+    rgba(216, 167, 177, 0.1) 0%,
+    rgba(231, 162, 155, 0.15) 25%,
+    rgba(239, 124, 142, 0.1) 50%,
+    rgba(216, 167, 177, 0.15) 75%,
+    rgba(231, 162, 155, 0.1) 100%
+  );
+
+  /* ===== LIQUID SHAPES & MORPHING ===== */
+  
+  /* Fluid Border Radius */
+  --radius-liquid-sm: 8px 16px 12px 20px;
+  --radius-liquid-md: 16px 24px 20px 32px;
+  --radius-liquid-lg: 24px 32px 28px 40px;
+  --radius-liquid-xl: 32px 40px 36px 48px;
+
+  /* Morphing Shapes */
+  --shape-liquid-1: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
+  --shape-liquid-2: polygon(0% 0%, 90% 0%, 100% 100%, 10% 100%);
+  --shape-liquid-3: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+
+  /* ===== INTERACTIVE LIQUID EFFECTS ===== */
+  
+  /* Hover State Multipliers */
+  --hover-scale: 1.02;
+  --hover-blur: 1.2;
+  --hover-saturate: 1.1;
+  --hover-brightness: 1.05;
+
+  /* Active State Multipliers */
+  --active-scale: 0.98;
+  --active-blur: 0.8;
+  --active-saturate: 0.9;
+  --active-brightness: 0.95;
+
+  /* Focus State Multipliers */
+  --focus-scale: 1.01;
+  --focus-blur: 1.1;
+  --focus-saturate: 1.05;
+  --focus-brightness: 1.02;
+
+  /* ===== LIQUID ANIMATION KEYFRAMES ===== */
+  
+  /* Morphing Animation Variables */
+  --morph-offset-1: 0deg;
+  --morph-offset-2: 120deg;
+  --morph-offset-3: 240deg;
+
+  /* ===== RESPONSIVE LIQUID SCALING ===== */
+  
+  /* Mobile Liquid Adjustments */
+  --liquid-mobile-scale: 0.8;
+  --liquid-mobile-blur: 0.7;
+  --liquid-mobile-saturate: 0.9;
+
+  /* Tablet Liquid Adjustments */
+  --liquid-tablet-scale: 0.9;
+  --liquid-tablet-blur: 0.85;
+  --liquid-tablet-saturate: 0.95;
+
+  /* ===== PERFORMANCE OPTIMIZATIONS ===== */
+  
+  /* GPU Acceleration */
+  --gpu-transform: translateZ(0);
+  --gpu-will-change: transform, opacity, filter, backdrop-filter;
+
+  /* Reduced Motion Overrides */
+  --reduced-motion-duration: 0.01ms;
+  --reduced-motion-iteration: 1;
+}
+
+/* Dark Mode Liquid Glass Adjustments */
+[data-theme='dark'] {
+  --glass-bg-primary: var(--glass-bg-dark);
+  --glass-bg-secondary: var(--glass-bg-dark-strong);
+  --glass-bg-strong: var(--glass-bg-dark-strong);
+  --glass-bg-subtle: var(--glass-bg-dark-subtle);
+  
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-border-strong: 1px solid rgba(255, 255, 255, 0.15);
+  --glass-border-subtle: 1px solid rgba(255, 255, 255, 0.05);
+
+  /* Dark mode liquid shadows */
+  --liquid-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3),
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    
+  --liquid-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    
+  --liquid-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5),
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+  --liquid-shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.6),
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* High Contrast Mode Overrides */
+@media (prefers-contrast: high) {
+  :root {
+    --glass-bg-primary: rgba(255, 255, 255, 0.9);
+    --glass-bg-secondary: rgba(255, 255, 255, 0.95);
+    --glass-border: 2px solid rgba(0, 0, 0, 0.8);
+    --liquid-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+    --liquid-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.6);
+    --liquid-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.7);
+    --liquid-shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.8);
+  }
+  
+  [data-theme='dark'] {
+    --glass-bg-primary: rgba(0, 0, 0, 0.9);
+    --glass-bg-secondary: rgba(0, 0, 0, 0.95);
+    --glass-border: 2px solid rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Reduced Motion Overrides */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --morph-duration-fast: var(--reduced-motion-duration);
+    --morph-duration-normal: var(--reduced-motion-duration);
+    --morph-duration-slow: var(--reduced-motion-duration);
+    --morph-duration-slower: var(--reduced-motion-duration);
+  }
+}
