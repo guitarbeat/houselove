@@ -1,0 +1,251 @@
+/* Liquid Glass Input Component */
+
+.liquid-glass-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  width: 100%;
+}
+
+.liquid-glass-input__wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.liquid-glass-input {
+  @extend .liquid-glass;
+  padding: var(--space-12) var(--space-16);
+  border: var(--glass-border);
+  background: var(--glass-bg-subtle);
+  color: var(--text-body);
+  font-size: var(--fs-15);
+  width: 100%;
+  transition: all var(--morph-duration-normal) var(--ease-liquid);
+  transform: var(--gpu-transform);
+  will-change: var(--gpu-will-change);
+  outline: none;
+  font-family: var(--font-family-sans);
+}
+
+.liquid-glass-input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+  transition: opacity var(--morph-duration-normal) var(--ease-liquid);
+}
+
+/* Input States */
+.liquid-glass-input--focused {
+  border: var(--glass-border-strong);
+  background: var(--glass-bg-primary);
+  box-shadow: var(--liquid-shadow-md), 
+    0 0 0 3px rgba(231, 162, 155, 0.2);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+}
+
+.liquid-glass-input--focused::placeholder {
+  opacity: 0.5;
+}
+
+.liquid-glass-input--error {
+  border-color: var(--danger-500);
+  background: rgba(239, 68, 68, 0.05);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.liquid-glass-input--success {
+  border-color: var(--success-500);
+  background: rgba(34, 197, 94, 0.05);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+.liquid-glass-input--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: var(--glass-bg-subtle);
+}
+
+/* Morphing Input */
+.liquid-glass-input--morphing {
+  border-radius: var(--radius-liquid-md);
+  animation: liquidMorph 6s var(--ease-morph) infinite;
+}
+
+.liquid-glass-input--morphing::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-liquid-1);
+  opacity: 0.1;
+  z-index: -1;
+  animation: liquidFlow 8s var(--ease-flow) infinite;
+  border-radius: inherit;
+}
+
+.liquid-glass-input__morphing-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-liquid-2);
+  opacity: 0.05;
+  z-index: -1;
+  animation: liquidFlow 10s var(--ease-flow) infinite reverse;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Input Label */
+.liquid-glass-input__label {
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  color: var(--text-strong);
+  margin-bottom: var(--space-4);
+  
+  /* Liquid text effect */
+  background: var(--liquid-primary);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: liquidTextFlow 8s var(--ease-flow) infinite;
+}
+
+/* Helper Text */
+.liquid-glass-input__helper {
+  font-size: var(--fs-12);
+  color: var(--text-muted);
+  margin-top: var(--space-4);
+  transition: color var(--morph-duration-normal) var(--ease-liquid);
+}
+
+.liquid-glass-input__helper--error {
+  color: var(--danger-600);
+}
+
+/* Input Types */
+.liquid-glass-input--text,
+.liquid-glass-input--email,
+.liquid-glass-input--password {
+  /* Default styling already applied */
+}
+
+.liquid-glass-input--search {
+  padding-left: var(--space-40);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: var(--space-12) center;
+  background-size: 16px 16px;
+}
+
+.liquid-glass-input--textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: var(--font-family-sans);
+  line-height: var(--lh-body);
+}
+
+/* Focus Ring Animation */
+.liquid-glass-input:focus {
+  animation: liquidInputFocus 0.3s var(--ease-liquid);
+}
+
+@keyframes liquidInputFocus {
+  0% {
+    box-shadow: var(--liquid-shadow-sm);
+  }
+  50% {
+    box-shadow: var(--liquid-shadow-lg), 
+      0 0 0 3px rgba(231, 162, 155, 0.3);
+  }
+  100% {
+    box-shadow: var(--liquid-shadow-md), 
+      0 0 0 3px rgba(231, 162, 155, 0.2);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .liquid-glass-input {
+    padding: var(--space-10) var(--space-12);
+    font-size: var(--fs-14);
+    
+    /* Mobile optimizations */
+    backdrop-filter: blur(calc(var(--blur-liquid-md) * var(--liquid-mobile-blur))) 
+      saturate(calc(var(--saturate-liquid) * var(--liquid-mobile-saturate)));
+    -webkit-backdrop-filter: blur(calc(var(--blur-liquid-md) * var(--liquid-mobile-blur))) 
+      saturate(calc(var(--saturate-liquid) * var(--liquid-mobile-saturate)));
+  }
+  
+  .liquid-glass-input--search {
+    padding-left: var(--space-32);
+    background-position: var(--space-8) center;
+  }
+  
+  .liquid-glass-input__label {
+    font-size: var(--fs-13);
+  }
+  
+  .liquid-glass-input__helper {
+    font-size: var(--fs-11);
+  }
+}
+
+/* Accessibility Enhancements */
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass-input,
+  .liquid-glass-input--morphing,
+  .liquid-glass-input--morphing::before,
+  .liquid-glass-input__morphing-bg,
+  .liquid-glass-input__label {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .liquid-glass-input {
+    background: var(--bg-surface);
+    border: 2px solid var(--border-strong);
+    color: var(--text-strong);
+  }
+  
+  .liquid-glass-input--focused {
+    border-color: var(--primary-600);
+    box-shadow: 0 0 0 3px rgba(231, 162, 155, 0.5);
+  }
+  
+  .liquid-glass-input--error {
+    border-color: var(--danger-600);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
+  }
+  
+  .liquid-glass-input--success {
+    border-color: var(--success-600);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.5);
+  }
+  
+  .liquid-glass-input--morphing::before,
+  .liquid-glass-input__morphing-bg {
+    display: none;
+  }
+  
+  .liquid-glass-input__label {
+    background: none;
+    -webkit-text-fill-color: var(--text-strong);
+    color: var(--text-strong);
+  }
+}
+
+/* High DPI Display Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .liquid-glass-input {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}

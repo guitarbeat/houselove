@@ -1,0 +1,526 @@
+/* Fluid Morphing Animations - Advanced Liquid Transitions */
+
+@import './liquid-glass-tokens.css';
+
+/* ===== FLUID MORPHING BASE ===== */
+
+/* Morphing Container */
+.fluid-morph {
+  position: relative;
+  overflow: hidden;
+  transform: var(--gpu-transform);
+  will-change: var(--gpu-will-change);
+}
+
+.fluid-morph::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--liquid-primary);
+  opacity: 0;
+  transition: all var(--morph-duration-normal) var(--ease-morph);
+  z-index: -1;
+}
+
+.fluid-morph:hover::before {
+  opacity: 0.1;
+  animation: fluidMorphWave 3s var(--ease-flow) infinite;
+}
+
+/* ===== MORPHING SHAPES ===== */
+
+/* Liquid Shape Morphing */
+.morph-shape {
+  transition: all var(--morph-duration-slow) var(--ease-morph);
+  transform: var(--gpu-transform);
+}
+
+.morph-shape--liquid-1 {
+  border-radius: var(--radius-liquid-sm);
+  clip-path: var(--shape-liquid-1);
+}
+
+.morph-shape--liquid-2 {
+  border-radius: var(--radius-liquid-md);
+  clip-path: var(--shape-liquid-2);
+}
+
+.morph-shape--liquid-3 {
+  border-radius: var(--radius-liquid-lg);
+  clip-path: var(--shape-liquid-3);
+}
+
+/* Hover Morphing */
+.morph-shape:hover {
+  border-radius: var(--radius-liquid-lg);
+  clip-path: var(--shape-liquid-2);
+  transform: scale(1.05) var(--gpu-transform);
+}
+
+/* ===== FLUID WAVE ANIMATIONS ===== */
+
+/* Wave Morphing */
+@keyframes fluidMorphWave {
+  0% {
+    transform: translateX(-100%) scaleX(1) scaleY(1);
+    border-radius: var(--radius-liquid-sm);
+  }
+  25% {
+    transform: translateX(-50%) scaleX(1.2) scaleY(0.8);
+    border-radius: var(--radius-liquid-md);
+  }
+  50% {
+    transform: translateX(0%) scaleX(0.8) scaleY(1.2);
+    border-radius: var(--radius-liquid-lg);
+  }
+  75% {
+    transform: translateX(50%) scaleX(1.1) scaleY(0.9);
+    border-radius: var(--radius-liquid-md);
+  }
+  100% {
+    transform: translateX(100%) scaleX(1) scaleY(1);
+    border-radius: var(--radius-liquid-sm);
+  }
+}
+
+/* Liquid Ripple Effect */
+@keyframes liquidRipple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Fluid Bounce */
+@keyframes fluidBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  40% {
+    transform: translateY(-20px) scale(1.1);
+  }
+  60% {
+    transform: translateY(-10px) scale(1.05);
+  }
+}
+
+/* ===== INTERACTIVE MORPHING ===== */
+
+/* Click Ripple Effect */
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.ripple-effect::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all var(--morph-duration-fast) var(--ease-liquid);
+}
+
+.ripple-effect:active::after {
+  width: 300px;
+  height: 300px;
+  animation: liquidRipple var(--morph-duration-normal) var(--ease-liquid);
+}
+
+/* Hover Morphing */
+.hover-morph {
+  transition: all var(--morph-duration-normal) var(--ease-morph);
+  transform: var(--gpu-transform);
+}
+
+.hover-morph:hover {
+  transform: scale(1.02) rotate(1deg) var(--gpu-transform);
+  border-radius: var(--radius-liquid-md);
+  box-shadow: var(--liquid-shadow-lg);
+}
+
+/* ===== FLUID GRADIENT MORPHING ===== */
+
+/* Animated Gradient Background */
+.gradient-morph {
+  background: var(--gradient-liquid-1);
+  background-size: 400% 400%;
+  animation: gradientMorph 8s var(--ease-flow) infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-morph::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-liquid-2);
+  background-size: 400% 400%;
+  animation: gradientMorph 8s var(--ease-flow) infinite reverse;
+  opacity: 0.7;
+  mix-blend-mode: overlay;
+}
+
+@keyframes gradientMorph {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ===== LIQUID TEXT EFFECTS ===== */
+
+/* Liquid Text Morphing */
+.liquid-text {
+  background: var(--liquid-primary);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: liquidTextFlow 4s var(--ease-flow) infinite;
+  font-weight: var(--fw-bold);
+  position: relative;
+}
+
+.liquid-text::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--gradient-liquid-2);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: liquidTextFlow 4s var(--ease-flow) infinite reverse;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+@keyframes liquidTextFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ===== FLUID CONTAINER MORPHING ===== */
+
+/* Morphing Container */
+.morph-container {
+  position: relative;
+  transition: all var(--morph-duration-slow) var(--ease-morph);
+  transform: var(--gpu-transform);
+}
+
+.morph-container--active {
+  border-radius: var(--radius-liquid-lg);
+  background: var(--glass-bg-primary);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  box-shadow: var(--liquid-shadow-lg);
+}
+
+.morph-container--hover:hover {
+  transform: scale(1.02) var(--gpu-transform);
+  border-radius: var(--radius-liquid-md);
+  box-shadow: var(--liquid-shadow-xl);
+}
+
+/* ===== LIQUID BORDER MORPHING ===== */
+
+/* Animated Liquid Border */
+.liquid-border {
+  position: relative;
+  background: var(--glass-bg-primary);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-radius: var(--radius-16);
+  padding: 2px;
+}
+
+.liquid-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--liquid-border);
+  border-radius: var(--radius-16);
+  z-index: -1;
+  animation: liquidBorderFlow 3s var(--ease-flow) infinite;
+}
+
+@keyframes liquidBorderFlow {
+  0% {
+    background: var(--liquid-border);
+    transform: scale(1);
+  }
+  50% {
+    background: var(--liquid-border-strong);
+    transform: scale(1.02);
+  }
+  100% {
+    background: var(--liquid-border);
+    transform: scale(1);
+  }
+}
+
+/* ===== FLUID LOADING ANIMATIONS ===== */
+
+/* Liquid Loading Spinner */
+.liquid-spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--liquid-primary);
+  animation: liquidSpinner 2s var(--ease-flow) infinite;
+  position: relative;
+}
+
+.liquid-spinner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: var(--glass-bg-primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: liquidSpinnerInner 2s var(--ease-flow) infinite reverse;
+}
+
+@keyframes liquidSpinner {
+  0% {
+    transform: rotate(0deg) scale(1);
+    border-radius: 50%;
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1);
+    border-radius: var(--radius-liquid-sm);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+    border-radius: var(--radius-liquid-md);
+  }
+  75% {
+    transform: rotate(270deg) scale(1.1);
+    border-radius: var(--radius-liquid-sm);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    border-radius: 50%;
+  }
+}
+
+@keyframes liquidSpinnerInner {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg) scale(0.8);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) scale(1);
+  }
+}
+
+/* ===== FLUID PROGRESS BARS ===== */
+
+/* Liquid Progress Bar */
+.liquid-progress {
+  width: 100%;
+  height: 8px;
+  background: var(--glass-bg-subtle);
+  border-radius: var(--radius-16);
+  overflow: hidden;
+  position: relative;
+}
+
+.liquid-progress-bar {
+  height: 100%;
+  background: var(--liquid-primary);
+  border-radius: var(--radius-16);
+  position: relative;
+  transition: width var(--morph-duration-normal) var(--ease-liquid);
+  animation: liquidProgressFlow 2s var(--ease-flow) infinite;
+}
+
+.liquid-progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: liquidProgressShine 2s var(--ease-flow) infinite;
+}
+
+@keyframes liquidProgressFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes liquidProgressShine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ===== FLUID MODAL ANIMATIONS ===== */
+
+/* Liquid Modal */
+.liquid-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--morph-duration-normal) var(--ease-liquid);
+}
+
+.liquid-modal--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.liquid-modal-content {
+  background: var(--glass-bg-primary);
+  backdrop-filter: var(--glass-backdrop-strong);
+  -webkit-backdrop-filter: var(--glass-backdrop-strong);
+  border: var(--glass-border);
+  border-radius: var(--radius-liquid-lg);
+  padding: var(--space-32);
+  max-width: 500px;
+  width: 90%;
+  box-shadow: var(--liquid-shadow-xl);
+  transform: scale(0.8) translateY(50px);
+  transition: all var(--morph-duration-normal) var(--ease-bounce);
+}
+
+.liquid-modal--active .liquid-modal-content {
+  transform: scale(1) translateY(0);
+}
+
+/* ===== RESPONSIVE MORPHING ===== */
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .morph-shape:hover {
+    transform: scale(1.02) var(--gpu-transform);
+  }
+  
+  .hover-morph:hover {
+    transform: scale(1.01) var(--gpu-transform);
+  }
+  
+  .liquid-spinner {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .liquid-spinner::before {
+    width: 15px;
+    height: 15px;
+  }
+  
+  .liquid-modal-content {
+    padding: var(--space-24);
+    border-radius: var(--radius-liquid-md);
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .fluid-morph,
+  .morph-shape,
+  .gradient-morph,
+  .liquid-text,
+  .morph-container,
+  .liquid-border,
+  .liquid-spinner,
+  .liquid-progress-bar,
+  .liquid-modal {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .hover-morph:hover,
+  .morph-shape:hover {
+    transform: none !important;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .liquid-text {
+    background: none;
+    -webkit-text-fill-color: var(--text-strong);
+    color: var(--text-strong);
+  }
+  
+  .liquid-text::before {
+    display: none;
+  }
+  
+  .gradient-morph {
+    background: var(--bg-surface);
+  }
+  
+  .gradient-morph::before {
+    display: none;
+  }
+}

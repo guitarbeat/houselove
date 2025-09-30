@@ -1,6 +1,11 @@
 // Import design system tokens
 @import './styles/design-tokens.css';
 
+// Import liquid glass system
+@import './styles/liquid-glass-tokens.css';
+@import './styles/liquid-glass-effects.css';
+@import './styles/fluid-morphing.css';
+
 // Import external animate.css library
 @import 'animate.css';
 @import '~loaders.css/loaders.css'; // Import loaders.css library
