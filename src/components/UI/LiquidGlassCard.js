@@ -1,5 +1,6 @@
 import React from 'react';
-import './LiquidGlassCard.scss';
+import { Card as ShadcnCard, CardHeader, CardContent } from './Card';
+import { cn } from 'src/lib/utils';
 
 const LiquidGlassCard = ({ 
   children, 
@@ -7,29 +8,26 @@ const LiquidGlassCard = ({
   size = 'medium',
   interactive = false,
   morphing = false,
-  className = '',
-  onClick,
+  className,
   ...props 
 }) => {
-  const cardClasses = [
+  const cardClasses = cn(
     'liquid-glass-card',
     `liquid-glass-card--${variant}`,
     `liquid-glass-card--${size}`,
-    interactive ? 'liquid-glass-card--interactive' : '',
-    morphing ? 'liquid-glass-card--morphing' : '',
+    {
+      'liquid-glass-card--interactive': interactive,
+      'liquid-glass-card--morphing': morphing,
+    },
     className
-  ].filter(Boolean).join(' ');
+  );
 
   return (
-    <div 
-      className={cardClasses}
-      onClick={interactive ? onClick : undefined}
-      role={interactive ? 'button' : undefined}
-      tabIndex={interactive ? 0 : undefined}
-      {...props}
-    >
-      {children}
-    </div>
+    <ShadcnCard className={cardClasses} {...props}>
+      <CardContent>
+        {children}
+      </CardContent>
+    </ShadcnCard>
   );
 };
 
