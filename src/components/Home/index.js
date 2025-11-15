@@ -1,60 +1,16 @@
-import { useEffect, useState } from 'react'
-import './index.scss'
-import AnimatedLetters from '../AnimatedLetters'
-import backgroundImage from '../../assets/images/background.png'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Button } from '../ui/button';
 
 const Home = () => {
-  const [letterClass, setLetterClass] = useState('text-animate')
-  // Split the introduction text into two lines
-  const line1Array = 'Empowering Co-op'.split('')
-  const line2Array = 'Communities'.split('')
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setLetterClass('text-animate-hover')
-    }, 4000)
-
-    return () => {
-      clearTimeout(timeoutId)
-    }
-  }, [])
-
   return (
-    <main className="container home-page">
-      <section
-        className="text-zone"
-        aria-labelledby="main-heading"
-        aria-describedby="main-description"
-      >
-        {/* Split the heading into two lines */}
-        <h1 id="main-heading">
-          <AnimatedLetters
-            letterClass={letterClass}
-            strArray={line1Array}
-            idx={0}
-          />
-          <br /> {/* Line break to move "Communities" to a new line */}
-          <AnimatedLetters
-            letterClass={letterClass}
-            strArray={line2Array}
-            idx={15}
-          />
-        </h1>
-        <h2 id="main-description">
-          Discover mediators, share resources, and grow a resilient
-          cooperative.
-        </h2>
-        <div className="home-cta">
-          <Link to="/resources" className="cta-button">Browse Resources</Link>
-          <Link to="/mediators" className="cta-button secondary">Find a Mediator</Link>
-        </div>
-      </section>
-      <div className="background-image-container" aria-hidden="true">
-        <img src={backgroundImage} alt="" role="presentation" />
-      </div>
-    </main>
-  )
-}
+    <div className="flex flex-col items-center justify-center min-h-screen text-center">
+      <h1 className="text-4xl font-bold mb-4">Welcome to House Love</h1>
+      <p className="text-lg mb-8">
+        Your platform for cooperative community living.
+      </p>
+      <Button>Get Started</Button>
+    </div>
+  );
+};
 
-export default Home
+export default Home;
