@@ -1,0 +1,7 @@
+ INFO  Accepting connections at http://localhost:3000
+ HTTP  12/26/2025 3:25:24 AM ::1 GET /contact
+ HTTP  12/26/2025 3:25:24 AM ::1 Returned 200 in 270 ms
+ HTTP  12/26/2025 3:25:25 AM ::1 GET /static/js/main.1e5dc9b1.js
+ HTTP  12/26/2025 3:25:25 AM ::1 GET /static/css/main.75e81967.css
+ HTTP  12/26/2025 3:25:25 AM ::1 Returned 200 in 4 ms
+ HTTP  12/26/2025 3:25:25 AM ::1 Returned 200 in 8 ms
