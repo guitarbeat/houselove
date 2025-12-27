@@ -25,26 +25,59 @@ const Contact = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Contact Us</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <Input
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        <Input
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <Textarea
-          name="message"
-          placeholder="Your Message"
-          value={formData.message}
-          onChange={handleChange}
-        />
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="name"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            Your Name <span className="text-red-500">*</span>
+          </label>
+          <Input
+            id="name"
+            type="text"
+            name="name"
+            placeholder="John Doe"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="email"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            Your Email <span className="text-red-500">*</span>
+          </label>
+          <Input
+            id="email"
+            type="email"
+            name="email"
+            placeholder="john@example.com"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="message"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            Your Message <span className="text-red-500">*</span>
+          </label>
+          <Textarea
+            id="message"
+            name="message"
+            placeholder="How can we help you?"
+            value={formData.message}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
         <Button type="submit">Send Message</Button>
       </form>
     </div>

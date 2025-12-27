@@ -1,0 +1,3 @@
+## 2024-05-24 - [Missing Form Labels in Contact Component]
+**Learning:** The `Contact` component was using placeholder attributes as the sole method of labeling inputs, which is an accessibility violation (WCAG 3.3.2). Placeholders disappear when the user starts typing, causing context loss, and are not reliably announced by all screen readers as labels.
+**Action:** Always verify that form inputs (`Input`, `Textarea`, etc.) are accompanied by visible `<label>` elements with correct `htmlFor` attributes matching the input's `id`. Added explicit labels to the Contact form to ensure compliance and better usability.
