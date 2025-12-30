@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ThemeProvider } from './components/ThemeProvider';
 import Layout from './components/Layout';
-import Home from './components/Home';
-import Mediators from './components/Mediators';
-import Resources from './components/Resources';
-import Contact from './components/Contact';
+import { Spinner } from './components/ui/spinner';
 import './index.css';
+
+// Lazy load route components for code splitting
+const Home = lazy(() => import('./components/Home'));
+const Mediators = lazy(() => import('./components/Mediators'));
+const Resources = lazy(() => import('./components/Resources'));
+const Contact = lazy(() => import('./components/Contact'));
 
 function App() {
   return (
@@ -19,12 +22,20 @@ function App() {
             <Link to="/resources">Resources</Link>
             <Link to="/contact">Contact</Link>
           </nav>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/mediators" element={<Mediators />} />
-            <Route path="/resources" element={<Resources />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
+          <Suspense
+            fallback={
+              <div className="flex justify-center items-center min-h-[50vh]">
+                <Spinner />
+              </div>
+            }
+          >
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/mediators" element={<Mediators />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </Suspense>
         </Layout>
       </Router>
     </ThemeProvider>

@@ -1,20 +1,21 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
 
-const Mediators = () => {
-  const mediators = [
-    {
-      name: 'John Doe',
-      description: 'Experienced in community conflict resolution.',
-      contact: 'john.doe@example.com',
-    },
-    {
-      name: 'Jane Smith',
-      description: 'Specializes in housing and resource disputes.',
-      contact: 'jane.smith@example.com',
-    },
-  ];
+// Move static data outside of the component to prevent recreation on every render
+const mediators = [
+  {
+    name: 'John Doe',
+    description: 'Experienced in community conflict resolution.',
+    contact: 'john.doe@example.com',
+  },
+  {
+    name: 'Jane Smith',
+    description: 'Specializes in housing and resource disputes.',
+    contact: 'jane.smith@example.com',
+  },
+];
 
+const Mediators = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Mediator Directory</h1>
