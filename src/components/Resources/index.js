@@ -2,25 +2,27 @@ import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
 import { Input } from '../ui/input';
 
+// ⚡ Bolt: Moved static data outside component to prevent reallocation on every render
+const resources = [
+  {
+    title: 'Community Gardening Guide',
+    description: 'A comprehensive guide to starting a community garden.',
+    category: 'Gardening',
+  },
+  {
+    title: 'Conflict Resolution Workbook',
+    description: 'A workbook for resolving conflicts peacefully.',
+    category: 'Conflict Resolution',
+  },
+  {
+    title: 'Cooperative Bylaws Template',
+    description: 'A template for creating cooperative bylaws.',
+    category: 'Legal',
+  },
+];
+
 const Resources = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const resources = [
-    {
-      title: 'Community Gardening Guide',
-      description: 'A comprehensive guide to starting a community garden.',
-      category: 'Gardening',
-    },
-    {
-      title: 'Conflict Resolution Workbook',
-      description: 'A workbook for resolving conflicts peacefully.',
-      category: 'Conflict Resolution',
-    },
-    {
-      title: 'Cooperative Bylaws Template',
-      description: 'A template for creating cooperative bylaws.',
-      category: 'Legal',
-    },
-  ];
 
   const filteredResources = resources.filter(resource =>
     resource.title.toLowerCase().includes(searchTerm.toLowerCase())
