@@ -1,0 +1,3 @@
+## 2024-05-23 - [Form Accessibility Patterns]
+**Learning:** shadcn/ui Input components are raw inputs and do not include labels. To meet accessibility standards, we must wrap them with explicit `<label>` elements linked via `htmlFor`. Additionally, dynamic form states (loading/success) significantly improve user confidence but require careful state management to disable inputs and announce changes.
+**Action:** When using shadcn/ui inputs, always implement a wrapper pattern that includes: `<label htmlFor={id}>`, `<Input id={id} />`, and `aria-live` regions or `role="alert"` for feedback messages.
