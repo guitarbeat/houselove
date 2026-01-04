@@ -1,30 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
 import { Input } from '../ui/input';
 
+// Performance: Move static data outside component to avoid reallocation on render
+const RESOURCES = [
+  {
+    title: 'Community Gardening Guide',
+    description: 'A comprehensive guide to starting a community garden.',
+    category: 'Gardening',
+  },
+  {
+    title: 'Conflict Resolution Workbook',
+    description: 'A workbook for resolving conflicts peacefully.',
+    category: 'Conflict Resolution',
+  },
+  {
+    title: 'Cooperative Bylaws Template',
+    description: 'A template for creating cooperative bylaws.',
+    category: 'Legal',
+  },
+];
+
 const Resources = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const resources = [
-    {
-      title: 'Community Gardening Guide',
-      description: 'A comprehensive guide to starting a community garden.',
-      category: 'Gardening',
-    },
-    {
-      title: 'Conflict Resolution Workbook',
-      description: 'A workbook for resolving conflicts peacefully.',
-      category: 'Conflict Resolution',
-    },
-    {
-      title: 'Cooperative Bylaws Template',
-      description: 'A template for creating cooperative bylaws.',
-      category: 'Legal',
-    },
-  ];
 
-  const filteredResources = resources.filter(resource =>
-    resource.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Performance: Memoize filtering to avoid expensive recalculations on re-render
+  const filteredResources = useMemo(() => {
+    const lowerTerm = searchTerm.toLowerCase();
+    return RESOURCES.filter(resource =>
+      resource.title.toLowerCase().includes(lowerTerm)
+    );
+  }, [searchTerm]);
 
   return (
     <div className="container mx-auto p-4">
