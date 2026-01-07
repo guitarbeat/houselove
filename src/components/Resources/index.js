@@ -1,30 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
 import { Input } from '../ui/input';
 
+const resources = [
+  {
+    title: 'Community Gardening Guide',
+    description: 'A comprehensive guide to starting a community garden.',
+    category: 'Gardening',
+  },
+  {
+    title: 'Conflict Resolution Workbook',
+    description: 'A workbook for resolving conflicts peacefully.',
+    category: 'Conflict Resolution',
+  },
+  {
+    title: 'Cooperative Bylaws Template',
+    description: 'A template for creating cooperative bylaws.',
+    category: 'Legal',
+  },
+];
+
 const Resources = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const resources = [
-    {
-      title: 'Community Gardening Guide',
-      description: 'A comprehensive guide to starting a community garden.',
-      category: 'Gardening',
-    },
-    {
-      title: 'Conflict Resolution Workbook',
-      description: 'A workbook for resolving conflicts peacefully.',
-      category: 'Conflict Resolution',
-    },
-    {
-      title: 'Cooperative Bylaws Template',
-      description: 'A template for creating cooperative bylaws.',
-      category: 'Legal',
-    },
-  ];
 
-  const filteredResources = resources.filter(resource =>
-    resource.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Bolt: Memoize filtered resources to prevent unnecessary recalculations
+  const filteredResources = useMemo(() => {
+    return resources.filter(resource =>
+      resource.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
 
   return (
     <div className="container mx-auto p-4">
