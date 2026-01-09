@@ -1,0 +1,3 @@
+## 2024-05-23 - [Form Accessibility and Feedback]
+**Learning:** Adding visible labels (not just placeholders) and explicit loading states significantly improves form usability and accessibility, especially for screen reader users and those on slow connections. Relying on placeholders alone is a common anti-pattern that hurts accessibility.
+**Action:** Always include `<label>` elements linked via `htmlFor` and simulate loading states for async actions to provide immediate feedback. Use `aria-live` or role `alert` for success messages.
