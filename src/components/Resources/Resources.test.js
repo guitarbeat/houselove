@@ -50,8 +50,14 @@ describe('Resources Component', () => {
 
     userEvent.type(searchInput, 'NonExistentResource');
 
-    // No cards should be displayed
-    const cards = screen.queryAllByTestId('card');
-    expect(cards).toHaveLength(0);
+    // Empty state should be displayed
+    expect(screen.getByText('No resources found')).toBeInTheDocument();
+    expect(screen.getByText('Try adjusting your search terms.')).toBeInTheDocument();
+  });
+
+  it('search input has accessible label', () => {
+    render(<Resources />);
+    // Check if the label is associated with the input
+    expect(screen.getByLabelText('Search resources')).toBeInTheDocument();
   });
 });

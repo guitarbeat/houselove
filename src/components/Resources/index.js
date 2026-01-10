@@ -33,26 +33,37 @@ const Resources = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Resource Library</h1>
+      <label htmlFor="resource-search" className="sr-only">
+        Search resources
+      </label>
       <Input
+        id="resource-search"
         type="text"
         placeholder="Search for resources..."
         value={searchTerm}
         onChange={e => setSearchTerm(e.target.value)}
         className="mb-4"
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredResources.map((resource, index) => (
-          <Card key={index}>
-            <CardHeader>
-              <CardTitle>{resource.title}</CardTitle>
-              <CardDescription>{resource.category}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>{resource.description}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      {filteredResources.length === 0 ? (
+        <div className="text-center py-12 text-muted-foreground bg-muted/20 rounded-lg border border-dashed">
+          <p className="text-lg font-medium">No resources found</p>
+          <p className="text-sm">Try adjusting your search terms.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredResources.map((resource, index) => (
+            <Card key={index}>
+              <CardHeader>
+                <CardTitle>{resource.title}</CardTitle>
+                <CardDescription>{resource.category}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p>{resource.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
