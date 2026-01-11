@@ -20,6 +20,7 @@ describe('Resources Component', () => {
   it('renders correctly', () => {
     render(<Resources />);
     expect(screen.getByText('Resource Library')).toBeInTheDocument();
+    expect(screen.getByLabelText('Search Resources')).toBeInTheDocument();
   });
 
   it('displays default resources', () => {
@@ -44,14 +45,21 @@ describe('Resources Component', () => {
     expect(screen.queryByText('Cooperative Bylaws Template')).not.toBeInTheDocument();
   });
 
-  it('displays no resources if search term does not match', () => {
+  it('displays empty state message if search term does not match', () => {
     render(<Resources />);
     const searchInput = screen.getByTestId('search-input');
+    const term = 'NonExistentResource';
 
-    userEvent.type(searchInput, 'NonExistentResource');
+    userEvent.type(searchInput, term);
 
     // No cards should be displayed
     const cards = screen.queryAllByTestId('card');
     expect(cards).toHaveLength(0);
+
+    // Empty state message should be visible
+    expect(screen.getByText(`No resources found for "${term}".`)).toBeInTheDocument();
+
+    // Clear search button should be visible
+    expect(screen.getByText('Clear search')).toBeInTheDocument();
   });
 });
