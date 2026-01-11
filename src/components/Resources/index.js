@@ -33,26 +33,49 @@ const Resources = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Resource Library</h1>
-      <Input
-        type="text"
-        placeholder="Search for resources..."
-        value={searchTerm}
-        onChange={e => setSearchTerm(e.target.value)}
-        className="mb-4"
-      />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredResources.map((resource, index) => (
-          <Card key={index}>
-            <CardHeader>
-              <CardTitle>{resource.title}</CardTitle>
-              <CardDescription>{resource.category}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>{resource.description}</p>
-            </CardContent>
-          </Card>
-        ))}
+      <div className="mb-6">
+        <label
+          htmlFor="resource-search"
+          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block"
+        >
+          Search Resources
+        </label>
+        <Input
+          id="resource-search"
+          type="text"
+          placeholder="Search for resources..."
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+        />
       </div>
+
+      {filteredResources.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredResources.map((resource, index) => (
+            <Card key={index}>
+              <CardHeader>
+                <CardTitle>{resource.title}</CardTitle>
+                <CardDescription>{resource.category}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p>{resource.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-12 bg-muted/20 rounded-lg border-2 border-dashed">
+          <p className="text-muted-foreground">
+            No resources found for "{searchTerm}".
+          </p>
+          <button
+            onClick={() => setSearchTerm('')}
+            className="text-primary hover:underline mt-2 text-sm font-medium"
+          >
+            Clear search
+          </button>
+        </div>
+      )}
     </div>
   );
 };
