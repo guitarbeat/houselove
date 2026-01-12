@@ -20,6 +20,7 @@ describe('Resources Component', () => {
   it('renders correctly', () => {
     render(<Resources />);
     expect(screen.getByText('Resource Library')).toBeInTheDocument();
+    expect(screen.getByLabelText('Search resources')).toBeInTheDocument();
   });
 
   it('displays default resources', () => {
@@ -53,5 +54,9 @@ describe('Resources Component', () => {
     // No cards should be displayed
     const cards = screen.queryAllByTestId('card');
     expect(cards).toHaveLength(0);
+
+    // Empty state message should be displayed
+    expect(screen.getByText('No resources found')).toBeInTheDocument();
+    expect(screen.getByText('Try adjusting your search terms')).toBeInTheDocument();
   });
 });

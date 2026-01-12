@@ -36,23 +36,31 @@ const Resources = () => {
       <Input
         type="text"
         placeholder="Search for resources..."
+        aria-label="Search resources"
         value={searchTerm}
         onChange={e => setSearchTerm(e.target.value)}
         className="mb-4"
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredResources.map((resource, index) => (
-          <Card key={index}>
-            <CardHeader>
-              <CardTitle>{resource.title}</CardTitle>
-              <CardDescription>{resource.category}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>{resource.description}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      {filteredResources.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredResources.map((resource, index) => (
+            <Card key={index}>
+              <CardHeader>
+                <CardTitle>{resource.title}</CardTitle>
+                <CardDescription>{resource.category}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p>{resource.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-12" role="status">
+          <p className="text-lg font-medium text-muted-foreground">No resources found</p>
+          <p className="text-sm text-muted-foreground mt-1">Try adjusting your search terms</p>
+        </div>
+      )}
     </div>
   );
 };
