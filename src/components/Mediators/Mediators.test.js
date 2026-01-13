@@ -9,4 +9,12 @@ describe('Mediators Component', () => {
     expect(screen.getByText('John Doe')).toBeInTheDocument();
     expect(screen.getByText('Jane Smith')).toBeInTheDocument();
   });
+
+  it('renders the map placeholder with empty state message', () => {
+    render(<Mediators />);
+    expect(screen.getByText('Find a Mediator Near You')).toBeInTheDocument();
+    expect(screen.getByText('Map View Coming Soon')).toBeInTheDocument();
+    expect(screen.getByText(/We're working on an interactive map/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /notification feature coming soon/i })).toBeDisabled();
+  });
 });
