@@ -1,19 +1,23 @@
 import React, { useState, useMemo } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
 import { Input } from '../ui/input';
+import { useDebounce } from '../../hooks/useDebounce';
 
 const resources = [
   {
+    id: 'gardening-guide',
     title: 'Community Gardening Guide',
     description: 'A comprehensive guide to starting a community garden.',
     category: 'Gardening',
   },
   {
+    id: 'conflict-workbook',
     title: 'Conflict Resolution Workbook',
     description: 'A workbook for resolving conflicts peacefully.',
     category: 'Conflict Resolution',
   },
   {
+    id: 'bylaws-template',
     title: 'Cooperative Bylaws Template',
     description: 'A template for creating cooperative bylaws.',
     category: 'Legal',
@@ -22,13 +26,14 @@ const resources = [
 
 const Resources = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
   // Bolt: Memoize filtered resources to prevent unnecessary recalculations
   const filteredResources = useMemo(() => {
     return resources.filter(resource =>
-      resource.title.toLowerCase().includes(searchTerm.toLowerCase())
+      resource.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
     );
-  }, [searchTerm]);
+  }, [debouncedSearchTerm]);
 
   return (
     <div className="container mx-auto p-4">
@@ -43,8 +48,8 @@ const Resources = () => {
       />
       {filteredResources.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredResources.map((resource, index) => (
-            <Card key={index}>
+          {filteredResources.map((resource) => (
+            <Card key={resource.id}>
               <CardHeader>
                 <CardTitle>{resource.title}</CardTitle>
                 <CardDescription>{resource.category}</CardDescription>
