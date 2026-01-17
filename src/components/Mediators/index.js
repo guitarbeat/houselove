@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
+import { Button } from '../ui/button';
 
 // Bolt: Move static data outside component to prevent reallocation on every render
 const mediators = [
@@ -17,6 +18,24 @@ const mediators = [
   },
 ];
 
+const MailIcon = (props) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+  </svg>
+)
+
 const Mediators = () => {
   return (
     <div className="container mx-auto p-4">
@@ -29,15 +48,20 @@ const Mediators = () => {
               <CardDescription>{mediator.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <p>Contact: {mediator.contact}</p>
+              <Button asChild variant="outline" size="sm" className="w-full sm:w-auto">
+                <a href={`mailto:${mediator.contact}`} aria-label={`Contact ${mediator.name}`}>
+                  <MailIcon className="mr-2 h-4 w-4" />
+                  Contact
+                </a>
+              </Button>
             </CardContent>
           </Card>
         ))}
       </div>
       <div className="mt-8">
         <h2 className="text-2xl font-bold mb-4">Find a Mediator Near You</h2>
-        <div className="w-full h-96 bg-gray-200 rounded-md">
-          {/* Map will be implemented here */}
+        <div className="w-full h-96 bg-gray-200 rounded-md flex items-center justify-center text-gray-500">
+           Map Placeholder
         </div>
       </div>
     </div>
