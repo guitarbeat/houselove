@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
 import { Input } from '../ui/input';
+import { useDebounce } from '../../hooks/use-debounce';
 
 const resources = [
   {
@@ -22,13 +23,15 @@ const resources = [
 
 const Resources = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  // Bolt: Debounce search term to prevent filtering on every keystroke
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
   // Bolt: Memoize filtered resources to prevent unnecessary recalculations
   const filteredResources = useMemo(() => {
     return resources.filter(resource =>
-      resource.title.toLowerCase().includes(searchTerm.toLowerCase())
+      resource.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
     );
-  }, [searchTerm]);
+  }, [debouncedSearchTerm]);
 
   return (
     <div className="container mx-auto p-4">
