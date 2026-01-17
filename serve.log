@@ -1,7 +1,13 @@
  INFO  Accepting connections at http://localhost:3000
- HTTP  1/6/2026 3:19:03 AM ::1 GET /contact
- HTTP  1/6/2026 3:19:03 AM ::1 Returned 200 in 20 ms
- HTTP  1/6/2026 3:19:03 AM ::1 GET /static/js/main.511b43d0.js
- HTTP  1/6/2026 3:19:03 AM ::1 GET /static/css/main.b89da17a.css
- HTTP  1/6/2026 3:19:03 AM ::1 Returned 200 in 5 ms
- HTTP  1/6/2026 3:19:03 AM ::1 Returned 200 in 8 ms
+ HTTP  1/17/2026 3:32:08 AM ::1 GET /resources
+ HTTP  1/17/2026 3:32:08 AM ::1 Returned 200 in 288 ms
+ HTTP  1/17/2026 3:32:09 AM ::1 GET /static/js/main.73f67531.js
+ HTTP  1/17/2026 3:32:09 AM ::1 GET /static/css/main.bb53161c.css
+ HTTP  1/17/2026 3:32:09 AM ::1 Returned 200 in 5 ms
+ HTTP  1/17/2026 3:32:09 AM ::1 Returned 200 in 7 ms
+ HTTP  1/17/2026 3:32:09 AM ::1 GET /static/js/725.06531c98.chunk.js
+ HTTP  1/17/2026 3:32:09 AM ::1 GET /static/js/135.3ede4b7b.chunk.js
+ HTTP  1/17/2026 3:32:09 AM ::1 Returned 200 in 4 ms
+ HTTP  1/17/2026 3:32:09 AM ::1 Returned 200 in 4 ms
+
+ INFO  Gracefully shutting down. Please wait...
