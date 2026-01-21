@@ -10,6 +10,24 @@ describe('Mediators Component', () => {
     expect(screen.getByText('Jane Smith')).toBeInTheDocument();
   });
 
+  it('renders contact emails as accessible links', () => {
+    render(<Mediators />);
+
+    // Check for John Doe's email
+    const johnEmail = screen.getByText('john.doe@example.com');
+    expect(johnEmail).toBeInTheDocument();
+
+    // The following assertions will fail until the component is updated
+    expect(johnEmail.closest('a')).toHaveAttribute('href', 'mailto:john.doe@example.com');
+    expect(johnEmail.closest('a')).toHaveAttribute('aria-label', 'Email John Doe');
+
+    // Check for Jane Smith's email
+    const janeEmail = screen.getByText('jane.smith@example.com');
+    expect(janeEmail).toBeInTheDocument();
+    expect(janeEmail.closest('a')).toHaveAttribute('href', 'mailto:jane.smith@example.com');
+    expect(janeEmail.closest('a')).toHaveAttribute('aria-label', 'Email Jane Smith');
+  });
+
   it('renders the map placeholder with empty state message', () => {
     render(<Mediators />);
     expect(screen.getByText('Find a Mediator Near You')).toBeInTheDocument();

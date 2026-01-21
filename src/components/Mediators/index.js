@@ -30,7 +30,16 @@ const Mediators = () => {
               <CardDescription>{mediator.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <p>Contact: {mediator.contact}</p>
+              <p>
+                Contact:{' '}
+                <a
+                  href={`mailto:${mediator.contact}`}
+                  className="text-primary hover:underline font-medium"
+                  aria-label={`Email ${mediator.name}`}
+                >
+                  {mediator.contact}
+                </a>
+              </p>
             </CardContent>
           </Card>
         ))}
