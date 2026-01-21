@@ -5,16 +5,19 @@ import { useDebounce } from '../../hooks/use-debounce';
 
 const resources = [
   {
+    id: 'gardening-guide',
     title: 'Community Gardening Guide',
     description: 'A comprehensive guide to starting a community garden.',
     category: 'Gardening',
   },
   {
+    id: 'conflict-workbook',
     title: 'Conflict Resolution Workbook',
     description: 'A workbook for resolving conflicts peacefully.',
     category: 'Conflict Resolution',
   },
   {
+    id: 'coop-bylaws',
     title: 'Cooperative Bylaws Template',
     description: 'A template for creating cooperative bylaws.',
     category: 'Legal',
@@ -46,8 +49,8 @@ const Resources = () => {
       />
       {filteredResources.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredResources.map((resource, index) => (
-            <Card key={index}>
+          {filteredResources.map((resource) => (
+            <Card key={resource.id}>
               <CardHeader>
                 <CardTitle>{resource.title}</CardTitle>
                 <CardDescription>{resource.category}</CardDescription>
