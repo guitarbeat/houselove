@@ -5,21 +5,52 @@ import { useDebounce } from '../../hooks/use-debounce';
 
 const resources = [
   {
+    id: 'gardening-guide',
     title: 'Community Gardening Guide',
     description: 'A comprehensive guide to starting a community garden.',
     category: 'Gardening',
   },
   {
+    id: 'conflict-workbook',
     title: 'Conflict Resolution Workbook',
     description: 'A workbook for resolving conflicts peacefully.',
     category: 'Conflict Resolution',
   },
   {
+    id: 'bylaws-template',
     title: 'Cooperative Bylaws Template',
     description: 'A template for creating cooperative bylaws.',
     category: 'Legal',
   },
 ];
+
+// Bolt: Extract and memoize list to prevent re-renders when parent state (input) changes but data hasn't
+const ResourceList = React.memo(({ resources }) => {
+  if (resources.length === 0) {
+    return (
+      <div className="text-center py-12" role="status">
+        <p className="text-lg font-medium text-muted-foreground">No resources found</p>
+        <p className="text-sm text-muted-foreground mt-1">Try adjusting your search terms</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {resources.map((resource) => (
+        <Card key={resource.id}>
+          <CardHeader>
+            <CardTitle>{resource.title}</CardTitle>
+            <CardDescription>{resource.category}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>{resource.description}</p>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+});
 
 const Resources = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -44,26 +75,7 @@ const Resources = () => {
         onChange={e => setSearchTerm(e.target.value)}
         className="mb-4"
       />
-      {filteredResources.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredResources.map((resource, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <CardTitle>{resource.title}</CardTitle>
-                <CardDescription>{resource.category}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>{resource.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-12" role="status">
-          <p className="text-lg font-medium text-muted-foreground">No resources found</p>
-          <p className="text-sm text-muted-foreground mt-1">Try adjusting your search terms</p>
-        </div>
-      )}
+      <ResourceList resources={filteredResources} />
     </div>
   );
 };
