@@ -5,3 +5,7 @@
 ## 2026-01-13 - [Empty State Engagement]
 **Learning:** Gray placeholder boxes create dead ends and user confusion. Replacing them with "Coming Soon" empty states that include icons, descriptive text, and (even disabled) calls-to-action significantly improves perceived value and keeps users engaged.
 **Action:** Replace all "TODO" or placeholder divs with designed Empty State components that explain *why* content is missing and *when* it might appear.
+
+## 2026-01-14 - [Actionable Contact Information]
+**Learning:** Plain text email addresses are passive and require user effort (copy-paste). Converting them into styled `<Button asChild>` components with `mailto:` links and descriptive `aria-label`s makes the primary interaction obvious and accessible.
+**Action:** Always wrap contact methods in interactive elements with clear visual affordances (icons) and accessible names.
