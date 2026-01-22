@@ -12,9 +12,13 @@ jest.mock('../ui/card', () => ({
   CardContent: ({ children }) => <div>{children}</div>,
 }));
 
-jest.mock('../ui/input', () => ({
-  Input: (props) => <input data-testid="search-input" {...props} />,
-}));
+// Forward ref in mock to support proper focusing behavior
+jest.mock('../ui/input', () => {
+  const React = require('react');
+  return {
+    Input: React.forwardRef((props, ref) => <input ref={ref} data-testid="search-input" {...props} />),
+  };
+});
 
 describe('Resources Component', () => {
   it('renders correctly', () => {
@@ -62,7 +66,20 @@ describe('Resources Component', () => {
 
       // Empty state message should be displayed
       expect(screen.getByText('No resources found')).toBeInTheDocument();
-      expect(screen.getByText('Try adjusting your search terms')).toBeInTheDocument();
+      expect(screen.getByText(/We couldn't find anything matching/i)).toBeInTheDocument();
     });
+  });
+
+  it('clears search when clear button is clicked', async () => {
+    render(<Resources />);
+    const searchInput = screen.getByTestId('search-input');
+
+    userEvent.type(searchInput, 'Test');
+
+    const clearButton = screen.getByLabelText('Clear search');
+    userEvent.click(clearButton);
+
+    expect(searchInput).toHaveValue('');
+    expect(searchInput).toHaveFocus();
   });
 });
