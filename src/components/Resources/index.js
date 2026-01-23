@@ -1,6 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
 import { Input } from '../ui/input';
+import { Button } from '../ui/button';
 import { useDebounce } from '../../hooks/use-debounce';
 
 const resources = [
@@ -26,6 +27,8 @@ const resources = [
 
 const Resources = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const inputRef = useRef(null);
+
   // Bolt: Debounce search term to prevent filtering on every keystroke
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
@@ -36,17 +39,50 @@ const Resources = () => {
     );
   }, [debouncedSearchTerm]);
 
+  const handleClear = () => {
+    setSearchTerm('');
+    inputRef.current?.focus();
+  };
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Resource Library</h1>
-      <Input
-        type="text"
-        placeholder="Search for resources..."
-        aria-label="Search resources"
-        value={searchTerm}
-        onChange={e => setSearchTerm(e.target.value)}
-        className="mb-4"
-      />
+      <div className="relative mb-4">
+        <Input
+          ref={inputRef}
+          type="text"
+          placeholder="Search for resources..."
+          aria-label="Search resources"
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+          className="pr-10"
+        />
+        {searchTerm && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute right-0 top-0 h-full w-10 hover:bg-transparent"
+            onClick={handleClear}
+            aria-label="Clear search"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-4 w-4 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </Button>
+        )}
+      </div>
       {filteredResources.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredResources.map((resource) => (

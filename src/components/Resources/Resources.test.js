@@ -12,8 +12,19 @@ jest.mock('../ui/card', () => ({
   CardContent: ({ children }) => <div>{children}</div>,
 }));
 
-jest.mock('../ui/input', () => ({
-  Input: (props) => <input data-testid="search-input" {...props} />,
+jest.mock('../ui/input', () => {
+  const React = require('react');
+  return {
+    Input: React.forwardRef((props, ref) => <input ref={ref} data-testid="search-input" {...props} />),
+  };
+});
+
+jest.mock('../ui/button', () => ({
+  Button: ({ children, onClick, 'aria-label': ariaLabel }) => (
+    <button onClick={onClick} aria-label={ariaLabel}>
+      {children}
+    </button>
+  ),
 }));
 
 describe('Resources Component', () => {
@@ -64,5 +75,27 @@ describe('Resources Component', () => {
       expect(screen.getByText('No resources found')).toBeInTheDocument();
       expect(screen.getByText('Try adjusting your search terms')).toBeInTheDocument();
     });
+  });
+
+  it('clears search term and focuses input when clear button is clicked', () => {
+    render(<Resources />);
+    const searchInput = screen.getByTestId('search-input');
+
+    // Type into the search input
+    userEvent.type(searchInput, 'Test');
+    expect(searchInput).toHaveValue('Test');
+
+    // Clear button should be visible
+    const clearButton = screen.getByLabelText('Clear search');
+    expect(clearButton).toBeInTheDocument();
+
+    // Click the clear button
+    userEvent.click(clearButton);
+
+    // Search input should be empty
+    expect(searchInput).toHaveValue('');
+
+    // Search input should be focused
+    expect(searchInput).toHaveFocus();
   });
 });
