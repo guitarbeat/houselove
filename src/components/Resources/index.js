@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
 import { Input } from '../ui/input';
 import { useDebounce } from '../../hooks/use-debounce';
+import ResourceList from './ResourceList';
 
 const resources = [
   {
@@ -47,26 +47,7 @@ const Resources = () => {
         onChange={e => setSearchTerm(e.target.value)}
         className="mb-4"
       />
-      {filteredResources.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredResources.map((resource) => (
-            <Card key={resource.id}>
-              <CardHeader>
-                <CardTitle>{resource.title}</CardTitle>
-                <CardDescription>{resource.category}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>{resource.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-12" role="status">
-          <p className="text-lg font-medium text-muted-foreground">No resources found</p>
-          <p className="text-sm text-muted-foreground mt-1">Try adjusting your search terms</p>
-        </div>
-      )}
+      <ResourceList resources={filteredResources} />
     </div>
   );
 };
