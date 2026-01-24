@@ -9,3 +9,7 @@
 ## 2026-01-14 - [Actionable Contact Information]
 **Learning:** Plain text email addresses are passive and require user effort (copy-paste). Converting them into styled `<Button asChild>` components with `mailto:` links and descriptive `aria-label`s makes the primary interaction obvious and accessible.
 **Action:** Always wrap contact methods in interactive elements with clear visual affordances (icons) and accessible names.
+
+## 2026-01-15 - [Search Input Interaction]
+**Learning:** Users searching for content often need to quickly reset their query. Standard inputs require manual deletion. Adding an absolute-positioned "Clear" button that appears conditionally provides a high-utility micro-interaction that feels polished.
+**Action:** When implementing search inputs, always consider a "Clear" button that resets state and returns focus to the input.
