@@ -9,3 +9,7 @@
 ## 2026-01-14 - [Actionable Contact Information]
 **Learning:** Plain text email addresses are passive and require user effort (copy-paste). Converting them into styled `<Button asChild>` components with `mailto:` links and descriptive `aria-label`s makes the primary interaction obvious and accessible.
 **Action:** Always wrap contact methods in interactive elements with clear visual affordances (icons) and accessible names.
+
+## 2026-01-15 - [Search Input Focus Management]
+**Learning:** Adding a "Clear" button to search inputs is helpful, but if it steals focus or leaves the user pressing "Tab" excessively, it creates friction. Explicitly returning focus to the input (`inputRef.current.focus()`) after clearing ensures a seamless flow where the user can immediately type a new query.
+**Action:** Always implement explicit focus management when adding interactive controls (like clear buttons) inside or adjacent to text inputs.
