@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
 import { Input } from '../ui/input';
 import { useDebounce } from '../../hooks/use-debounce';
@@ -24,27 +24,43 @@ const resources = [
   },
 ];
 
+// Bolt: Component to handle input state locally and only trigger updates on debounce
+const DebouncedSearchInput = ({ onSearch, ...props }) => {
+  const [value, setValue] = useState('');
+  const debouncedValue = useDebounce(value, 300);
+
+  useEffect(() => {
+    onSearch(debouncedValue);
+  }, [debouncedValue, onSearch]);
+
+  return (
+    <Input
+      {...props}
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+  );
+};
+
 const Resources = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  // Bolt: Debounce search term to prevent filtering on every keystroke
-  const debouncedSearchTerm = useDebounce(searchTerm, 300);
+  const [filterTerm, setFilterTerm] = useState('');
 
   // Bolt: Memoize filtered resources to prevent unnecessary recalculations
+  // filterTerm is already debounced by DebouncedSearchInput
   const filteredResources = useMemo(() => {
     return resources.filter(resource =>
-      resource.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+      resource.title.toLowerCase().includes(filterTerm.toLowerCase())
     );
-  }, [debouncedSearchTerm]);
+  }, [filterTerm]);
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Resource Library</h1>
-      <Input
+      <DebouncedSearchInput
         type="text"
         placeholder="Search for resources..."
         aria-label="Search resources"
-        value={searchTerm}
-        onChange={e => setSearchTerm(e.target.value)}
+        onSearch={setFilterTerm}
         className="mb-4"
       />
       {filteredResources.length > 0 ? (
