@@ -4,10 +4,16 @@ import { ThemeProvider } from './components/ThemeProvider';
 import Layout from './components/Layout';
 import './index.css';
 
-const Home = React.lazy(() => import('./components/Home'));
-const Mediators = React.lazy(() => import('./components/Mediators'));
-const Resources = React.lazy(() => import('./components/Resources'));
-const Contact = React.lazy(() => import('./components/Contact'));
+// Bolt: Extract loaders for prefetching
+const loadHome = () => import('./components/Home');
+const loadMediators = () => import('./components/Mediators');
+const loadResources = () => import('./components/Resources');
+const loadContact = () => import('./components/Contact');
+
+const Home = React.lazy(loadHome);
+const Mediators = React.lazy(loadMediators);
+const Resources = React.lazy(loadResources);
+const Contact = React.lazy(loadContact);
 
 function App() {
   return (
@@ -15,10 +21,10 @@ function App() {
       <Router>
         <Layout>
           <nav className="flex justify-center gap-4 mb-4">
-            <Link to="/">Home</Link>
-            <Link to="/mediators">Mediators</Link>
-            <Link to="/resources">Resources</Link>
-            <Link to="/contact">Contact</Link>
+            <Link to="/" onMouseEnter={loadHome} onFocus={loadHome}>Home</Link>
+            <Link to="/mediators" onMouseEnter={loadMediators} onFocus={loadMediators}>Mediators</Link>
+            <Link to="/resources" onMouseEnter={loadResources} onFocus={loadResources}>Resources</Link>
+            <Link to="/contact" onMouseEnter={loadContact} onFocus={loadContact}>Contact</Link>
           </nav>
           <React.Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
             <Routes>
