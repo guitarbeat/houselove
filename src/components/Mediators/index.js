@@ -18,6 +18,24 @@ const mediators = [
   },
 ];
 
+const MailIcon = (props) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+  </svg>
+)
+
 const Mediators = () => {
   return (
     <div className="container mx-auto p-4">
@@ -30,28 +48,10 @@ const Mediators = () => {
               <CardDescription>{mediator.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button asChild variant="outline" size="sm" className="w-full justify-start">
-                <a
-                  href={`mailto:${mediator.contact}`}
-                  aria-label={`Email ${mediator.name}`}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="mr-2 h-4 w-4"
-                    aria-hidden="true"
-                  >
-                    <rect width="20" height="16" x="2" y="4" rx="2"/>
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                  </svg>
-                  {mediator.contact}
+              <Button asChild variant="outline" size="sm" className="w-full sm:w-auto">
+                <a href={`mailto:${mediator.contact}`} aria-label={`Contact ${mediator.name}`}>
+                  <MailIcon className="mr-2 h-4 w-4" />
+                  Contact
                 </a>
               </Button>
             </CardContent>
