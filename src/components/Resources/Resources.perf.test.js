@@ -18,9 +18,12 @@ jest.mock('./ResourceList', () => {
 });
 
 // Mock UI components to avoid noise
-jest.mock('../ui/input', () => ({
-  Input: (props) => <input {...props} />,
-}));
+jest.mock('../ui/input', () => {
+  const React = require('react');
+  return {
+    Input: React.forwardRef((props, ref) => <input ref={ref} {...props} />),
+  };
+});
 
 describe('Resources Performance', () => {
   beforeEach(() => {
