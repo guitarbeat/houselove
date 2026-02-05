@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import { ThemeProvider } from './components/ThemeProvider';
 import Layout from './components/Layout';
 import './index.css';
@@ -16,15 +16,20 @@ const Resources = React.lazy(loadResources);
 const Contact = React.lazy(loadContact);
 
 function App() {
+  const getNavLinkClass = ({ isActive }) =>
+    `text-sm font-medium transition-colors hover:text-primary ${
+      isActive ? 'text-primary' : 'text-muted-foreground'
+    }`;
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Router>
         <Layout>
           <nav className="flex justify-center gap-4 mb-4">
-            <Link to="/" onMouseEnter={loadHome} onFocus={loadHome}>Home</Link>
-            <Link to="/mediators" onMouseEnter={loadMediators} onFocus={loadMediators}>Mediators</Link>
-            <Link to="/resources" onMouseEnter={loadResources} onFocus={loadResources}>Resources</Link>
-            <Link to="/contact" onMouseEnter={loadContact} onFocus={loadContact}>Contact</Link>
+            <NavLink to="/" className={getNavLinkClass} onMouseEnter={loadHome} onFocus={loadHome}>Home</NavLink>
+            <NavLink to="/mediators" className={getNavLinkClass} onMouseEnter={loadMediators} onFocus={loadMediators}>Mediators</NavLink>
+            <NavLink to="/resources" className={getNavLinkClass} onMouseEnter={loadResources} onFocus={loadResources}>Resources</NavLink>
+            <NavLink to="/contact" className={getNavLinkClass} onMouseEnter={loadContact} onFocus={loadContact}>Contact</NavLink>
           </nav>
           <React.Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
             <Routes>
