@@ -13,3 +13,7 @@
 ## 2026-01-22 - [Search Input Clear Actions]
 **Learning:** Users typing in search fields expect a quick way to clear the input without backspacing. A 'Clear' button that appears dynamically and refocuses the input is a standard pattern that significantly reduces friction.
 **Action:** Enhance all search inputs with a wrapper containing a search icon (for affordance) and a conditional clear button that resets state and focus.
+
+## 2026-01-26 - [Navigation Active States]
+**Learning:** Users need immediate visual confirmation of their current location within an application. Relying on browser defaults or static links increases cognitive load. Highlighting the active link with a distinct color and weight improves wayfinding.
+**Action:** Use `NavLink` with conditional styling to apply active state classes (e.g., `text-primary font-medium`) and maintain distinct inactive states.
