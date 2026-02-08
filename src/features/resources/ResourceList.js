@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../../shared/ui/card';
 
 const ResourceList = React.memo(({ resources }) => {
   if (resources.length === 0) {

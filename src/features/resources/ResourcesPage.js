@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef } from 'react';
-import { Input } from '../ui/input';
-import { useDebounce } from '../../hooks/use-debounce';
+import { Input } from '../../shared/ui/input';
+import { useDebounce } from '../../shared/hooks/use-debounce';
 import ResourceList from './ResourceList';
 
 const resources = [
