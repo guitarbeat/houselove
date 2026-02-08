@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { ThemeProvider } from './components/ThemeProvider';
-import Layout from './components/Layout';
-import './index.css';
+import { ThemeProvider } from '../shared/providers/ThemeProvider';
+import Layout from './Layout';
+import '../index.css';
 
 // Bolt: Extract loaders for prefetching
-const loadHome = () => import('./components/Home');
-const loadMediators = () => import('./components/Mediators');
-const loadResources = () => import('./components/Resources');
-const loadContact = () => import('./components/Contact');
+const loadHome = () => import('../features/home/HomePage');
+const loadMediators = () => import('../features/mediators/MediatorsPage');
+const loadResources = () => import('../features/resources/ResourcesPage');
+const loadContact = () => import('../features/contact/ContactPage');
 
 const Home = React.lazy(loadHome);
 const Mediators = React.lazy(loadMediators);

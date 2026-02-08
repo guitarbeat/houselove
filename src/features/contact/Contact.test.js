@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom'; // Explicit import since setupTests.js is missing
-import Contact from './index';
+import Contact from './ContactPage';
 
 // Mock console.log to avoid cluttering output
 const originalLog = console.log;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Resources from './index';
+import Resources from './ResourcesPage';
 
 // 1. Setup the spy
 const mockRenderSpy = jest.fn(({ resources }) => (
@@ -18,7 +18,7 @@ jest.mock('./ResourceList', () => {
 });
 
 // Mock UI components to avoid noise
-jest.mock('../ui/input', () => {
+jest.mock('../../shared/ui/input', () => {
   const React = require('react');
   return {
     Input: React.forwardRef((props, ref) => <input ref={ref} {...props} />),

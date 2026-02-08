@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Resources from './index';
+import Resources from './ResourcesPage';
 
 // Mock the UI components to simplify testing
-jest.mock('../ui/card', () => ({
+jest.mock('../../shared/ui/card', () => ({
   Card: ({ children }) => <div data-testid="card">{children}</div>,
   CardHeader: ({ children }) => <div>{children}</div>,
   CardTitle: ({ children }) => <h3>{children}</h3>,
@@ -12,7 +12,7 @@ jest.mock('../ui/card', () => ({
   CardContent: ({ children }) => <div>{children}</div>,
 }));
 
-jest.mock('../ui/input', () => {
+jest.mock('../../shared/ui/input', () => {
   const React = require('react');
   return {
     Input: React.forwardRef((props, ref) => <input ref={ref} data-testid="search-input" {...props} />),
